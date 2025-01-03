@@ -8,9 +8,9 @@ import java.util.List;
 public class Restaurants {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long restaurantsId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "restaurant_id")
+    private Integer restaurantId;
 
     private String name;
     private String description;
@@ -21,13 +21,14 @@ public class Restaurants {
     private Integer average;
     private String image;
     private String phone;
+    private String storeId;
 
-    public Long getRestaurantsId() {
-        return restaurantsId;
+    public Integer getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestaurantsId(Long restaurantsId) {
-        this.restaurantsId = restaurantsId;
+    public void setRestaurantId(Integer restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getName() {
@@ -102,6 +103,14 @@ public class Restaurants {
         this.phone = phone;
     }
 
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
     //-------------------------------------------------------
     @OneToMany(mappedBy = "restaurants")
     private List<BusinessHours> businessHours;
@@ -112,5 +121,17 @@ public class Restaurants {
 
     public void setBusinessHours(List<BusinessHours> businessHours) {
         this.businessHours = businessHours;
+    }
+
+    //----------------------------------------------------------
+    @OneToMany(mappedBy = "restaurants")
+    private List<RestaurantCategories> restaurantCategories;
+
+    public List<RestaurantCategories> getRestaurantCategories() {
+        return restaurantCategories;
+    }
+
+    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
+        this.restaurantCategories = restaurantCategories;
     }
 }

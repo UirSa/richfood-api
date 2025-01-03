@@ -9,15 +9,15 @@ import java.time.LocalTime;
 public class BusinessHoursId {
 
     @Column(name = "restaurant_id")
-    private Long restaurantId;
+    private Integer restaurantId;
     private String day_of_week;
     private String start_time;
 
-    public Long getRestaurantId() {
+    public Integer getRestaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(Long restaurantId) {
+    public void setRestaurantId(Integer restaurantId) {
         this.restaurantId = restaurantId;
     }
 
