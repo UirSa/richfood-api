@@ -11,7 +11,7 @@ public class BusinessHours {
     @EmbeddedId
     private BusinessHoursId businessHoursId;
 
-    private String end_time;
+    private String endTime;
 
     public BusinessHoursId getBusinessHoursId() {
         return businessHoursId;
@@ -21,12 +21,12 @@ public class BusinessHours {
         this.businessHoursId = businessHoursId;
     }
 
-    public String getEnd_time() {
-        return end_time;
+    public String getEndTime() {
+        return endTime;
     }
 
-    public void setEnd_time(String end_time) {
-        this.end_time = end_time;
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 
     //-----------------------------------------------------------

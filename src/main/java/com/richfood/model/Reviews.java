@@ -8,23 +8,24 @@ import java.util.List;
 public class Reviews {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ReviewsId;
+    private Integer reviewId;
 
     private Integer restaurantId;
     private Integer userId;
     private Integer rating;
-    private String context;
+    private String content;
     private String createdAt;
+    private Integer storeId;
     private Boolean isFlagged;
     private Boolean isApproved;
 
 
-    public Integer getReviewsId() {
-        return ReviewsId;
+    public Integer getReviewId() {
+        return reviewId;
     }
 
-    public void setReviewsId(Integer reviewsId) {
-        ReviewsId = reviewsId;
+    public void setReviewId(Integer reviewId) {
+        this.reviewId = reviewId;
     }
 
     public Integer getRestaurantId() {
@@ -51,12 +52,12 @@ public class Reviews {
         this.rating = rating;
     }
 
-    public String getContext() {
-        return context;
+    public String getContent() {
+        return content;
     }
 
-    public void setContext(String context) {
-        this.context = context;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getCreatedAt() {
@@ -65,6 +66,14 @@ public class Reviews {
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     public Boolean getFlagged() {

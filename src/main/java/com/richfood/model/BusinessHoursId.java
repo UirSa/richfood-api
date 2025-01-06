@@ -9,8 +9,8 @@ import java.time.LocalTime;
 public class BusinessHoursId {
 
     private Integer restaurantId;
-    private String day_of_week;
-    private String start_time;
+    private String dayOfWeek;
+    private String startTime;
 
     public Integer getRestaurantId() {
         return restaurantId;
@@ -20,19 +20,19 @@ public class BusinessHoursId {
         this.restaurantId = restaurantId;
     }
 
-    public String getDay_of_week() {
-        return day_of_week;
+    public String getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setDay_of_week(String day_of_week) {
-        this.day_of_week = day_of_week;
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
-    public String getStart_time() {
-        return start_time;
+    public String getStartTime() {
+        return startTime;
     }
 
-    public void setStart_time(String start_time) {
-        this.start_time = start_time;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 }

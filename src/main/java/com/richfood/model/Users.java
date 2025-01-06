@@ -13,9 +13,9 @@ public class Users {
     private String name;
     @Column(name = "users_account")
     private String userAccount;
-    private String email;
     private String password;
     private String tel;
+    private String email;
 
     public Integer getUserId() {
         return userId;
@@ -41,13 +41,6 @@ public class Users {
         this.userAccount = userAccount;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public String getPassword() {
         return password;
@@ -64,7 +57,13 @@ public class Users {
     public void setTel(String tel) {
         this.tel = tel;
     }
+    public String getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
     //------------------------------------------------------------
     @OneToMany(mappedBy = "users")
     private List<Reviews> reviews;

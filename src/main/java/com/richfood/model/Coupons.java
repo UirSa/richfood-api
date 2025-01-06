@@ -56,7 +56,7 @@ public class Coupons {
     }
 
     //-------------------------------------------------------
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
     private Store store;
 
