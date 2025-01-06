@@ -1,9 +1,8 @@
 package com.richfood.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Store {
@@ -12,7 +11,7 @@ public class Store {
     private Integer storeId;
 
     private Integer restaurantId;
-    private String userName;
+    private String storeAccount;
     private String password;
 
     public Integer getStoreId() {
@@ -31,12 +30,12 @@ public class Store {
         this.restaurantId = restaurantId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getStoreAccount() {
+        return storeAccount;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setStoreAccount(String storeAccount) {
+        this.storeAccount = storeAccount;
     }
 
     public String getPassword() {
@@ -47,8 +46,52 @@ public class Store {
         this.password = password;
     }
 
-
     //------------------------------------
-    //TODO 寫與餐廳表J
+    @OneToOne
+    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    private Restaurants restaurants;
 
+    public Restaurants getRestaurants() {
+        return restaurants;
+    }
+
+    public void setRestaurants(Restaurants restaurants) {
+        this.restaurants = restaurants;
+    }
+
+    //--------------------------------------------
+    @OneToMany(mappedBy = "store")
+    private List<Reservations> reservations;
+
+    public List<Reservations> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservations> reservations) {
+        this.reservations = reservations;
+    }
+
+    //---------------------------------------------------------
+    @OneToMany(mappedBy = "store")
+    private List<Coupons> coupons;
+
+    public List<Coupons> getCoupons() {
+        return coupons;
+    }
+
+    public void setCoupons(List<Coupons> coupons) {
+        this.coupons = coupons;
+    }
+
+    //------------------------------------------------------
+    @OneToMany(mappedBy = "store")
+    private List<CouponsOrders> couponsOrders;
+
+    public List<CouponsOrders> getCouponsOrders() {
+        return couponsOrders;
+    }
+
+    public void setCouponsOrders(List<CouponsOrders> couponsOrders) {
+        this.couponsOrders = couponsOrders;
+    }
 }

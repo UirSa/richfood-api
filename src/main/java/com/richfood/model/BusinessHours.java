@@ -31,7 +31,7 @@ public class BusinessHours {
 
     //-----------------------------------------------------------
     @ManyToOne
-    @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
+    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {

@@ -8,7 +8,6 @@ import java.time.LocalTime;
 @Embeddable
 public class BusinessHoursId {
 
-    @Column(name = "restaurant_id")
     private Integer restaurantId;
     private String day_of_week;
     private String start_time;
