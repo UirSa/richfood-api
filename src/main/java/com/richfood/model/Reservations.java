@@ -15,6 +15,7 @@ public class Reservations {
     private String numPeople;
     private String editTime;
     private Boolean state;
+    private Integer storeId;
 
     public Integer getReservationId() {
         return reservationId;
@@ -80,9 +81,17 @@ public class Reservations {
         this.state = state;
     }
 
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
     //------------------------------------------------------------
     @ManyToOne
-    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    @JoinColumn(name = "storeId", insertable = false, updatable = false)
     private Store store;
 
     public Store getStore() {

@@ -14,6 +14,7 @@ public class Coupons {
     private String name;
     private String description;
     private String createdAt;
+    private Integer storeId;
 
     public Integer getCouponId() {
         return couponId;
@@ -55,9 +56,17 @@ public class Coupons {
         this.createdAt = createdAt;
     }
 
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
     //-------------------------------------------------------
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    @ManyToOne
+    @JoinColumn(name = "storeId", insertable = false, updatable = false)
     private Store store;
 
     public Store getStore() {

@@ -13,6 +13,7 @@ public class CouponsOrders {
     private Integer restaurantId;
     private Integer quantity;
     private Integer totalPrice;
+    private Integer storeId;
 
     public Integer getOrderId() {
         return orderId;
@@ -62,9 +63,17 @@ public class CouponsOrders {
         this.totalPrice = totalPrice;
     }
 
+    public Integer getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
+    }
+
     //-----------------------------------------------
     @ManyToOne
-    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    @JoinColumn(name = "storeId", insertable = false, updatable = false)
     private Store store;
 
     public Store getStore() {
