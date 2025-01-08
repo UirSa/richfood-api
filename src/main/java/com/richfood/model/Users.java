@@ -66,7 +66,7 @@ public class Users {
         this.email = email;
     }
     //------------------------------------------------------------
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reviews> reviews;
 
@@ -79,7 +79,7 @@ public class Users {
     }
 
     //-------------------------------------------------------------
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<FavoriteRestaurants> favoriteRestaurants;
 
@@ -92,7 +92,7 @@ public class Users {
     }
 
     //---------------------------------------------------------
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 
@@ -105,7 +105,7 @@ public class Users {
     }
 
     //--------------------------------------------------------------
-    @OneToMany(mappedBy = "users")
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reservations> reservations;
 

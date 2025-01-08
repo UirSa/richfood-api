@@ -94,7 +94,7 @@ public class Reviews {
     }
 
     //---------------------------------------------------------
-    @OneToMany(mappedBy = "reviews")
+    @OneToMany(mappedBy = "reviews", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ReviewAudits> reviewAudits;
 

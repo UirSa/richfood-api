@@ -62,7 +62,7 @@ public class Store {
     }
 
     //--------------------------------------------
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reservations> reservations;
 
@@ -75,7 +75,7 @@ public class Store {
     }
 
     //---------------------------------------------------------
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Coupons> coupons;
 
@@ -88,7 +88,7 @@ public class Store {
     }
 
     //------------------------------------------------------
-    @OneToMany(mappedBy = "store")
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 

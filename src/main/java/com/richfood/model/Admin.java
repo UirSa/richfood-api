@@ -39,7 +39,7 @@ public class Admin {
     }
 
     //------------------------------------------------------
-    @OneToMany(mappedBy = "admin")
+    @OneToMany(mappedBy = "admin", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<ReviewAudits> reviewAudits;
 

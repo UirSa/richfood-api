@@ -80,7 +80,7 @@ public class Coupons {
     }
 
     //---------------------------------------------------------
-    @OneToMany(mappedBy = "coupons")
+    @OneToMany(mappedBy = "coupons", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 

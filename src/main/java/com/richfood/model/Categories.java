@@ -32,7 +32,7 @@ public class Categories {
     }
 
     //-------------------------------------------------
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<RestaurantCategories> restaurantCategories;
 

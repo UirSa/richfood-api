@@ -22,7 +22,7 @@ public class Restaurants {
     private Integer average;
     private String image;
     private String phone;
-    private String storeId;
+    private Integer storeId;
 
     public Integer getRestaurantId() {
         return restaurantId;
@@ -104,17 +104,17 @@ public class Restaurants {
         this.phone = phone;
     }
 
-    public String getStoreId() {
+    public Integer getStoreId() {
         return storeId;
     }
 
-    public void setStoreId(String storeId) {
+    public void setStoreId(Integer storeId) {
         this.storeId = storeId;
     }
 
     //-------------------------------------------------------
-    @OneToMany(mappedBy = "restaurants")
-    @JsonIgnore
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+
     private List<BusinessHours> businessHours;
 
     public List<BusinessHours> getBusinessHours() {
@@ -126,7 +126,7 @@ public class Restaurants {
     }
 
     //----------------------------------------------------------
-    @OneToMany(mappedBy = "restaurants")
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<RestaurantCategories> restaurantCategories;
 
@@ -139,7 +139,7 @@ public class Restaurants {
     }
 
     //-------------------------------------------------------
-    @OneToOne(mappedBy = "restaurants")
+    @OneToOne(mappedBy = "restaurants", cascade = CascadeType.ALL)
     @JsonIgnore
     private Store store;
 
