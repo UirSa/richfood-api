@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class Categories {
 
     //-------------------------------------------------
     @OneToMany(mappedBy = "categories")
+    @JsonIgnore
     private List<RestaurantCategories> restaurantCategories;
 
     public List<RestaurantCategories> getRestaurantCategories() {

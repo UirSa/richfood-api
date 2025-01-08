@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -94,6 +95,7 @@ public class Reviews {
 
     //---------------------------------------------------------
     @OneToMany(mappedBy = "reviews")
+    @JsonIgnore
     private List<ReviewAudits> reviewAudits;
 
     public List<ReviewAudits> getReviewAudits() {
@@ -107,6 +109,7 @@ public class Reviews {
     //-----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JsonIgnore
     private Users users;
 
     public Users getUsers() {

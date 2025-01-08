@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class RestaurantCategories {
     //-----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "restaurant_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {
@@ -32,6 +34,7 @@ public class RestaurantCategories {
     //--------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Categories categories;
 
     public Categories getCategories() {

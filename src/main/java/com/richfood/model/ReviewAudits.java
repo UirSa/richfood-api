@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -65,6 +66,7 @@ public class ReviewAudits {
     //----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "adminId", insertable = false, updatable = false)
+    @JsonIgnore
     private Admin admin;
 
     public Admin getAdmin() {
@@ -78,6 +80,7 @@ public class ReviewAudits {
     //---------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "reviewId", insertable = false, updatable = false)
+    @JsonIgnore
     private Reviews reviews;
 
     public Reviews getReviews() {

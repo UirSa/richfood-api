@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -38,6 +39,7 @@ public class FavoriteRestaurants {
     //---------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JsonIgnore
     private Users users;
 
     public Users getUsers() {

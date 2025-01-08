@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class Store {
     //------------------------------------
     @OneToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    @JsonIgnore
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {
@@ -61,6 +63,7 @@ public class Store {
 
     //--------------------------------------------
     @OneToMany(mappedBy = "store")
+    @JsonIgnore
     private List<Reservations> reservations;
 
     public List<Reservations> getReservations() {
@@ -73,6 +76,7 @@ public class Store {
 
     //---------------------------------------------------------
     @OneToMany(mappedBy = "store")
+    @JsonIgnore
     private List<Coupons> coupons;
 
     public List<Coupons> getCoupons() {
@@ -85,6 +89,7 @@ public class Store {
 
     //------------------------------------------------------
     @OneToMany(mappedBy = "store")
+    @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 
     public List<CouponsOrders> getCouponsOrders() {

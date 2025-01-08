@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -32,6 +33,7 @@ public class BusinessHours {
     //-----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    @JsonIgnore
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {

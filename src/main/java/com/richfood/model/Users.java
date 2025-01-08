@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -66,6 +67,7 @@ public class Users {
     }
     //------------------------------------------------------------
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Reviews> reviews;
 
     public List<Reviews> getReviews() {
@@ -78,6 +80,7 @@ public class Users {
 
     //-------------------------------------------------------------
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<FavoriteRestaurants> favoriteRestaurants;
 
     public List<FavoriteRestaurants> getFavoriteRestaurants() {
@@ -90,6 +93,7 @@ public class Users {
 
     //---------------------------------------------------------
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 
     public List<CouponsOrders> getCouponsOrders() {
@@ -102,6 +106,7 @@ public class Users {
 
     //--------------------------------------------------------------
     @OneToMany(mappedBy = "users")
+    @JsonIgnore
     private List<Reservations> reservations;
 
     public List<Reservations> getReservations() {
