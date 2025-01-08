@@ -2,6 +2,10 @@ package com.richfood.model;
 
 import jakarta.persistence.*;
 
+import javax.xml.crypto.Data;
+import java.sql.Time;
+import java.util.Date;
+
 @Entity
 public class Reservations {
     @Id
@@ -10,10 +14,10 @@ public class Reservations {
 
     private Integer restaurantId;
     private Integer userId;
-    private String reservationDate;
-    private String reservationTime;
+    private Date reservationDate;
+    private Time reservationTime;
     private String numPeople;
-    private String editTime;
+    private Time editTime;
     private Boolean state;
     private Integer storeId;
 
