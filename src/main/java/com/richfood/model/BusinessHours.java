@@ -16,6 +16,14 @@ public class BusinessHours {
 
     private String endTime;
 
+    public BusinessHours() {
+    }
+
+    public BusinessHours(BusinessHoursId businessHoursId, String endTime) {
+        this.businessHoursId = businessHoursId;
+        this.endTime = endTime;
+    }
+
     public BusinessHoursId getBusinessHoursId() {
         return businessHoursId;
     }

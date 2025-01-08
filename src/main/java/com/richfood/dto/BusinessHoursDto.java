@@ -1,25 +1,11 @@
-package com.richfood.model;
+package com.richfood.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
-
-import java.time.LocalTime;
-
-@Embeddable
-public class BusinessHoursId {
-
+public class BusinessHoursDto {
     private Integer restaurantId;
     private String dayOfWeek;
     private String startTime;
+    private String endTime;
 
-    public BusinessHoursId() {
-    }
-
-    public BusinessHoursId(Integer restaurantId, String dayOfWeek, String startTime) {
-        this.restaurantId = restaurantId;
-        this.dayOfWeek = dayOfWeek;
-        this.startTime = startTime;
-    }
     public Integer getRestaurantId() {
         return restaurantId;
     }
@@ -42,5 +28,13 @@ public class BusinessHoursId {
 
     public void setStartTime(String startTime) {
         this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
     }
 }
