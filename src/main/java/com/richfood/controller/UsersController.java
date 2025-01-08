@@ -25,7 +25,7 @@ import com.richfood.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/ ")
+@RequestMapping("/User")
 public class UsersController {
 	
 	@Autowired UsersService userService;
@@ -134,4 +134,4 @@ public class UsersController {
 	         return ResponseEntity.status(500).body("Error deleting user: " + e.getMessage());
 	     }
 	 }
-}
+} 
