@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Time;
@@ -96,6 +97,7 @@ public class Reservations {
     //------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
+    @JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -109,6 +111,7 @@ public class Reservations {
     //---------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JsonIgnore
     private Users users;
 
     public Users getUsers() {
