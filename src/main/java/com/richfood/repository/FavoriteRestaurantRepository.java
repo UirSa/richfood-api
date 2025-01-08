@@ -24,4 +24,4 @@ public interface FavoriteRestaurantRepository extends JpaRepository<FavoriteRest
 
 
 
-}
+} 

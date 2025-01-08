@@ -40,7 +40,7 @@ public class FavoriteRestaurantController {
 		 
 	     List<Restaurants> favoriteRestaurants = favoriteRestaurantService.getFavoriteRestaurants(userId);
 	     
-	     return ResponseEntity.ok(favoriteRestaurants);
+	     return ResponseEntity.ok(favoriteRestaurants); 
 	 }
 
 
