@@ -25,7 +25,7 @@ import com.richfood.service.UsersService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/ ")
+@RequestMapping("/User")
 public class UsersController {
 	
 	@Autowired UsersService userService;
