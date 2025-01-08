@@ -1,6 +1,11 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.sql.Time;
+import java.time.OffsetTime;
+import java.util.Date;
 
 @Entity
 public class Reservations {
@@ -10,10 +15,10 @@ public class Reservations {
 
     private Integer restaurantId;
     private Integer userId;
-    private String reservationDate;
-    private String reservationTime;
-    private String numPeople;
-    private String editTime;
+    private Date reservationDate;
+    private Time reservationTime;
+    private Integer numPeople;
+    private OffsetTime editTime;
     private Boolean state;
     private Integer storeId;
 
@@ -41,35 +46,35 @@ public class Reservations {
         this.userId = userId;
     }
 
-    public String getReservationDate() {
+    public Date getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(String reservationDate) {
+    public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
 
-    public String getReservationTime() {
+    public Time getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(String reservationTime) {
+    public void setReservationTime(Time reservationTime) {
         this.reservationTime = reservationTime;
     }
 
-    public String getNumPeople() {
+    public Integer getNumPeople() {
         return numPeople;
     }
 
-    public void setNumPeople(String numPeople) {
+    public void setNumPeople(Integer numPeople) {
         this.numPeople = numPeople;
     }
 
-    public String getEditTime() {
+    public OffsetTime getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(String editTime) {
+    public void setEditTime(OffsetTime editTime) {
         this.editTime = editTime;
     }
 
@@ -92,6 +97,7 @@ public class Reservations {
     //------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
+    @JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -105,6 +111,7 @@ public class Reservations {
     //---------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
+    @JsonIgnore
     private Users users;
 
     public Users getUsers() {
@@ -114,4 +121,5 @@ public class Reservations {
     public void setUsers(Users users) {
         this.users = users;
     }
+
 }

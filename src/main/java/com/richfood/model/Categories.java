@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "category_id")
+//  @Column(name = "category_id")
     private Integer categoryId;
 
     private String name;
@@ -31,7 +32,8 @@ public class Categories {
     }
 
     //-------------------------------------------------
-    @OneToMany(mappedBy = "categories")
+    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<RestaurantCategories> restaurantCategories;
 
     public List<RestaurantCategories> getRestaurantCategories() {

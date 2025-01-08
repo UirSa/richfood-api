@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalTime;
@@ -8,10 +9,20 @@ import java.time.LocalTime;
 @Table(name = "business_hours")
 public class BusinessHours {
 
+
+
     @EmbeddedId
     private BusinessHoursId businessHoursId;
 
     private String endTime;
+
+    public BusinessHours() {
+    }
+
+    public BusinessHours(BusinessHoursId businessHoursId, String endTime) {
+        this.businessHoursId = businessHoursId;
+        this.endTime = endTime;
+    }
 
     public BusinessHoursId getBusinessHoursId() {
         return businessHoursId;
@@ -32,6 +43,7 @@ public class BusinessHours {
     //-----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {

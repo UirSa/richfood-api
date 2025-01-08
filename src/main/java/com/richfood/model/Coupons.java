@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -67,6 +68,7 @@ public class Coupons {
     //-------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
+    @JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -78,7 +80,8 @@ public class Coupons {
     }
 
     //---------------------------------------------------------
-    @OneToMany(mappedBy = "coupons")
+    @OneToMany(mappedBy = "coupons", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<CouponsOrders> couponsOrders;
 
     public List<CouponsOrders> getCouponsOrders() {
