@@ -9,7 +9,7 @@ public class Categories {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "category_id")
+//  @Column(name = "category_id")
     private Integer categoryId;
 
     private String name;
