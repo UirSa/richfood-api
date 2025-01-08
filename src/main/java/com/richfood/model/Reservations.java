@@ -45,19 +45,19 @@ public class Reservations {
         this.userId = userId;
     }
 
-    public String getReservationDate() {
+    public Date getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(String reservationDate) {
+    public void setReservationDate(Date reservationDate) {
         this.reservationDate = reservationDate;
     }
 
-    public String getReservationTime() {
+    public Time getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(String reservationTime) {
+    public void setReservationTime(Time reservationTime) {
         this.reservationTime = reservationTime;
     }
 
@@ -69,11 +69,11 @@ public class Reservations {
         this.numPeople = numPeople;
     }
 
-    public String getEditTime() {
+    public Time getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(String editTime) {
+    public void setEditTime(Time editTime) {
         this.editTime = editTime;
     }
 
