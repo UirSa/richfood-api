@@ -1,9 +1,11 @@
 package com.richfood.service;
 
 import java.time.OffsetTime;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.richfood.model.Reservations;
 import com.richfood.repository.ReservationRepository;
@@ -35,6 +37,32 @@ public class ReservationService {
     public void deleteSeat(Integer reservationId) {
     	reservationRepository.deleteById(reservationId);
     }
+    public Reservations updateSeat(Integer reservationId,Reservations updatedReservation) {
+    	Optional<Reservations> optionalorder=reservationRepository.findById(reservationId);
+    	
+         if (optionalorder.isPresent()) {
+             Reservations existingReservation = optionalorder.get();
+
+             // 更新資料
+             if (updatedReservation.getNumPeople() != null) {
+                 existingReservation.setNumPeople(updatedReservation.getNumPeople());
+             }
+             if (updatedReservation.getReservationDate() != null) {
+                 existingReservation.setReservationDate(updatedReservation.getReservationDate());
+             }
+             if (updatedReservation.getReservationTime() != null) {
+                 existingReservation.setReservationTime(updatedReservation.getReservationTime());
+             }
+
+             // 保存更新的資料
+             return reservationRepository.save(existingReservation);
+         }
+
+         // 若不存在，返回 null
+         return null;
+     }
+    
+	
 
 	
 }

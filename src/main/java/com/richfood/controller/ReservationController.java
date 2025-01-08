@@ -61,8 +61,11 @@ public class ReservationController {
 	}
 	
 	//修改訂位
-//	@PutMapping("/{reservationId}")
-	
+	@PutMapping("/{reservationId}")
+	public ResponseEntity<Reservations> updateSeat(@PathVariable Integer reservationId,@RequestBody Reservations updatedReservation) {
+		Reservations reservation = reservationService.updateSeat(reservationId, updatedReservation);
+		return ResponseEntity.ok(reservation);
+	}
 	
 	
 }
