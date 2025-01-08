@@ -2,8 +2,8 @@ package com.richfood.model;
 
 import jakarta.persistence.*;
 
-import javax.xml.crypto.Data;
 import java.sql.Time;
+import java.time.OffsetTime;
 import java.util.Date;
 
 @Entity
@@ -17,7 +17,7 @@ public class Reservations {
     private Date reservationDate;
     private Time reservationTime;
     private Integer numPeople;
-    private Time editTime;
+    private OffsetTime editTime;
     private Boolean state;
     private Integer storeId;
 
@@ -69,11 +69,11 @@ public class Reservations {
         this.numPeople = numPeople;
     }
 
-    public Time getEditTime() {
+    public OffsetTime getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(Time editTime) {
+    public void setEditTime(OffsetTime editTime) {
         this.editTime = editTime;
     }
 
