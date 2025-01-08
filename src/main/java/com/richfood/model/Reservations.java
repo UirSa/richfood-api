@@ -16,7 +16,7 @@ public class Reservations {
     private Integer userId;
     private Date reservationDate;
     private Time reservationTime;
-    private String numPeople;
+    private Integer numPeople;
     private Time editTime;
     private Boolean state;
     private Integer storeId;
@@ -61,11 +61,11 @@ public class Reservations {
         this.reservationTime = reservationTime;
     }
 
-    public String getNumPeople() {
+    public Integer getNumPeople() {
         return numPeople;
     }
 
-    public void setNumPeople(String numPeople) {
+    public void setNumPeople(Integer numPeople) {
         this.numPeople = numPeople;
     }
 
