@@ -16,7 +16,7 @@ import com.richfood.model.Reservations;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservations, Integer> {
 	List<Reservations> findByUserId(Integer userid);
-	boolean existsByUserIdAndReservationDateAndReservationTimeAndStoreIdAndState(Integer userId, Date date, Time reservationTime, Integer storeId,boolean status);
+	boolean existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(Integer userId,Integer storeId,  Date date, Time reservationTime);
 	
 	List<Reservations> findByUserIdOrderByReservationDateAscReservationTimeAsc(Integer userid);
 	List<Reservations> findByUserIdOrderByReservationDateDescReservationTimeAsc(Integer userid);

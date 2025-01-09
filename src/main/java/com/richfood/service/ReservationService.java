@@ -20,12 +20,11 @@ public class ReservationService {
         // 自動設置 editTime 為當前時間（+00）
         reservation.setEditTime(OffsetTime.now());
         
-        boolean exists = reservationRepository.existsByUserIdAndReservationDateAndReservationTimeAndStoreIdAndState(
+        boolean exists = reservationRepository.existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(
                 reservation.getUserId(), 
+                reservation.getStoreId(), 
                 reservation.getReservationDate(),  // 使用 Date 類型
-                reservation.getReservationTime(),  // 使用 Time 類型
-                reservation.getStoreId(),
-                reservation.getState()
+                reservation.getReservationTime() // 使用 Time 類型
             );
             
             if (exists) {
@@ -34,6 +33,7 @@ public class ReservationService {
             }
 
             // 若不存在相同預約，則保存新的預約
+            reservation.setState(true);
             return reservationRepository.save(reservation);
     }
     
