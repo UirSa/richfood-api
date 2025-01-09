@@ -23,9 +23,7 @@ import com.richfood.repository.ReservationRepository;
 import com.richfood.service.ReservationService;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-
-
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -54,18 +52,61 @@ public class ReservationController {
 	}
 	
 	//刪除使用者訂位
-	@DeleteMapping("/{reservationId}")
+	@DeleteMapping("deleteSeat/{reservationId}")
 	public void deleteSeat(@PathVariable Integer reservationId) {
 		reservationService.deleteSeat(reservationId);
 		
 	}
 	
 	//修改訂位
-	@PutMapping("/{reservationId}")
+	@PutMapping("updateSeat/{reservationId}")
 	public ResponseEntity<Reservations> updateSeat(@PathVariable Integer reservationId,@RequestBody Reservations updatedReservation) {
 		Reservations reservation = reservationService.updateSeat(reservationId, updatedReservation);
 		return ResponseEntity.ok(reservation);
 	}
+	
+	//消費者查詢所有訂位 排序依訂位到期時日期是舊到新 時間是舊到新 歷史訂單 不排除各種條件
+	@GetMapping("/selectAllReservationAsc")
+	public ResponseEntity<List<Reservations>>selectAllAscReservation(HttpServletRequest request) {
+		
+		Integer userId= (Integer)request.getSession().getAttribute("userId");
+		//System.out.println(userId);
+		List<Reservations> reservations=reservationService.seleteSeatAsc(userId);
+		
+		return ResponseEntity.ok(reservations);
+	}
+	//消費者查詢所有訂位 預設排序依訂位到期日期是新到舊 時間是舊到新 歷史訂單 不排除各種條件
+	@GetMapping("/selectAllReservationDesc")
+	public ResponseEntity<List<Reservations>>selectAllReservation(HttpServletRequest request) {
+		
+		Integer userId= (Integer)request.getSession().getAttribute("userId");
+		List<Reservations> reservations=reservationService.seleteSeatDesc(userId);
+		
+		return ResponseEntity.ok(reservations);
+	}
+	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是舊到新 時間是舊到新 歷史訂單 排除已取消訂單status!=false
+	@GetMapping("/selectReservationNotCancelAsc")
+	public ResponseEntity<List<Reservations>>selectReservationNotCancelAsc(HttpServletRequest request){
+		
+		Integer userId= (Integer)request.getSession().getAttribute("userId");
+		List<Reservations> reservations=reservationService.seleteSeatNotCancelAsc(userId);
+		
+		return ResponseEntity.ok(reservations);
+	}
+	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是新到舊 時間是舊到新 歷史訂單 排除已取消訂單status!=false
+	@GetMapping("/selectReservationNotCancelDesc")
+	public ResponseEntity<List<Reservations>>selectReservationNotCancelDesc(HttpServletRequest request){
+		
+		Integer userId= (Integer)request.getSession().getAttribute("userId");
+		List<Reservations> reservations=reservationService.seleteSeatNotCancelDesc(userId);
+		
+		return ResponseEntity.ok(reservations);
+	}
+	
+	
+	
+	
+	
 	
 	
 }
