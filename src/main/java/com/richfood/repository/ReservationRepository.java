@@ -10,9 +10,6 @@ import org.springframework.stereotype.Repository;
 
 import com.richfood.model.Reservations;
 
-
-
-
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservations, Integer> {
 	List<Reservations> findByUserId(Integer userid);
