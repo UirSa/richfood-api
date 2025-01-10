@@ -1,15 +1,15 @@
 package com.richfood.model;
 
-import jakarta.persistence.Column;
+import com.richfood.util.StringToOffsetTimeConverter;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
-
-import java.time.LocalTime;
 
 @Embeddable
 public class BusinessHoursId {
 
     private Integer restaurantId;
     private String dayOfWeek;
+    @Convert(converter = StringToOffsetTimeConverter.class)
     private String startTime;
 
     public BusinessHoursId() {

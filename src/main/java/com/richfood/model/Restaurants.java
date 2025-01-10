@@ -114,7 +114,7 @@ public class Restaurants {
 
     //-------------------------------------------------------
     @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
-
+    @JsonIgnore
     private List<BusinessHours> businessHours;
 
     public List<BusinessHours> getBusinessHours() {
