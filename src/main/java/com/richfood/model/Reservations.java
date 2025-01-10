@@ -97,7 +97,7 @@ public class Reservations {
     //------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -111,7 +111,7 @@ public class Reservations {
     //---------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Users users;
 
     public Users getUsers() {
