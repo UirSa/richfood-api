@@ -51,14 +51,14 @@ public class ReservationController {
 		return ResponseEntity.ok(reservation);
 	}
 	
-	//刪除使用者訂位
+	//刪除使用者訂位//資料庫不留
 	@DeleteMapping("deleteSeat/{reservationId}")
 	public void deleteSeat(@PathVariable Integer reservationId) {
 		reservationService.deleteSeat(reservationId);
 		
 	}
 	
-	//修改訂位
+	//修改訂位//刪除用這裡更改狀態
 	@PutMapping("updateSeat/{reservationId}")
 	public ResponseEntity<Reservations> updateSeat(@PathVariable Integer reservationId,@RequestBody Reservations updatedReservation) {
 		Reservations reservation = reservationService.updateSeat(reservationId, updatedReservation);
@@ -84,7 +84,7 @@ public class ReservationController {
 		
 		return ResponseEntity.ok(reservations);
 	}
-	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是舊到新 時間是舊到新 歷史訂單 排除已取消訂單status!=false
+	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是舊到新 時間是舊到新  排除已取消訂單status!=false
 	@GetMapping("/selectReservationNotCancelAsc")
 	public ResponseEntity<List<Reservations>>selectReservationNotCancelAsc(HttpServletRequest request){
 		
@@ -93,7 +93,7 @@ public class ReservationController {
 		
 		return ResponseEntity.ok(reservations);
 	}
-	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是新到舊 時間是舊到新 歷史訂單 排除已取消訂單status!=false
+	//消費者查詢未來訂位含今日 預設排序依訂位到期日期是新到舊 時間是舊到新  排除已取消訂單status!=false
 	@GetMapping("/selectReservationNotCancelDesc")
 	public ResponseEntity<List<Reservations>>selectReservationNotCancelDesc(HttpServletRequest request){
 		
@@ -102,9 +102,6 @@ public class ReservationController {
 		
 		return ResponseEntity.ok(reservations);
 	}
-	
-	
-	
 	
 	
 	

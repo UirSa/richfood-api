@@ -1,7 +1,10 @@
 package com.richfood.service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.OffsetTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +21,14 @@ public class ReservationService {
 	private ReservationRepository reservationRepository;
 	
     public Reservations addSeat(Reservations reservation) {
-        // 自動設置 editTime 為當前時間（+00）
-        reservation.setEditTime(LocalDateTime.now());
+        // 自動設置 editTime 為當前時間
+        reservation.setEditTime(OffsetDateTime.now());
         
         boolean exists = reservationRepository.existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(
                 reservation.getUserId(), 
                 reservation.getStoreId(), 
-                reservation.getReservationDate(),  // 使用 Date 類型
-                reservation.getReservationTime() // 使用 Time 類型
+                reservation.getReservationDate(),
+                reservation.getReservationTime() 
             );
             
             if (exists) {
@@ -47,21 +50,36 @@ public class ReservationService {
     	
          if (optionalorder.isPresent()) {
              Reservations existingReservation = optionalorder.get();
+             
+             if(existingReservation.getReservationDate()!= null) {
+            	 OffsetDateTime now = OffsetDateTime.now();
+            	 LocalDate previousDay = now.toLocalDate().minusDays(1);
+            	 Date reservationDate= existingReservation.getReservationDate();
+            	 LocalDate reservationLocalDate = reservationDate.toInstant()
+                         .atZone(ZoneId.systemDefault())
+                         .toLocalDate();
 
-             // 更新資料
-             if (updatedReservation.getNumPeople() != null) {
-                 existingReservation.setNumPeople(updatedReservation.getNumPeople());
-             }
-             if (updatedReservation.getReservationDate() != null) {
-                 existingReservation.setReservationDate(updatedReservation.getReservationDate());
-             }
-             if (updatedReservation.getReservationTime() != null) {
-                 existingReservation.setReservationTime(updatedReservation.getReservationTime());
-             }
-             if(updatedReservation.getState()!=null) {
-            	 existingReservation.setState(updatedReservation.getState());
+                 if (reservationLocalDate.equals(now.toLocalDate())||reservationLocalDate.equals(previousDay)) {
+                     throw new IllegalStateException("不能更改當天及前一天的預約。");
+                     
+                 }
+                 // 更新資料
+                 if (updatedReservation.getNumPeople() != null) {
+                	 existingReservation.setNumPeople(updatedReservation.getNumPeople());
+                 }
+                 if (updatedReservation.getReservationDate() != null) {
+                	 existingReservation.setReservationDate(updatedReservation.getReservationDate());
+                 }
+                 if (updatedReservation.getReservationTime() != null) {
+                	 existingReservation.setReservationTime(updatedReservation.getReservationTime());
+                 }
+                 if(updatedReservation.getState()!=null) {
+                	 existingReservation.setState(updatedReservation.getState());
+                 }
+
              }
 
+             
              // 保存更新的資料
              return reservationRepository.save(existingReservation);
          }
