@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Time;
-import java.time.OffsetTime;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,7 +18,7 @@ public class Reservations {
     private Date reservationDate;
     private Time reservationTime;
     private Integer numPeople;
-    private OffsetTime editTime;
+    private LocalDateTime editTime;
     private Boolean state;
     private Integer storeId;
 
@@ -70,11 +70,11 @@ public class Reservations {
         this.numPeople = numPeople;
     }
 
-    public OffsetTime getEditTime() {
+    public LocalDateTime getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(OffsetTime editTime) {
+    public void setEditTime(LocalDateTime editTime) {
         this.editTime = editTime;
     }
 
