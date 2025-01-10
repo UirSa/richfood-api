@@ -18,7 +18,11 @@ import com.richfood.service.ReservationStoreService;
 public class ReservationStoreController {
 	@Autowired
 	private ReservationStoreService reservationStoreService;
-	//暫時
+	
+	//刪除預定(更改狀態)
+	
+	//瀏覽頁面
+
 	@GetMapping("/selectAllReservationAsc/{storeid}")
 	public ResponseEntity<List<Reservations>>selectAllReservation(@PathVariable Integer storeid){
 		List<Reservations> reservations=reservationStoreService.seleteSeatNotCancelAsc(storeid);

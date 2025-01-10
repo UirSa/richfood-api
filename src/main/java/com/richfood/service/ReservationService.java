@@ -1,7 +1,6 @@
 package com.richfood.service;
 
-import java.time.LocalDateTime;
-import java.time.OffsetTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,14 +17,14 @@ public class ReservationService {
 	private ReservationRepository reservationRepository;
 	
     public Reservations addSeat(Reservations reservation) {
-        // 自動設置 editTime 為當前時間（+00）
-        reservation.setEditTime(LocalDateTime.now());
+        // 自動設置 editTime 為當前時間
+        reservation.setEditTime(OffsetDateTime.now());
         
         boolean exists = reservationRepository.existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(
                 reservation.getUserId(), 
                 reservation.getStoreId(), 
-                reservation.getReservationDate(),  // 使用 Date 類型
-                reservation.getReservationTime() // 使用 Time 類型
+                reservation.getReservationDate(),
+                reservation.getReservationTime() 
             );
             
             if (exists) {
