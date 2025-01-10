@@ -25,4 +25,4 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	
 	
 	
-}
+} 
