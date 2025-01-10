@@ -3,6 +3,7 @@ package com.richfood.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class Reviews {
     private Integer userId;
     private Integer rating;
     private String content;
-    private String createdAt;
+    private LocalDateTime createdAt;
     private Integer storeId;
     private Boolean isFlagged;
     private Boolean isApproved;
@@ -61,11 +62,11 @@ public class Reviews {
         this.content = content;
     }
 
-    public String getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
