@@ -7,6 +7,7 @@ import com.richfood.service.RestaurantsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,9 +18,15 @@ public class RestaurantsController {
     private RestaurantsService restaurantsService;
 
     @GetMapping("/restaurants")
-    public List<Restaurants> test1(){
+    public List<BusinessHours> test1(){
         List<Restaurants> list =restaurantsService.searchRestaurants();
-        return list;
+        List<BusinessHours> allBusinessHoursList= new ArrayList<>();
+        for (Restaurants restaurants : list) {
+            List<BusinessHours> businessHoursList=restaurants.getBusinessHours();
+            allBusinessHoursList.addAll(businessHoursList);
+        }
+        return allBusinessHoursList;
+
     }
 
     @PostMapping("/restaurants")
