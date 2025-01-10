@@ -55,7 +55,7 @@ public class ReviewsService {
         review.setFlagged(false);
         
         // 4. 預設管理者未審核 → IsApproved = false
-        review.setIsApproved(false);
+        review.setApproved(false);
         
         review.setCreatedAt(LocalDateTime.now());
         
