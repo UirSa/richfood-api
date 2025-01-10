@@ -30,7 +30,6 @@ public class StoresController {
 	public void storeLogin(@RequestBody Store store, HttpServletRequest request) {
 		boolean isStore =storesService.storeLogin(store.getStoreAccount(), store.getPassword());
 		if(isStore) {
-			request
 		}
 		
 	}
