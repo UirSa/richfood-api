@@ -51,14 +51,14 @@ public class ReservationController {
 		return ResponseEntity.ok(reservation);
 	}
 	
-	//刪除使用者訂位
+	//刪除使用者訂位//資料庫不留
 	@DeleteMapping("deleteSeat/{reservationId}")
 	public void deleteSeat(@PathVariable Integer reservationId) {
 		reservationService.deleteSeat(reservationId);
 		
 	}
 	
-	//修改訂位
+	//修改訂位//刪除用這裡更改狀態
 	@PutMapping("updateSeat/{reservationId}")
 	public ResponseEntity<Reservations> updateSeat(@PathVariable Integer reservationId,@RequestBody Reservations updatedReservation) {
 		Reservations reservation = reservationService.updateSeat(reservationId, updatedReservation);
