@@ -40,11 +40,12 @@ public class RestaurantsService {
 
         List<BusinessHours> businessHoursList=new ArrayList<>();
         for (BusinessHoursDto businessHoursDto : restaurantsDto.getBusinessHours()) {
-            LocalTime startTime = LocalTime.parse(businessHoursDto.getStartTime()); // "11:00" 會被轉換為 LocalTime.of(11, 0)
+            String startTime = businessHoursDto.getStartTime();
+            String endTime = businessHoursDto.getEndTime();
             //TODO 改格式
-            BusinessHoursId businessHoursId=new BusinessHoursId(businessHoursDto.getRestaurantId(),businessHoursDto.getDayOfWeek(), businessHoursDto.getStartTime());
+            BusinessHoursId businessHoursId=new BusinessHoursId(businessHoursDto.getRestaurantId(),businessHoursDto.getDayOfWeek(), startTime);
 
-            BusinessHours businessHours = new BusinessHours(businessHoursId, businessHoursDto.getEndTime());
+            BusinessHours businessHours = new BusinessHours(businessHoursId, endTime);
             businessHoursList.add(businessHours);
         }
         restaurants.setBusinessHours(businessHoursList);

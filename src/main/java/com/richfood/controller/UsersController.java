@@ -91,6 +91,16 @@ public class UsersController {
 	    errorResponse.put("message", "帳號或密碼錯誤");
 	    return ResponseEntity.badRequest().body(errorResponse);  // 返回錯誤訊息
 	}
+	
+	@PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
+        try {
+            userService.logout(request);
+            return ResponseEntity.ok(Map.of("message", "登出成功"));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("message", "登出失敗：" + e.getMessage()));
+        }
+    }
 	 
 	 @GetMapping("/getUserDetails")
 	 public ResponseEntity<Users> getUserDetails(@RequestParam Integer userId) {
@@ -134,4 +144,4 @@ public class UsersController {
 	         return ResponseEntity.status(500).body("Error deleting user: " + e.getMessage());
 	     }
 	 }
-} 
+}

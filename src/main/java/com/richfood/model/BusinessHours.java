@@ -1,9 +1,8 @@
 package com.richfood.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.richfood.util.StringToOffsetTimeConverter;
 import jakarta.persistence.*;
-
-import java.time.LocalTime;
 
 @Entity
 @Table(name = "business_hours")
@@ -13,7 +12,7 @@ public class BusinessHours {
 
     @EmbeddedId
     private BusinessHoursId businessHoursId;
-
+    @Convert(converter = StringToOffsetTimeConverter.class)
     private String endTime;
 
     public BusinessHours() {
@@ -43,7 +42,7 @@ public class BusinessHours {
     //-----------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
-
+    @JsonIgnore
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {

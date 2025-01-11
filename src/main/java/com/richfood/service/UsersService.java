@@ -61,6 +61,12 @@ public class UsersService {
 
         return false;  // 如果用戶不存在，返回 false
     }
+    
+    @Transactional
+    public void logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        System.out.println("用戶已成功登出");
+    }
 
     
     public Users getUserDetails(Integer userId) {

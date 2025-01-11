@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Time;
-import java.time.OffsetTime;
+import java.time.OffsetDateTime;
 import java.util.Date;
 
 @Entity
@@ -18,7 +18,7 @@ public class Reservations {
     private Date reservationDate;
     private Time reservationTime;
     private Integer numPeople;
-    private OffsetTime editTime;
+    private OffsetDateTime editTime;
     private Boolean state;
     private Integer storeId;
 
@@ -70,11 +70,11 @@ public class Reservations {
         this.numPeople = numPeople;
     }
 
-    public OffsetTime getEditTime() {
+    public OffsetDateTime getEditTime() {
         return editTime;
     }
 
-    public void setEditTime(OffsetTime editTime) {
+    public void setEditTime(OffsetDateTime editTime) {
         this.editTime = editTime;
     }
 
@@ -97,7 +97,7 @@ public class Reservations {
     //------------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -111,7 +111,7 @@ public class Reservations {
     //---------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Users users;
 
     public Users getUsers() {
