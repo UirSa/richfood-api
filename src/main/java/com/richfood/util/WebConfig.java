@@ -1,10 +1,12 @@
 package com.richfood.util;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+@EnableSpringDataWebSupport(pageSerializationMode = EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO)
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
@@ -16,4 +18,5 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowCredentials(true)  // 是否允許發送 Cookie
                 .maxAge(3600);  // 預檢請求的最大有效時間（秒）
     }
+    
 }
