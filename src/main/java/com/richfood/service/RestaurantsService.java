@@ -7,6 +7,8 @@ import com.richfood.model.BusinessHoursId;
 import com.richfood.model.Restaurants;
 import com.richfood.repository.RestaurantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -20,10 +22,19 @@ public class RestaurantsService {
     @Autowired
     private RestaurantsRepository restaurantsRepository;
 
-    public List<Restaurants> searchRestaurants(){
-        return restaurantsRepository.findAll();
+
+    public Page<Restaurants> searchRestaurants(String country, Pageable pageable){
+        return restaurantsRepository.findByCountry(country,pageable);
 
     }
+    public Page<Restaurants> getRestaurantsByCategoryName(String categoryName, Pageable pageable) {
+        return restaurantsRepository.findRestaurantsByCategoryName(categoryName,pageable);
+    }
+
+
+
+
+
 
     public void saveRestaurants(@RequestBody RestaurantsDto restaurantsDto){
         Restaurants restaurants = new Restaurants();

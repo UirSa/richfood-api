@@ -32,15 +32,26 @@ public class Categories {
     }
 
     //-------------------------------------------------
-    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<RestaurantCategories> restaurantCategories;
+//
+//    public List<RestaurantCategories> getRestaurantCategories() {
+//        return restaurantCategories;
+//    }
+//
+//    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
+//        this.restaurantCategories = restaurantCategories;
+//    }
+    @ManyToMany(mappedBy = "categories")
     @JsonIgnore
-    private List<RestaurantCategories> restaurantCategories;
+    private List<Restaurants> restaurants;
 
-    public List<RestaurantCategories> getRestaurantCategories() {
-        return restaurantCategories;
+    public List<Restaurants> getRestaurants() {
+        return restaurants;
     }
 
-    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
-        this.restaurantCategories = restaurantCategories;
+    public void setRestaurants(List<Restaurants> restaurants) {
+        this.restaurants = restaurants;
     }
 }

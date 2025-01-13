@@ -126,16 +126,33 @@ public class Restaurants {
     }
 
     //----------------------------------------------------------
-    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<RestaurantCategories> restaurantCategories;
+//    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<RestaurantCategories> restaurantCategories;
+//
+//    public List<RestaurantCategories> getRestaurantCategories() {
+//        return restaurantCategories;
+//    }
+//
+//    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
+//        this.restaurantCategories = restaurantCategories;
+//    }
 
-    public List<RestaurantCategories> getRestaurantCategories() {
-        return restaurantCategories;
+    @ManyToMany
+    @JoinTable(
+            name = "restaurant_categories",  // 中介表名稱
+            joinColumns = @JoinColumn(name = "restaurant_id"),  // 連接 restaurant_id
+            inverseJoinColumns = @JoinColumn(name = "category_id")  // 連接 category_id
+    )
+    @JsonIgnore
+    private List<Categories> categories;
+
+    public List<Categories> getCategories() {
+        return categories;
     }
 
-    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
-        this.restaurantCategories = restaurantCategories;
+    public void setCategories(List<Categories> categories) {
+        this.categories = categories;
     }
 
     //-------------------------------------------------------
