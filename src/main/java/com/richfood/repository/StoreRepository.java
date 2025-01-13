@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface StoreRepository extends JpaRepository<Store, Integer> {
 	Optional<Store> findByStoreAccount(String storeAccount);
-	
-	
+	Optional<Store> findByStoreId(Integer storeId);
+
+
 }
