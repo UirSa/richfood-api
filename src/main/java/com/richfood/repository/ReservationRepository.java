@@ -28,4 +28,7 @@ public interface ReservationRepository extends JpaRepository<Reservations, Integ
 			+ "AND reservation_date >= CURRENT_DATE \r\n"
 			+ "ORDER BY reservation_date Desc,reservation_time ASC", nativeQuery = true)
 	List<Reservations> findByUserIdReservationNotCancelDesc(Integer userid);
+	
+	@Query(value ="DELETE FROM public.Reservations r WHERE r.store_id IS NULL", nativeQuery = true)
+	void deleteOrphanReservations();
 }
