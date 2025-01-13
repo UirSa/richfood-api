@@ -3,6 +3,7 @@ package com.richfood.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.List;
 
 @Entity
@@ -17,6 +18,8 @@ public class Users {
     private String password;
     private String tel;
     private String email;
+    private byte[] icon;
+    private Date  birthday;
 
     public Integer getUserId() {
         return userId;
@@ -65,7 +68,26 @@ public class Users {
     public void setEmail(String email) {
         this.email = email;
     }
-    //------------------------------------------------------------
+    
+    
+    public byte[] getIcon() {
+		return icon;
+	}
+
+	public void setIcon(byte[] icon) {
+		this.icon = icon;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+
+	//------------------------------------------------------------
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reviews> reviews;

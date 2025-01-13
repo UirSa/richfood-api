@@ -45,6 +45,8 @@ public class UsersService {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
         user.setTel(user.getTel());
         user.setEmail(user.getEmail());
+        user.setIcon(user.getIcon()); // 處理圖片
+        user.setBirthday(user.getBirthday()); // 處理生日
 
         // 儲存並返回使用者資料
         return usersRepository.save(user);
@@ -104,6 +106,12 @@ public class UsersService {
             }
             if (user.getEmail() != null && !user.getEmail().isEmpty()) {
             	existingUser.setEmail(user.getEmail());
+            }
+            if (user.getIcon() != null) {
+                existingUser.setIcon(user.getIcon());
+            }
+            if (user.getBirthday() != null) {
+                existingUser.setBirthday(user.getBirthday());
             }
 
             // 儲存更新後的資料

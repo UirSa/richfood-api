@@ -41,6 +41,8 @@ public class UsersController {
 		System.out.println("Received passeord: "+user.getPassword());
 		System.out.println("Received Tel: "+user.getTel());
 		System.out.println("Received Email:"+user.getEmail());
+		System.out.println("Received Icon: " + (user.getIcon() != null));
+		System.out.println("Received Birthday: " + user.getBirthday());
 		
 		if (user.getName() == null || user.getName().isEmpty()) {
 			return ResponseEntity.badRequest().body(Map.of("message", "您的名稱不可以為空"));
@@ -114,12 +116,14 @@ public class UsersController {
 	 
 	 @PutMapping("/updateUser")
 	 public ResponseEntity<Map<String, Object>> updateUser(HttpServletRequest request, @RequestBody Users user) {
+		 // 打印收到的 userId 和 user 資料
+		 System.out.println("Received userId: " + user.getUserId());
+		 System.out.println("Received name: " + user.getName());
+		 System.out.println("Received tel: " + user.getTel());
+		 System.out.println("Received Email:"+ user.getEmail());
+		 System.out.println("Received Icon: " + (user.getIcon() != null));
+		 System.out.println("Received Birthday: " + user.getBirthday());
 	     try {
-	         // 打印收到的 userId 和 user 資料
-	         System.out.println("Received userId: " + user.getUserId());
-	         System.out.println("Received name: " + user.getName());
-	         System.out.println("Received tel: " + user.getTel());
-	         System.out.println("Received Email:"+ user.getEmail());
 
 	         userService.updateUser(request, user);  // 確保這裡的 updateUser 會正確更新資料
 
