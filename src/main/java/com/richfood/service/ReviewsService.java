@@ -73,10 +73,15 @@ public class ReviewsService {
         Reviews existingReview = reviewsRepository.findByUserIdAndRestaurantId(userId, restaurantId)
             .orElseThrow(() -> new RuntimeException("找不到該評論，或您尚未對此餐廳發表評論"));
 
-        // 更新評論的欄位
-        existingReview.setRating(newReviewData.getRating());
-        existingReview.setContent(newReviewData.getContent());
-        
+        // 如果傳入的評分不為 null，則更新評分
+        if (newReviewData.getRating() != null) {
+            existingReview.setRating(newReviewData.getRating());
+        }
+
+        // 如果傳入的評論內容不為 null，則更新評論內容
+        if (newReviewData.getContent() != null) {
+            existingReview.setContent(newReviewData.getContent());
+        }
         // 儲存更新後的評論
         return reviewsRepository.save(existingReview);
     }
@@ -91,4 +96,4 @@ public class ReviewsService {
     }
 
 	
-} 
+}
