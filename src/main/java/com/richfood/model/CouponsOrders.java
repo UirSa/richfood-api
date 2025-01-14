@@ -14,6 +14,7 @@ public class CouponsOrders {
     private Integer quantity;
     private Integer price;
     private Integer storeId;
+    private Boolean status;
 
     public Integer getOrderId() {
         return orderId;
@@ -61,6 +62,14 @@ public class CouponsOrders {
 
     public void setStoreId(Integer storeId) {
         this.storeId = storeId;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     //-----------------------------------------------
