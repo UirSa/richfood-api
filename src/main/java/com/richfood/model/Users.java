@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Users {
     private String tel;
     private String email;
     private String icon;
-    private Date  birthday;
+    private LocalDate  birthday;
 
     public Integer getUserId() {
         return userId;
@@ -77,16 +78,15 @@ public class Users {
         this.icon = icon;
     }
 
-    public Date getBirthday() {
-		return birthday;
-	}
+    public LocalDate getBirthday() {
+        return birthday;
+    }
 
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 
-
-	//------------------------------------------------------------
+    //------------------------------------------------------------
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reviews> reviews;
