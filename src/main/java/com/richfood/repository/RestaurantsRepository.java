@@ -13,13 +13,9 @@ import java.util.List;
 
 @Repository
 public interface RestaurantsRepository extends JpaRepository<Restaurants, Integer> {
-    Page<Restaurants> findByCountry(String country, Pageable pageable);
+    Page<Restaurants> findRestaurantsByCountry(String country, Pageable pageable);
     @Query("SELECT r FROM Restaurants r JOIN r.categories c WHERE c.name = :categoryName")
-    Page<Restaurants> findRestaurantsByCategoryName(@Param("categoryName") String categoryName, Pageable pageable);
+    Page<Restaurants> findRestaurantsByCategoryName(@Param("categoryName") String category, Pageable pageable);
+    @Query("SELECT r FROM Restaurants r JOIN r.categories c WHERE (:country IS NULL OR r.country = :country) AND (:categoryName IS NULL OR c.name = :categoryName)")
+    Page<Restaurants> findRestaurantsByCountryAndCategoryName(String country, @Param("categoryName") String category, Pageable pageable);
 }
-// SQL分類
-//SELECT r.restaurant_id, r.name, r.address
-//FROM restaurants r
-//JOIN restaurant_categories rc ON r.restaurant_id = rc.restaurant_id
-//JOIN categories c ON rc.category_id = c.category_id
-//WHERE c.name = '燒肉';

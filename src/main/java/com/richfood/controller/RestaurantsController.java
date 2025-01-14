@@ -15,18 +15,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("")
+@RequestMapping("/restaurants")
 public class RestaurantsController {
     @Autowired
     private RestaurantsService restaurantsService;
 
 
-    @GetMapping("/restaurants")
-    public Page<Restaurants> searchRestaurants(@RequestParam int page
-            , @RequestParam int size, @RequestParam String country){
+    @GetMapping(value = {"/{country}/list/{category}", "/{country}/list","/list/{category}",})
+    public Page<Restaurants> searchRestaurants(@PathVariable(required = false) String country,
+                                               @PathVariable(required = false) String category,
+                                               @RequestParam(defaultValue = "0") int page,
+                                               @RequestParam(defaultValue = "10") int size){
         Pageable pageable = PageRequest.of(page,size);
-        Page<Restaurants> restaurantsPage= restaurantsService.searchRestaurants(country,pageable);
-        return restaurantsPage;
+        return restaurantsService.searchRestaurants(country, category ,pageable);
     }
 
 
@@ -34,4 +35,31 @@ public class RestaurantsController {
     public void test2(@RequestBody RestaurantsDto restaurantsDto){
         restaurantsService.saveRestaurants(restaurantsDto);
     }
+
+//    {
+//        "name": "IKIGAI 燒肉專門店",
+//            "description": "燒肉店",
+//            "address": "忠誠路二段55號B1",
+//            "country": "臺北市",
+//            "district": "士林區",
+//            "score": 4.9,
+//            "average": 500,
+//            "image": "https://example.com/image.jpg",
+//            "phone": "0228311698",
+//            "store_id": 2,
+//            "businessHours": [
+//        {
+//            "restaurantId": 1,
+//                "dayOfWeek": "星期日",
+//                "startTime": "11:30",
+//                "endTime": "11:30"
+//        },
+//        {
+//            "restaurantId": 1,
+//                "dayOfWeek": "星期一",
+//                "startTime":"11:30",
+//                "endTime": "11:30"
+//        }
+//    ]
+//    }
 }

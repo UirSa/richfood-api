@@ -22,18 +22,17 @@ public class RestaurantsService {
     @Autowired
     private RestaurantsRepository restaurantsRepository;
 
-
-    public Page<Restaurants> searchRestaurants(String country, Pageable pageable){
-        return restaurantsRepository.findByCountry(country,pageable);
-
+    public  Page<Restaurants> searchRestaurants(String country, String category, Pageable pageable){
+        if(country !=null && category !=null){
+           return restaurantsRepository.findRestaurantsByCountryAndCategoryName(country, category, pageable);
+        }else if(country !=null){
+            return restaurantsRepository.findRestaurantsByCountry(country, pageable);
+        }else if(category !=null){
+            return restaurantsRepository.findRestaurantsByCategoryName(category,pageable);
+        }else {
+            return restaurantsRepository.findAll(pageable);
+        }
     }
-    public Page<Restaurants> getRestaurantsByCategoryName(String categoryName, Pageable pageable) {
-        return restaurantsRepository.findRestaurantsByCategoryName(categoryName,pageable);
-    }
-
-
-
-
 
 
     public void saveRestaurants(@RequestBody RestaurantsDto restaurantsDto){
