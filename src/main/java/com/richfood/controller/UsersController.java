@@ -38,36 +38,34 @@ public class UsersController {
 	private UsersRepository userRepository; 
 	
 	@PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<Map<String, String>> register(
-	        @RequestParam("name") String name,
-	        @RequestParam("userAccount") String userAccount,
-	        @RequestParam("password") String password,
-	        @RequestParam("tel") String tel,
-	        @RequestParam("email") String email,
-	        @RequestParam(value = "iconFile", required = false) MultipartFile iconFile,
-	        @RequestParam("birthday") String birthday) {
-	    try {
-	        // 建立 Users 物件並設置值
-	        Users user = new Users();
-	        user.setName(name);
-	        user.setUserAccount(userAccount);
-	        user.setPassword(password);
-	        user.setTel(tel);
-	        user.setEmail(email);
-	        user.setBirthday(LocalDate.parse(birthday)); // 假設日期格式為 ISO 格式
+	 public ResponseEntity<Map<String, String>> register(
+	            @RequestParam("name") String name,
+	            @RequestParam("userAccount") String userAccount,
+	            @RequestParam("password") String password,
+	            @RequestParam("tel") String tel,
+	            @RequestParam("email") String email,
+	            @RequestParam(value = "iconFile", required = false) MultipartFile iconFile,
+	            @RequestParam("birthday") String birthday) {
+	        try {
+	            // 建立 Users 物件並設置值
+	            Users user = new Users();
+	            user.setName(name);
+	            user.setUserAccount(userAccount);
+	            user.setPassword(password);
+	            user.setTel(tel);
+	            user.setEmail(email);
+	            user.setBirthday(LocalDate.parse(birthday)); // 假設日期格式為 ISO 格式
 
-	        // 呼叫 Service 完成註冊邏輯
-	        userService.registerMember(user, iconFile);
+	            // 呼叫 Service 完成註冊邏輯
+	            userService.registerMember(user, iconFile);
 
-	        return ResponseEntity.ok(Map.of("message", "註冊成功"));
-	    } catch (IllegalArgumentException e) {
-	        // 如果有非法參數的錯誤
-	        return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
-	    } catch (Exception e) {
-	        // 其他錯誤
-	        return ResponseEntity.status(500).body(Map.of("message", "伺服器錯誤：" + e.getMessage()));
+	            return ResponseEntity.ok(Map.of("message", "註冊成功"));
+	        } catch (IllegalArgumentException e) {
+	            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+	        } catch (Exception e) {
+	            return ResponseEntity.status(500).body(Map.of("message", "伺服器錯誤：" + e.getMessage()));
+	        }
 	    }
-	}
 
 	
 	@PostMapping("/Userlogin")
@@ -114,29 +112,38 @@ public class UsersController {
 	     }
 	 }
 	 
-	 @PutMapping("/updateUser")
-	 public ResponseEntity<Map<String, Object>> updateUser(HttpServletRequest request, @RequestBody Users user) {
-		 // 打印收到的 userId 和 user 資料
-		 System.out.println("Received userId: " + user.getUserId());
-		 System.out.println("Received name: " + user.getName());
-		 System.out.println("Received tel: " + user.getTel());
-		 System.out.println("Received Email:"+ user.getEmail());
-		 System.out.println("Received Icon: " + (user.getIcon() != null));
-		 System.out.println("Received Birthday: " + user.getBirthday());
-	     try {
+	 @PutMapping(value = "/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	    public ResponseEntity<Map<String, Object>> updateUser(
+	            HttpServletRequest request,
+	            @RequestParam("userId") Integer userId,
+	            @RequestParam(value = "name", required = false) String name,
+	            @RequestParam(value = "tel", required = false) String tel,
+	            @RequestParam(value = "email", required = false) String email,
+	            @RequestParam(value = "birthday", required = false) String birthday,
+	            @RequestParam(value = "iconFile", required = false) MultipartFile iconFile) {
+	        try {
+	            // 從 request 建立更新資料的 Users 物件
+	            Users user = new Users();
+	            user.setUserId(userId);
+	            user.setName(name);
+	            user.setTel(tel);
+	            user.setEmail(email);
+	            if (birthday != null && !birthday.isEmpty()) {
+	                user.setBirthday(LocalDate.parse(birthday));
+	            }
 
-	         userService.updateUser(request, user);  // 確保這裡的 updateUser 會正確更新資料
+	            // 呼叫 Service 更新資料
+	            userService.updateUser(request, user, iconFile);
 
-	         Map<String, Object> response = new HashMap<>();
-	         response.put("message", "資料更新成功");
-	         return ResponseEntity.ok(response);  // 返回成功訊息
-	     } catch (Exception e) {
-	         // 如果發生錯誤，返回錯誤訊息
-	         Map<String, Object> errorResponse = new HashMap<>();
-	         errorResponse.put("message", "更新失敗: " + e.getMessage());
-	         return ResponseEntity.status(400).body(errorResponse);
-	     }
-	 }
+	            Map<String, Object> response = new HashMap<>();
+	            response.put("message", "資料更新成功");
+	            return ResponseEntity.ok(response);
+	        } catch (Exception e) {
+	            Map<String, Object> errorResponse = new HashMap<>();
+	            errorResponse.put("message", "更新失敗: " + e.getMessage());
+	            return ResponseEntity.status(400).body(errorResponse);
+	        }
+	    }
 	 
 	 @DeleteMapping("/deleteUser/{userId}")
 	 public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
