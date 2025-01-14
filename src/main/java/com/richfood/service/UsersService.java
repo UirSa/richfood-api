@@ -12,8 +12,7 @@ import jakarta.transaction.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Base64;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -63,6 +62,7 @@ public class UsersService {
         user.setTel(user.getTel());
         user.setEmail(user.getEmail());
         user.setBirthday(user.getBirthday()); // 處理生日
+        user.setGender(user.getGender());
 
         // 如果圖片有上傳，保存圖片文件
         if (iconFile != null && !iconFile.isEmpty()) {
@@ -182,6 +182,9 @@ public class UsersService {
         }
         if (user.getBirthday() != null) {
             existingUser.setBirthday(user.getBirthday());
+        }
+        if (user.getGender() != null && !user.getGender().isEmpty()) {
+            existingUser.setGender(user.getGender()); // 更新性別
         }
 
         // 如果有新圖檔，就覆蓋舊的 icon

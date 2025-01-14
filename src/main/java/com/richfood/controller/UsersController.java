@@ -45,7 +45,8 @@ public class UsersController {
 	            @RequestParam("tel") String tel,
 	            @RequestParam("email") String email,
 	            @RequestParam(value = "iconFile", required = false) MultipartFile iconFile,
-	            @RequestParam("birthday") String birthday) {
+	            @RequestParam("birthday") String birthday,
+	 			@RequestParam("gender") String gender){
 	        try {
 	            // 建立 Users 物件並設置值
 	            Users user = new Users();
@@ -55,6 +56,7 @@ public class UsersController {
 	            user.setTel(tel);
 	            user.setEmail(email);
 	            user.setBirthday(LocalDate.parse(birthday)); // 假設日期格式為 ISO 格式
+	            user.setGender(gender);
 
 	            // 呼叫 Service 完成註冊邏輯
 	            userService.registerMember(user, iconFile);
@@ -120,6 +122,7 @@ public class UsersController {
 	            @RequestParam(value = "tel", required = false) String tel,
 	            @RequestParam(value = "email", required = false) String email,
 	            @RequestParam(value = "birthday", required = false) String birthday,
+	            @RequestParam(value = "gender", required = false) String gender,
 	            @RequestParam(value = "iconFile", required = false) MultipartFile iconFile) {
 	        try {
 	            // 從 request 建立更新資料的 Users 物件
@@ -130,6 +133,9 @@ public class UsersController {
 	            user.setEmail(email);
 	            if (birthday != null && !birthday.isEmpty()) {
 	                user.setBirthday(LocalDate.parse(birthday));
+	            }
+	            if (gender != null && !gender.isEmpty()) {
+	                user.setGender(gender); // 設置性別
 	            }
 
 	            // 呼叫 Service 更新資料

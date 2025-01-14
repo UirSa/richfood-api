@@ -21,6 +21,7 @@ public class Users {
     private String email;
     private String icon;
     private LocalDate  birthday;
+    private String gender;
 
     public Integer getUserId() {
         return userId;
@@ -86,7 +87,17 @@ public class Users {
         this.birthday = birthday;
     }
 
-    //------------------------------------------------------------
+    
+    public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+
+	//------------------------------------------------------------
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Reviews> reviews;
