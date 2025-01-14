@@ -18,7 +18,7 @@ public class Users {
     private String password;
     private String tel;
     private String email;
-    private byte[] icon;
+    private String icon;
     private Date  birthday;
 
     public Integer getUserId() {
@@ -68,17 +68,16 @@ public class Users {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    
-    public byte[] getIcon() {
-		return icon;
-	}
 
-	public void setIcon(byte[] icon) {
-		this.icon = icon;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public Date getBirthday() {
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+    public Date getBirthday() {
 		return birthday;
 	}
 
