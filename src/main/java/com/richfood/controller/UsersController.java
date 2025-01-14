@@ -1,14 +1,18 @@
 package com.richfood.controller;
 
+
+import java.time.LocalDate;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import com.richfood.model.Users;
 import com.richfood.repository.UsersRepository;
@@ -33,42 +37,38 @@ public class UsersController {
 	@Autowired
 	private UsersRepository userRepository; 
 	
-	@PostMapping("/register")
-	public ResponseEntity<Map<String, String>> register(@RequestBody Users user){
-		
-		System.out.println("Received name: "+user.getName());
-		System.out.println("Received account: "+user.getUserAccount());
-		System.out.println("Received passeord: "+user.getPassword());
-		System.out.println("Received Tel: "+user.getTel());
-		System.out.println("Received Email:"+user.getEmail());
-		System.out.println("Received Icon: " + (user.getIcon() != null));
-		System.out.println("Received Birthday: " + user.getBirthday());
-		
-		if (user.getName() == null || user.getName().isEmpty()) {
-			return ResponseEntity.badRequest().body(Map.of("message", "您的名稱不可以為空"));
-			}
-		
-		 if (user.getUserAccount() == null || user.getUserAccount().isEmpty()) {
-		        return ResponseEntity.badRequest().body(Map.of("message", "您的帳號不可以為空"));
-		    }
+	@PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<Map<String, String>> register(
+	        @RequestParam("name") String name,
+	        @RequestParam("userAccount") String userAccount,
+	        @RequestParam("password") String password,
+	        @RequestParam("tel") String tel,
+	        @RequestParam("email") String email,
+	        @RequestParam(value = "iconFile", required = false) MultipartFile iconFile,
+	        @RequestParam("birthday") String birthday) {
+	    try {
+	        // 建立 Users 物件並設置值
+	        Users user = new Users();
+	        user.setName(name);
+	        user.setUserAccount(userAccount);
+	        user.setPassword(password);
+	        user.setTel(tel);
+	        user.setEmail(email);
+	        user.setBirthday(LocalDate.parse(birthday)); // 假設日期格式為 ISO 格式
 
-		 if (user.getPassword().length() > 20) {
-		        return ResponseEntity.badRequest().body(Map.of("message", "您的密碼不可以為空"));
-		    }
-		 
-		 if (user.getEmail() == null || user.getEmail().isEmpty()) {
-			    return ResponseEntity.badRequest().body(Map.of("message", "您的信箱不可以為空"));
-		 }
-		
-		try {
-	        // 呼叫 UserService 註冊會員
-	        userService.registerMember(user);
+	        // 呼叫 Service 完成註冊邏輯
+	        userService.registerMember(user, iconFile);
+
 	        return ResponseEntity.ok(Map.of("message", "註冊成功"));
 	    } catch (IllegalArgumentException e) {
-	        // 如果帳號已存在，返回錯誤訊息
+	        // 如果有非法參數的錯誤
 	        return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+	    } catch (Exception e) {
+	        // 其他錯誤
+	        return ResponseEntity.status(500).body(Map.of("message", "伺服器錯誤：" + e.getMessage()));
 	    }
-	} 
+	}
+
 	
 	@PostMapping("/Userlogin")
 	public ResponseEntity<Map<String, Object>> login(@RequestBody Users user, HttpServletRequest request) {
