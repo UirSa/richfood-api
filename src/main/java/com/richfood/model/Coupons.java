@@ -68,7 +68,7 @@ public class Coupons {
     //-------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
-    @JsonIgnore
+    //@JsonIgnore
     private Store store;
 
     public Store getStore() {
