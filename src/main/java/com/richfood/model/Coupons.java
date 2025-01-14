@@ -11,11 +11,11 @@ public class Coupons {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer couponId;
 
-    private Integer restaurantId;
     private String name;
     private String description;
     private String createdAt;
     private Integer storeId;
+    private Integer price;
 
     public Integer getCouponId() {
         return couponId;
@@ -23,14 +23,6 @@ public class Coupons {
 
     public void setCouponId(Integer couponId) {
         this.couponId = couponId;
-    }
-
-    public Integer getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
     }
 
     public String getName() {
@@ -63,6 +55,14 @@ public class Coupons {
 
     public void setStoreId(Integer storeId) {
         this.storeId = storeId;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     //-------------------------------------------------------

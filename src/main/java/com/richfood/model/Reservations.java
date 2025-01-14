@@ -13,7 +13,6 @@ public class Reservations {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer reservationId;
 
-    private Integer restaurantId;
     private Integer userId;
     private Date reservationDate;
     private Time reservationTime;
@@ -28,14 +27,6 @@ public class Reservations {
 
     public void setReservationId(Integer reservationId) {
         this.reservationId = reservationId;
-    }
-
-    public Integer getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
     }
 
     public Integer getUserId() {

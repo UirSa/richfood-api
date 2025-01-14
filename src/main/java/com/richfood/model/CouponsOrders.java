@@ -11,9 +11,8 @@ public class CouponsOrders {
 
     private Integer couponId;
     private Integer userId;
-    private Integer restaurantId;
     private Integer quantity;
-    private Integer totalPrice;
+    private Integer price;
     private Integer storeId;
 
     public Integer getOrderId() {
@@ -40,14 +39,6 @@ public class CouponsOrders {
         this.userId = userId;
     }
 
-    public Integer getRestaurantId() {
-        return restaurantId;
-    }
-
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
     public Integer getQuantity() {
         return quantity;
     }
@@ -56,12 +47,12 @@ public class CouponsOrders {
         this.quantity = quantity;
     }
 
-    public Integer getTotalPrice() {
-        return totalPrice;
+    public Integer getPrice() {
+        return price;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 
     public Integer getStoreId() {
