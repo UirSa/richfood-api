@@ -167,4 +167,17 @@ public class Restaurants {
     public void setStore(Store store) {
         this.store = store;
     }
+
+    //-----------------------------------------------------------
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RestaurantCapacity> restaurantCapacity;
+
+    public List<RestaurantCapacity> getRestaurantCapacity() {
+        return restaurantCapacity;
+    }
+
+    public void setRestaurantCapacity(List<RestaurantCapacity> restaurantCapacity) {
+        this.restaurantCapacity = restaurantCapacity;
+    }
 }
