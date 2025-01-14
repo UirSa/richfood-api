@@ -1,7 +1,11 @@
 package com.richfood.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,13 @@ public class CouponsOrdersController {
 		String url=linePayService.requestPaymentImmediate(userId);
 		 
 		return url;
+	}
+	//查出所有餐券//不含status==false
+	@GetMapping("/selectCouponsOrder")
+	public List<CouponsOrders> selectCouponsOrder(HttpServletRequest request) {
+		Integer userId = (Integer) request.getSession().getAttribute("userId");
+		List<CouponsOrders> couponsOrders=couponsOrdersService.selectCouponsOrder(userId);
+		return couponsOrders;
 	}
 	
 	
