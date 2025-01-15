@@ -40,7 +40,31 @@ public class UsersService {
         }
     }
     
+    private void validateUserData(Users user) {
+        if (usersRepository.findByName(user.getName().toLowerCase()).isPresent()) {
+            throw new IllegalArgumentException("This name already exists");
+        }
+        if (usersRepository.findByEmail(user.getEmail().toLowerCase()).isPresent()) {
+            throw new IllegalArgumentException("This Email already exists");
+        }
+        if (usersRepository.findByUserAccount(user.getUserAccount().toLowerCase()).isPresent()) {
+            throw new IllegalArgumentException("This Account already exists");
+        }
+        if (!user.getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            throw new IllegalArgumentException("Invalid email format");
+        }
+    }
+    private Users findUserById(Integer userId) {
+        return usersRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
+    }
+
+    
     public Users registerMember(Users user, MultipartFile iconFile) {
+    	
+    	 validateUserData(user);
+    	
+    	
         // 確保名稱不重複，忽略大小寫
         if (usersRepository.findByName(user.getName().toLowerCase()).isPresent()) {
             throw new IllegalArgumentException("This name already exists");
@@ -209,12 +233,10 @@ public class UsersService {
 
     
     @Transactional
-    public void deleteUserAndRearrangeIds(Integer userId) {
-        // 刪除指定ID的會員
-        usersRepository.deleteById(userId);
-        
-        // 不需要修改ID，ID不會變動
-        
+    public void deleteUser(Integer userId) {
+    	 Users user = findUserById(userId); // 使用共用方法檢查用戶是否存在
+    	    usersRepository.delete(user);
+    	    System.out.println("User with id " + userId + " deleted successfully.");
     }
        
 }
