@@ -71,28 +71,49 @@ public class UsersController {
 
 	
 	@PostMapping("/Userlogin")
-	public ResponseEntity<Map<String, Object>> login(@RequestBody Users user, HttpServletRequest request) {
-	    boolean isAuthenticated = userService.authenticate(user.getUserAccount(), user.getPassword());  // 這裡是 boolean
+	public ResponseEntity<Map<String, Object>> login(@RequestBody Map<String, String> requestBody, HttpServletRequest request) {
+	    // 從前端請求中獲取字段
+	    String userAccount = requestBody.get("userAccount");
+	    String password = requestBody.get("password");
+	    String userType = requestBody.get("userType");
+
+	    // 驗證 userType 是否正確
+	    if (userType == null || (!userType.equals("member") && !userType.equals("store"))) {
+	        return ResponseEntity.badRequest().body(Map.of("message", "用戶類型不正確"));
+	    }
+
+	    // 驗證 userAccount 是否與 userType 匹配
+	    if ((userType.equals("store") && !userAccount.startsWith("store_")) ||
+	        (userType.equals("member") && userAccount.startsWith("store_"))) {
+	        return ResponseEntity.badRequest().body(Map.of("message", "帳號類型與用戶類型不匹配"));
+	    }
+
+	    // 驗證用戶憑據
+	    boolean isAuthenticated = userService.authenticate(userAccount, password);
 
 	    if (isAuthenticated) {
-	        Optional<Users> optionalUser = userRepository.findByUserAccount(user.getUserAccount());
+	        Optional<Users> optionalUser = userRepository.findByUserAccount(userAccount);
 	        if (optionalUser.isPresent()) {
 	            Users authenticatedUser = optionalUser.get();
+
+	            // 準備響應數據
 	            Map<String, Object> response = new HashMap<>();
 	            response.put("message", "登入成功");
-	            response.put("userId", authenticatedUser.getUserId());  // 返回 userId
-	            
-	         // 將 userId 設置到 session 中
+	            response.put("userId", authenticatedUser.getUserId());
+	            response.put("userType", userType); // 使用前端傳遞的 userType
+
+	            // 將用戶數據存入 session
 	            request.getSession().setAttribute("userId", authenticatedUser.getUserId());
-	            
-	            return ResponseEntity.ok(response);  // 成功登入，返回 userId
+	            request.getSession().setAttribute("userType", userType);
+
+	            return ResponseEntity.ok(response);
 	        }
-	    } 
-	    // 如果帳號或密碼錯誤，返回錯誤訊息
-	    Map<String, Object> errorResponse = new HashMap<>();
-	    errorResponse.put("message", "帳號或密碼錯誤");
-	    return ResponseEntity.badRequest().body(errorResponse);  // 返回錯誤訊息
+	    }
+
+	    // 驗證失敗
+	    return ResponseEntity.badRequest().body(Map.of("message", "帳號或密碼錯誤"));
 	}
+
 	
 	@PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(HttpServletRequest request) {
@@ -155,7 +176,7 @@ public class UsersController {
 	 public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
 	     try {
 	         // 呼叫 UserService 來刪除會員，不需要重新排列ID
-	         userService.deleteUserAndRearrangeIds(userId);
+	         userService.deleteUser(userId);
 	         return ResponseEntity.ok("User deleted successfully.");
 	     } catch (Exception e) {
 	         return ResponseEntity.status(500).body("Error deleting user: " + e.getMessage());
