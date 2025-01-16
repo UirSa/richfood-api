@@ -99,4 +99,16 @@ public class Store {
     public void setCouponsOrders(List<CouponsOrders> couponsOrders) {
         this.couponsOrders = couponsOrders;
     }
+    //-------------------------------------------------------
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RestaurantCapacity> restaurantCapacities;
+
+    public List<RestaurantCapacity> getRestaurantCapacities() {
+        return restaurantCapacities;
+    }
+
+    public void setRestaurantCapacities(List<RestaurantCapacity> restaurantCapacities) {
+        this.restaurantCapacities = restaurantCapacities;
+    }
 }
