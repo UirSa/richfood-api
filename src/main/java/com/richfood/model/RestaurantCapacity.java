@@ -10,9 +10,10 @@ public class RestaurantCapacity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer capacityId;
 
-    private Integer restaurantId;
+    private Integer storeId;
     private String time;
     private Integer maxCapacity;
+    private String date;
 
     public Integer getCapacityId() {
         return capacityId;
@@ -22,12 +23,12 @@ public class RestaurantCapacity {
         this.capacityId = capacityId;
     }
 
-    public Integer getRestaurantId() {
-        return restaurantId;
+    public Integer getStoreId() {
+        return storeId;
     }
 
-    public void setRestaurantId(Integer restaurantId) {
-        this.restaurantId = restaurantId;
+    public void setStoreId(Integer storeId) {
+        this.storeId = storeId;
     }
 
     public String getTime() {
@@ -46,17 +47,39 @@ public class RestaurantCapacity {
         this.maxCapacity = maxCapacity;
     }
 
-    //------------------------------------------------
-    @ManyToOne
-    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
-    @JsonIgnore
-    private Restaurants restaurants;
-
-    public Restaurants getRestaurants() {
-        return restaurants;
+    public String getDate() {
+        return date;
     }
 
-    public void setRestaurants(Restaurants restaurants) {
-        this.restaurants = restaurants;
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    //------------------------------------------------
+//    @ManyToOne
+//    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+//    @JsonIgnore
+//    private Restaurants restaurants;
+//
+//    public Restaurants getRestaurants() {
+//        return restaurants;
+//    }
+//
+//    public void setRestaurants(Restaurants restaurants) {
+//        this.restaurants = restaurants;
+//    }
+
+    //-------------------------------------------------
+    @ManyToOne
+    @JoinColumn(name = "storeId", insertable = false, updatable = false)
+    @JsonIgnore
+    private Store store;
+
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 }
