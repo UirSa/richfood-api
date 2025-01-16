@@ -50,7 +50,7 @@ public class Store {
     //------------------------------------
     @OneToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Restaurants restaurants;
 
     public Restaurants getRestaurants() {

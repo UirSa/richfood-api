@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.richfood.model.Reservations;
@@ -13,20 +14,62 @@ import com.richfood.model.Reservations;
 @Repository
 public interface ReservationRepository extends JpaRepository<Reservations, Integer> {
 	List<Reservations> findByUserId(Integer userid);
-	boolean existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(Integer userId,Integer storeId,  Date date, Time reservationTime);
+	boolean existsByUserIdAndStoreIdAndStateTrueAndReservationDateAndReservationTime(Integer userId,Integer storeId, String date, String reservationTime);
 	
-	List<Reservations> findByUserIdOrderByReservationDateAscReservationTimeAsc(Integer userid);
-	List<Reservations> findByUserIdOrderByReservationDateDescReservationTimeAsc(Integer userid);
+	@Query(value = "SELECT * FROM public.reservations " +
+            "WHERE user_id = ?1 " +
+            "ORDER BY " +
+            "reservation_date ASC, " +
+            "CASE reservation_time " +
+            "    WHEN '早上' THEN 1 " +
+            "    WHEN '中午' THEN 2 " +
+            "    WHEN '晚上' THEN 3 " +
+            "    ELSE 4 " +
+            "END, " +
+            "store_id ASC", nativeQuery = true)
+	List<Reservations> findByUserIdOrderByAsc(Integer userid);
 	
-	@Query(value="SELECT * FROM public.reservations\r\n"
-			+ "WHERE user_id=?1 AND state !=false\r\n"
-			+ "AND reservation_date >= CURRENT_DATE " 
-			+ "ORDER BY reservation_date ASC,reservation_time ASC", nativeQuery = true)
+	
+	@Query(value = "SELECT * FROM public.reservations " +
+            "WHERE user_id = ?1 " +
+            "ORDER BY " +
+            "reservation_date DESC, " +
+            "CASE reservation_time " +
+            "    WHEN '早上' THEN 1 " +
+            "    WHEN '中午' THEN 2 " +
+            "    WHEN '晚上' THEN 3 " +
+            "    ELSE 4 " +
+            "END, " +
+            "store_id ASC", nativeQuery = true)
+	List<Reservations> findByUserIdOrderByDesc(Integer userid);
+	
+	
+	@Query(value = "SELECT * FROM public.reservations " +
+	        "WHERE user_id=?1 AND state != false " +
+	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " +  // 注意這裡加了空格
+	        "ORDER BY " +
+	        "reservation_date ASC, " +
+	        "CASE reservation_time " +
+	        "    WHEN '早上' THEN 1 " +
+	        "    WHEN '中午' THEN 2 " +
+	        "    WHEN '晚上' THEN 3 " +
+	        "    ELSE 4 " +
+	        "END, " +
+	        "store_id ASC", nativeQuery = true)
 	List<Reservations> findByUserIdReservationNotCancelAsc(Integer userid);
-	@Query(value="SELECT * FROM public.reservations\r\n"
-			+ "WHERE user_id=?1 AND state !=false\r\n"
-			+ "AND reservation_date >= CURRENT_DATE \r\n"
-			+ "ORDER BY reservation_date Desc,reservation_time ASC", nativeQuery = true)
+	
+	@Query(value = "SELECT * FROM public.reservations " +
+	        "WHERE user_id=?1 AND state != false " +
+	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " +  // 注意這裡加了空格
+	        "ORDER BY " +
+	        "reservation_date DESC, " +
+	        "CASE reservation_time " +
+	        "    WHEN '早上' THEN 1 " +
+	        "    WHEN '中午' THEN 2 " +
+	        "    WHEN '晚上' THEN 3 " +
+	        "    ELSE 4 " +
+	        "END, " +
+	        "store_id ASC", nativeQuery = true)
 	List<Reservations> findByUserIdReservationNotCancelDesc(Integer userid);
 	
 	@Query(value ="DELETE FROM public.Reservations r WHERE r.store_id IS NULL", nativeQuery = true)

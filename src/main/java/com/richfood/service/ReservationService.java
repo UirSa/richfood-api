@@ -54,15 +54,17 @@ public class ReservationService {
              if(existingReservation.getReservationDate()!= null) {
             	 OffsetDateTime now = OffsetDateTime.now();
             	 LocalDate previousDay = now.toLocalDate().minusDays(1);
-            	 Date reservationDate= existingReservation.getReservationDate();
-            	 LocalDate reservationLocalDate = reservationDate.toInstant()
-                         .atZone(ZoneId.systemDefault())
-                         .toLocalDate();
+            	 String reservationDate= existingReservation.getReservationDate();
+//            	 LocalDate reservationLocalDate = reservationDate.toInstant()
+//                         .atZone(ZoneId.systemDefault())
+//                         .toLocalDate();
+            	 LocalDate reservationLocalDate = LocalDate.parse(reservationDate);
 
                  if (reservationLocalDate.equals(now.toLocalDate())||reservationLocalDate.equals(previousDay)) {
                      throw new IllegalStateException("不能更改當天及前一天的預約。");
                      
                  }
+
                  // 更新資料
                  if (updatedReservation.getNumPeople() != null) {
                 	 existingReservation.setNumPeople(updatedReservation.getNumPeople());
@@ -90,11 +92,11 @@ public class ReservationService {
     //查 
     //消費者查詢所有訂位 預設排序舊到新
     public List<Reservations>seleteSeatAsc(Integer userid) {
-    	 List<Reservations> userReservations=reservationRepository.findByUserIdOrderByReservationDateAscReservationTimeAsc(userid);
+    	 List<Reservations> userReservations=reservationRepository.findByUserIdOrderByAsc(userid);
     	 return userReservations;
     }
     public List<Reservations>seleteSeatDesc(Integer userid) {
-   	 	List<Reservations> userReservations=reservationRepository.findByUserIdOrderByReservationDateDescReservationTimeAsc(userid);
+   	 	List<Reservations> userReservations=reservationRepository.findByUserIdOrderByDesc(userid);
    	 	return userReservations;
     }
     public List<Reservations>seleteSeatNotCancelAsc(Integer userid){

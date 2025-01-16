@@ -14,8 +14,8 @@ public class Reservations {
     private Integer reservationId;
 
     private Integer userId;
-    private Date reservationDate;
-    private Time reservationTime;
+    private String reservationDate;
+    private String reservationTime;
     private Integer numPeople;
     private OffsetDateTime editTime;
     private Boolean state;
@@ -37,19 +37,19 @@ public class Reservations {
         this.userId = userId;
     }
 
-    public Date getReservationDate() {
+    public String getReservationDate() {
         return reservationDate;
     }
 
-    public void setReservationDate(Date reservationDate) {
+    public void setReservationDate(String reservationDate) {
         this.reservationDate = reservationDate;
     }
 
-    public Time getReservationTime() {
+    public String getReservationTime() {
         return reservationTime;
     }
 
-    public void setReservationTime(Time reservationTime) {
+    public void setReservationTime(String reservationTime) {
         this.reservationTime = reservationTime;
     }
 
@@ -102,7 +102,7 @@ public class Reservations {
     //---------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "userId", insertable = false, updatable = false)
-//    @JsonIgnore
+    //@JsonIgnore
     private Users users;
 
     public Users getUsers() {
