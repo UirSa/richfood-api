@@ -78,16 +78,16 @@ public class UsersController {
 	    String password = requestBody.get("password");
 	    String userType = requestBody.get("userType");
 
-//	    // 驗證 userType 是否正確
-//	    if (userType == null || (!userType.equals("member") && !userType.equals("store"))) {
-//	        return ResponseEntity.badRequest().body(Map.of("message", "用戶類型不正確"));
-//	    }
-//
-//	    // 驗證 userAccount 是否與 userType 匹配
-//	    if ((userType.equals("store") && !userAccount.startsWith("store_")) ||
-//	        (userType.equals("member") && userAccount.startsWith("store_"))) {
-//	        return ResponseEntity.badRequest().body(Map.of("message", "帳號類型與用戶類型不匹配"));
-//	    }
+	    // 驗證 userType 是否正確
+	    if (userType == null || (!userType.equals("member") && !userType.equals("store"))) {
+	        return ResponseEntity.badRequest().body(Map.of("message", "用戶類型不正確"));
+	    }
+
+	    // 驗證 userAccount 是否與 userType 匹配
+	    if ((userType.equals("store") && !userAccount.startsWith("store_")) ||
+	        (userType.equals("member") && userAccount.startsWith("store_"))) {
+	        return ResponseEntity.badRequest().body(Map.of("message", "帳號類型與用戶類型不匹配"));
+	    }
 
 	    // 驗證用戶憑據
 	    boolean isAuthenticated = userService.authenticate(userAccount, password);
