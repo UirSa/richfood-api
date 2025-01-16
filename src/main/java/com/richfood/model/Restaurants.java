@@ -140,9 +140,9 @@ public class Restaurants {
 
     @ManyToMany
     @JoinTable(
-            name = "restaurant_categories",  // 中介表名稱
-            joinColumns = @JoinColumn(name = "restaurant_id"),  // 連接 restaurant_id
-            inverseJoinColumns = @JoinColumn(name = "category_id")  // 連接 category_id
+            name = "restaurant_categories",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")  
     )
     @JsonIgnore
     private List<Categories> categories;
@@ -169,15 +169,15 @@ public class Restaurants {
     }
 
     //-----------------------------------------------------------
-    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<RestaurantCapacity> restaurantCapacity;
-
-    public List<RestaurantCapacity> getRestaurantCapacity() {
-        return restaurantCapacity;
-    }
-
-    public void setRestaurantCapacity(List<RestaurantCapacity> restaurantCapacity) {
-        this.restaurantCapacity = restaurantCapacity;
-    }
+//    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private List<RestaurantCapacity> restaurantCapacity;
+//
+//    public List<RestaurantCapacity> getRestaurantCapacity() {
+//        return restaurantCapacity;
+//    }
+//
+//    public void setRestaurantCapacity(List<RestaurantCapacity> restaurantCapacity) {
+//        this.restaurantCapacity = restaurantCapacity;
+//    }
 }
