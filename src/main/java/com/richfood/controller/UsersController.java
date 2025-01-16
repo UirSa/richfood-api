@@ -27,6 +27,7 @@ import com.richfood.repository.UsersRepository;
 import com.richfood.service.UsersService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/User")
@@ -125,15 +126,22 @@ public class UsersController {
         }
     }
 	 
-	 @GetMapping("/getUserDetails")
-	 public ResponseEntity<Users> getUserDetails(@RequestParam Integer userId) {
-	     Users user = userService.getUserDetails(userId);
-	     if (user != null) {
-	         return ResponseEntity.ok(user);
-	     } else {
-	         return ResponseEntity.status(404).body(null);
-	     }
-	 }
+	@GetMapping("/getUserDetails")
+	public ResponseEntity<Users> getUserDetails(HttpSession session) {
+	    Integer userId = (Integer) session.getAttribute("userId");
+	    if (userId == null) {
+	        return ResponseEntity.status(401).body(null); // 使用者未登入
+	    }
+
+	    Users user = userService.getUserDetails(userId);
+	    if (user != null) {
+	        user.setPassword(null); // 移除密碼，避免洩露
+	        return ResponseEntity.ok(user);
+	    } else {
+	        return ResponseEntity.status(404).body(null); // 資料不存在
+	    }
+	}
+
 	 
 	 @PutMapping(value = "/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	    public ResponseEntity<Map<String, Object>> updateUser(
