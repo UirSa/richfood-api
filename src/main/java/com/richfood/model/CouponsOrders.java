@@ -15,6 +15,7 @@ public class CouponsOrders {
     private Integer price;
     private Integer storeId;
     private Boolean status;
+    private Integer totalPrice;
 
     public Integer getOrderId() {
         return orderId;
@@ -72,7 +73,16 @@ public class CouponsOrders {
         this.status = status;
     }
 
-    //-----------------------------------------------
+    public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+
+	//-----------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
     @JsonIgnore

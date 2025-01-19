@@ -18,7 +18,7 @@ import com.richfood.service.LinePayService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/coupons")
+@RequestMapping("/couponsOrder")
 public class CouponsOrdersController {
 	@Autowired CouponsOrdersService couponsOrdersService;
 	@Autowired LinePayService linePayService;
@@ -29,6 +29,7 @@ public class CouponsOrdersController {
 		
 		Integer userId = (Integer) request.getSession().getAttribute("userId");
 		couponsOrders.setUserId(userId);
+		couponsOrders.setTotalPrice(couponsOrders.getPrice()*couponsOrders.getQuantity());
 		couponsOrders.setStatus(false);
 		//訂單存入資料庫
 		CouponsOrders couponsOrder=couponsOrdersService.addCouponsOrder(couponsOrders);
