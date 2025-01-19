@@ -107,6 +107,10 @@ public class ReservationService {
     	List<Reservations> userReservations=reservationRepository.findByUserIdReservationNotCancelDesc(userid);
       	return userReservations;
     }
+    
+    public Reservations getReservationById(Integer reservationId) {
+        return reservationRepository.findById(reservationId).orElse(null);
+    }
 	
 
 	
