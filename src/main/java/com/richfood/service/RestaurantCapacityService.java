@@ -16,11 +16,7 @@ import jakarta.transaction.Transactional;
 public class RestaurantCapacityService {
 	@Autowired RestaurantCapacityRepository restaurantCapacityRepository;
 	
-//	public RestaurantCapacity getDatail(Integer storeId) {
-//		Optional<RestaurantCapacity> optionalStore=restaurantCapacityRepository.findByStoreId(storeId);
-//		RestaurantCapacity restaurantCapacity=optionalStore.get();
-//		return restaurantCapacity;
-//	}
+
 	
     public void updateMaxCapacity(int storeid,String date,String time,int adjustment) {
         // 找到目標資料
@@ -39,5 +35,12 @@ public class RestaurantCapacityService {
         
         restaurantCapacityRepository.save(capacity);
 
+    }
+    
+    public RestaurantCapacity addCapacity(RestaurantCapacity restaurantCapacity) {
+    	return restaurantCapacityRepository.save(restaurantCapacity);
+    	
+    	
+    	
     }
 }

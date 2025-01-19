@@ -11,28 +11,27 @@ import com.richfood.model.RestaurantCapacity;
 
 import com.richfood.service.RestaurantCapacityService;
 
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+
 @RestController
 @RequestMapping("/restaurantCapacity")
 public class RestaurantCapacityController {
 	@Autowired RestaurantCapacityService restaurantCapacityService;
 	
-	//查詢
-//	@GetMapping("/getRestaurantCapacity")
-//	public ResponseEntity<RestaurantCapacity> getDatail(@RequestParam Integer storeId) {
-//		RestaurantCapacity restaurantCapacity=restaurantCapacityService.getDatail(storeId);
-//		return ResponseEntity.ok(restaurantCapacity);
-//	}
-	@GetMapping("/test")
-	public void updateMaxCapacity() {
-		Integer numPeople=200;
-		Integer justmentNum=-numPeople;
-		System.out.println(-numPeople);
-		restaurantCapacityService.updateMaxCapacity(1,"2025-12-01","早上",justmentNum);
-	}
-	
+
 	//新增
-	
-	//修改狀態
+	@PostMapping("/addCapacity")
+	public ResponseEntity<RestaurantCapacity> addCapacity(@RequestBody RestaurantCapacity restaurantCapacity, HttpServletRequest request){
+		Integer storeId = (Integer) request.getSession().getAttribute("storeId");
+		restaurantCapacity.setStoreId(storeId);
+		
+		restaurantCapacityService.addCapacity(restaurantCapacity);
+		return ResponseEntity.ok(restaurantCapacity);
+	}
 	
 	
 }

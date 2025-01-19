@@ -17,6 +17,8 @@ public interface RestaurantCapacityRepository extends JpaRepository<RestaurantCa
 //	@Query(value="SELECT * FROM public.restaurant_capacity\r\n"
 //			+ "WHERE store_id=1  AND time= '早上時段'AND date='2025-12-01'", nativeQuery = true)
 	RestaurantCapacity findLastByStoreIdAndDateAndTime(Integer storeid,String date,String time);
+	
+	
 
 
 }

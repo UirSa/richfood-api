@@ -46,7 +46,7 @@ public interface ReservationRepository extends JpaRepository<Reservations, Integ
 	
 	@Query(value = "SELECT * FROM public.reservations " +
 	        "WHERE user_id=?1 AND state != false " +
-	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " +  // 注意這裡加了空格
+	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " + 
 	        "ORDER BY " +
 	        "reservation_date ASC, " +
 	        "CASE reservation_time " +
@@ -60,7 +60,7 @@ public interface ReservationRepository extends JpaRepository<Reservations, Integ
 	
 	@Query(value = "SELECT * FROM public.reservations " +
 	        "WHERE user_id=?1 AND state != false " +
-	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " +  // 注意這裡加了空格
+	        "AND TO_DATE(reservation_date, 'YYYY-MM-DD') >= CURRENT_DATE " +  
 	        "ORDER BY " +
 	        "reservation_date DESC, " +
 	        "CASE reservation_time " +

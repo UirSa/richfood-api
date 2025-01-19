@@ -21,7 +21,7 @@ public class ReservationStoreService {
 	private ReservationStoreRepository reservationStoreRepository;
 	
 	
-	//增加可訂位數
+
 	
 	
 	//查詢已訂位資料
@@ -40,10 +40,11 @@ public class ReservationStoreService {
 	             if(existingReservation.getReservationDate()!= null) {
 	            	 OffsetDateTime now = OffsetDateTime.now();
 	            	 LocalDate previousDay = now.toLocalDate().minusDays(1);
-	            	 Date reservationDate= existingReservation.getReservationDate();
-	            	 LocalDate reservationLocalDate = reservationDate.toInstant()
-	                         .atZone(ZoneId.systemDefault())
-	                         .toLocalDate();
+	            	 String reservationDate= existingReservation.getReservationDate();
+//	            	 LocalDate reservationLocalDate = reservationDate.toInstant()
+//	                         .atZone(ZoneId.systemDefault())
+//	                         .toLocalDate();
+	            	 LocalDate reservationLocalDate = LocalDate.parse(reservationDate);
 
 	                 if (reservationLocalDate.equals(now.toLocalDate())||reservationLocalDate.equals(previousDay)) {
 	                     throw new IllegalStateException("不能更改當天及前一天的預約。");
@@ -73,5 +74,9 @@ public class ReservationStoreService {
 	         // 若不存在，返回
 	         return null;
 	     }
+	  
+	    public Reservations getReservationById(Integer reservationId) {
+	        return reservationStoreRepository.findById(reservationId).orElse(null);
+	    }
 	
 }
