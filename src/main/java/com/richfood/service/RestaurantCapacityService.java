@@ -39,7 +39,12 @@ public class RestaurantCapacityService {
     
     public RestaurantCapacity addCapacity(RestaurantCapacity restaurantCapacity) {
     	return restaurantCapacityRepository.save(restaurantCapacity);
+
+    }
+    public List<RestaurantCapacity> getCapacity(Integer storeId) {
     	
+    	
+    	return restaurantCapacityRepository.findByStoreIdOrderByDateAndTime(storeId);
     	
     	
     }

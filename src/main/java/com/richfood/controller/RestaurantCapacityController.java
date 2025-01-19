@@ -1,5 +1,7 @@
 package com.richfood.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +34,14 @@ public class RestaurantCapacityController {
 		restaurantCapacityService.addCapacity(restaurantCapacity);
 		return ResponseEntity.ok(restaurantCapacity);
 	}
+	@GetMapping("/getMaxCapacity")
+	public ResponseEntity<List<RestaurantCapacity>> getCapacity(@RequestParam Integer storeId){
+//		Integer storeId = (Integer) request.getSession().getAttribute("storeId");
+		
+		
+		return ResponseEntity.ok(restaurantCapacityService.getCapacity(storeId));
+	}
+	
 	
 	
 }
