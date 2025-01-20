@@ -36,8 +36,8 @@ public class StoresController {
 	
 	@PostMapping("/storeLogin")
 	public ResponseEntity<Store> storeLogin(@RequestBody Store store, HttpServletRequest request) {
-		boolean isStore =storesService.storeLogin(store.getStoreAccount(), store.getPassword());
-		if(isStore) {
+		boolean isStoreExist =storesService.storeLogin(store.getStoreAccount(), store.getPassword());
+		if(isStoreExist) {
 	        Store storeData = storesService.getStoreDatail(store.getStoreAccount());
 	        
 	        // 將資料存入 session
