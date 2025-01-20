@@ -62,15 +62,33 @@ public class Reviews {
         this.content = content;
     }
 
+   
+
     public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+		return createdAt;
+	}
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public Integer getStoreId() {
+	public Boolean getIsFlagged() {
+		return isFlagged;
+	}
+
+	public void setIsFlagged(Boolean isFlagged) {
+		this.isFlagged = isFlagged;
+	}
+
+	public Boolean getIsApproved() {
+		return isApproved;
+	}
+
+	public void setIsApproved(Boolean isApproved) {
+		this.isApproved = isApproved;
+	}
+
+	public Integer getStoreId() {
         return storeId;
     }
 
