@@ -172,7 +172,11 @@ public class UsersService {
         Optional<Users> userOptional = usersRepository.findById(userId);
         if (userOptional.isPresent()) {
             Users user = userOptional.get();
-            user.setPassword(null);  // 移除密碼
+            user.setPassword(null); // 移除密碼
+            // 確保 gender 有效
+            if (user.getGender() == null || user.getGender().isEmpty()) {
+                user.setGender("other"); // 預設值為 "other"
+            }
             return user;
         }
         return null; // 用戶不存在時返回 null
@@ -228,7 +232,24 @@ public class UsersService {
         usersRepository.save(existingUser);
     }
      
+    @Transactional
+    public void changePassword(HttpServletRequest request, String newPassword) {
+        // 從 Session 獲取用戶 ID
+        Integer userId = (Integer) request.getSession().getAttribute("userId");
+        if (userId == null) {
+            throw new IllegalArgumentException("用戶未登入或會話已過期");
+        }
 
+        // 查詢用戶
+        Users user = usersRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("用戶不存在"));
+
+        // 更新為新密碼
+        user.setPassword(BCrypt.hashpw(newPassword, BCrypt.gensalt()));
+
+        // 保存修改
+        usersRepository.save(user);
+    }
 
 
     

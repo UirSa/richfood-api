@@ -1,9 +1,10 @@
 package com.richfood.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,13 +51,13 @@ public class ReviewsController {
      *  GET /Reviews/myReviews
      */
     @GetMapping("/myReviews")
-    public List<Reviews> getMyReviews(HttpServletRequest request) {
+    public List<Map<String, Object>> getMyReviews(HttpServletRequest request) {
         // 從 Session 取得 userId
         Integer currentUserId = (Integer) request.getSession().getAttribute("userId");
         if (currentUserId == null) {
             throw new RuntimeException("您尚未登入");
         }
-        return reviewsService.getReviewsByUserId(currentUserId);
+        return reviewsService.getReviewsByUserIdWithRestaurant(currentUserId);
     }
     
     /**
@@ -118,4 +119,4 @@ public class ReviewsController {
         reviewsService.deleteReviewByUserAndRestaurant(currentUserId, restaurantId);
     }
 
-} 
+}
