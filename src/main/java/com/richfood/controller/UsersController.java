@@ -135,7 +135,11 @@ public class UsersController {
 
 	    Users user = userService.getUserDetails(userId);
 	    if (user != null) {
-	        user.setPassword(null); // 移除密碼，避免洩露
+	        user.setPassword(null); // 移除密碼
+	        // 如果 gender 為 null 或空字串，設置預設值
+	        if (user.getGender() == null || user.getGender().isEmpty()) {
+	            user.setGender("other"); // 預設值為 "other"
+	        }
 	        return ResponseEntity.ok(user);
 	    } else {
 	        return ResponseEntity.status(404).body(null); // 資料不存在
@@ -179,6 +183,31 @@ public class UsersController {
 	            return ResponseEntity.status(400).body(errorResponse);
 	        }
 	    }
+	 
+	 @PutMapping("/changePassword")
+	 public ResponseEntity<Map<String, Object>> changePassword(
+	         HttpServletRequest request,
+	         @RequestParam("newPassword") String newPassword) {
+	     try {
+	         // 調用 Service 方法
+	         userService.changePassword(request, newPassword);
+
+	         // 回應成功訊息
+	         Map<String, Object> response = new HashMap<>();
+	         response.put("message", "密碼修改成功");
+	         return ResponseEntity.ok(response);
+	     } catch (IllegalArgumentException e) {
+	         // 處理驗證錯誤
+	         Map<String, Object> errorResponse = new HashMap<>();
+	         errorResponse.put("message", e.getMessage());
+	         return ResponseEntity.status(400).body(errorResponse);
+	     } catch (Exception e) {
+	         // 處理其他錯誤
+	         Map<String, Object> errorResponse = new HashMap<>();
+	         errorResponse.put("message", "密碼修改失敗: " + e.getMessage());
+	         return ResponseEntity.status(500).body(errorResponse);
+	     }
+	 }
 	 
 	 @DeleteMapping("/deleteUser/{userId}")
 	 public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
