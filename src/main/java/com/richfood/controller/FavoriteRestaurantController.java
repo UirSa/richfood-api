@@ -1,6 +1,9 @@
 package com.richfood.controller;
 
 import java.util.List;
+import java.util.Map;
+
+import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,38 +13,61 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.richfood.model.FavoriteRestaurants;
 import com.richfood.model.Restaurants;
 import com.richfood.service.FavoriteRestaurantService;
 
 @Controller
-@RequestMapping("/Favorite")
+@RequestMapping("/favorite")
 public class FavoriteRestaurantController {
-	
-	@Autowired FavoriteRestaurantService favoriteRestaurantService;
-	
-	@PostMapping("/addFavorite")
-	public ResponseEntity<String> addFavorite(@RequestBody FavoriteRestaurants favoriteRestaurant) {
-	    favoriteRestaurantService.addFavorite(favoriteRestaurant.getUserId(), favoriteRestaurant.getRestaurantId());
-	    return ResponseEntity.ok("餐廳已加入收藏");
-	}
-	
-	@DeleteMapping("/removeFavorite")
-    public ResponseEntity<String> removeFavorite(@RequestParam Integer userId, @RequestParam Integer restaurantId) {
-        favoriteRestaurantService.removeFavorite(userId, restaurantId);
+
+    @Autowired
+    private FavoriteRestaurantService favoriteRestaurantService;
+
+    // 添加收藏
+    @PostMapping
+    public ResponseEntity<String> addFavorite(@RequestBody FavoriteRestaurants favoriteRestaurant, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId"); // 從 session 獲取 userId
+        if (userId == null) {
+            return ResponseEntity.status(401).body("未登入");
+        }
+        favoriteRestaurantService.addFavorite(userId, favoriteRestaurant.getRestaurantId());
+        return ResponseEntity.ok("餐廳已加入收藏");
+    }
+
+    // 移除收藏
+    @DeleteMapping
+    public ResponseEntity<String> removeFavorite(@RequestBody FavoriteRestaurants favoriteRestaurant, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId"); // 從 session 獲取 userId
+        if (userId == null) {
+            return ResponseEntity.status(401).body("未登入");
+        }
+        favoriteRestaurantService.removeFavorite(userId, favoriteRestaurant.getRestaurantId());
         return ResponseEntity.ok("餐廳已從收藏中移除");
     }
-	 
-	 // 查詢已收藏的餐廳
-	 @GetMapping("/getFavoriteRestaurants")
-	 public ResponseEntity<List<Restaurants>> getFavoriteRestaurants(@RequestParam Integer userId) {
-		 
-	     List<Restaurants> favoriteRestaurants = favoriteRestaurantService.getFavoriteRestaurants(userId);
-	     
-	     return ResponseEntity.ok(favoriteRestaurants); 
-	 }
 
+    // 查詢已收藏的餐廳
+    @GetMapping
+    public ResponseEntity<List<Restaurants>> getFavoriteRestaurants(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        System.out.println("Session userId: " + userId); // 添加日誌
+        if (userId == null) {
+            return ResponseEntity.status(401).body(null); // 未登入
+        }
+        List<Restaurants> favoriteRestaurants = favoriteRestaurantService.getFavoriteRestaurants(userId);
+        return ResponseEntity.ok(favoriteRestaurants);
+    }
+
+    // 查詢收藏餐廳及其詳細信息
+    @GetMapping("/restaurants")
+    public ResponseEntity<List<Map<String, Object>>> getFavoriteRestaurantsWithDetails(HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        System.out.println("Session 中的 userId: " + userId); // 確認 userId 是否從 session 中正確讀取
+        if (userId == null) {
+            return ResponseEntity.status(401).body(null); // 未登入
+        }
+        return ResponseEntity.ok(favoriteRestaurantService.getFavoriteRestaurantsWithDetails(userId));
+    }
 
 }
