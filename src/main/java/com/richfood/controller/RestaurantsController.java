@@ -21,7 +21,7 @@ public class RestaurantsController {
     private RestaurantsService restaurantsService;
 
 
-    @GetMapping(value = {"/{country}/list/{category}", "/{country}/list","/list/{category}",})
+    @GetMapping(value = {"list","/{country}/list/{category}", "/{country}/list","/list/{category}",})
     public Page<Restaurants> searchRestaurants(@PathVariable(required = false) String country,
                                                @PathVariable(required = false) String category,
                                                @RequestParam(defaultValue = "0") int page,
@@ -30,6 +30,10 @@ public class RestaurantsController {
         return restaurantsService.searchRestaurants(country, category ,pageable);
     }
 
+    @GetMapping("/{restaurantId}")
+    public Optional<Restaurants> getRestaurantsById(@PathVariable Integer restaurantId){
+        return restaurantsService.getRestaurantsById(restaurantId);
+    }
 
     @PostMapping("/restaurants")
     public void test2(@RequestBody RestaurantsDto restaurantsDto){
