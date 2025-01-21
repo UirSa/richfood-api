@@ -29,5 +29,13 @@ public class CouponsOrdersService {
 		return couponsOrders;
 	}
 	
+	public CouponsOrders usedCoupon(Integer orderId) {
+		Optional<CouponsOrders> orders=couponsOrdersRepository.findById(orderId);
+		CouponsOrders couponsOrders=orders.get();
+		couponsOrders.setStatus(false);
+		couponsOrdersRepository.save(couponsOrders);
+		return couponsOrders;
+	}
+	
 	
 }
