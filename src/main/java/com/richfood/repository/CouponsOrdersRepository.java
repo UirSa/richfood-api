@@ -13,4 +13,5 @@ public interface CouponsOrdersRepository extends JpaRepository<CouponsOrders, In
 	Optional<CouponsOrders> findTopByUserIdAndStatusIsFalseOrderByOrderIdDesc(Integer userId);
 	List<CouponsOrders> findByUserIdAndStatusIsTrue(Integer userId);
 	List<CouponsOrders> findByUserId(Integer userId);
+	List<CouponsOrders> findByStoreId(Integer storeId);
 }

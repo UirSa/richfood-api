@@ -1,15 +1,18 @@
 package com.richfood.service;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+
 import org.springframework.stereotype.Service;
 
+import com.richfood.dto.BusinessHoursDto;
+import com.richfood.model.BusinessHours;
 import com.richfood.model.FavoriteRestaurants;
 import com.richfood.model.Restaurants;
 
@@ -70,6 +73,43 @@ public class FavoriteRestaurantService {
 		    return restaurants;
 		}
 
-	 
+	 public List<Map<String, Object>> getFavoriteRestaurantsWithDetails(Integer userId) {
+		    System.out.println("接收到的 userId: " + userId); // 檢查 userId
+
+		    List<FavoriteRestaurants> favorites = favoriteRestaurantRepository.findByUserIdOrderByFavoriteIdDesc(userId);
+		    System.out.println("查詢到的收藏記錄: " + favorites); // 檢查收藏記錄
+
+		    List<Map<String, Object>> result = new ArrayList<>();
+		    for (FavoriteRestaurants favorite : favorites) {
+		        Restaurants restaurant = restaurantRepository.findById(favorite.getRestaurantId())
+		                .orElse(null);
+
+		        System.out.println("查詢餐廳 (restaurantId=" + favorite.getRestaurantId() + "): " + restaurant); // 檢查餐廳記錄
+
+		        if (restaurant != null) {
+		            Map<String, Object> restaurantData = new HashMap<>();
+		            restaurantData.put("restaurantId", restaurant.getRestaurantId());
+		            restaurantData.put("name", restaurant.getName());
+		            restaurantData.put("address", restaurant.getAddress());
+		            restaurantData.put("image", restaurant.getImage()); // 添加 image 字段
+
+
+		            // 組裝營業時間
+		            List<Map<String, String>> businessHours = new ArrayList<>();
+		            for (BusinessHours hours : restaurant.getBusinessHours()) {
+		                Map<String, String> hoursData = new HashMap<>();
+		                hoursData.put("dayOfWeek", hours.getBusinessHoursId().getDayOfWeek());
+		                hoursData.put("startTime", hours.getBusinessHoursId().getStartTime());
+		                hoursData.put("endTime", hours.getEndTime());
+		                businessHours.add(hoursData);
+		            }
+		            restaurantData.put("businessHours", businessHours);
+
+		            result.add(restaurantData);
+		        }
+		    }
+		    System.out.println("最終返回的數據: " + result); // 檢查最終結果
+		    return result;
+		}
 	
-} 
+}
