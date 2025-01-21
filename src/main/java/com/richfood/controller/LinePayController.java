@@ -43,7 +43,7 @@ public class LinePayController {
     	System.out.println(transactionId);
         linePayService.confirmPayment(transactionId);
         
-        String redirectUrl = "http://localhost:9000/payment-success";//付款完跳轉回首頁之類的
+        String redirectUrl = "http://localhost:5173";//付款完跳轉回首頁之類的
         try {
 			response.sendRedirect(redirectUrl);
 		} catch (IOException e) {
