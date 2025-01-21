@@ -45,6 +45,13 @@ public class CouponsOrdersController {
 		List<CouponsOrders> couponsOrders=couponsOrdersService.selectCouponsOrder(userId);
 		return couponsOrders;
 	}
+	@GetMapping("/selectAllCouponsOrder")
+	public List<CouponsOrders> selectAllCouponsOrder(HttpServletRequest request){
+		Integer userId = (Integer) request.getSession().getAttribute("userId");
+		List<CouponsOrders> couponsOrders=couponsOrdersService.selectAllCouponsOrder(userId);
+		return couponsOrders;
+	}
+	
 	//更改狀態
 	@GetMapping("/usedCoupon")
 	public CouponsOrders usedCoupon(@RequestParam Integer orderId) {

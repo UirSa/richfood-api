@@ -12,4 +12,5 @@ import org.springframework.stereotype.Repository;
 public interface CouponsOrdersRepository extends JpaRepository<CouponsOrders, Integer> {
 	Optional<CouponsOrders> findTopByUserIdAndStatusIsFalseOrderByOrderIdDesc(Integer userId);
 	List<CouponsOrders> findByUserIdAndStatusIsTrue(Integer userId);
+	List<CouponsOrders> findByUserId(Integer userId);
 }
