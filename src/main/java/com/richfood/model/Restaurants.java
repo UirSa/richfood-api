@@ -145,17 +145,17 @@ public class Restaurants {
     }
 
     //----------------------------------------------------------
-//    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<RestaurantCategories> restaurantCategories;
-//
-//    public List<RestaurantCategories> getRestaurantCategories() {
-//        return restaurantCategories;
-//    }
-//
-//    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
-//        this.restaurantCategories = restaurantCategories;
-//    }
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<RestaurantCategories> restaurantCategories;
+
+    public List<RestaurantCategories> getRestaurantCategories() {
+        return restaurantCategories;
+    }
+
+    public void setRestaurantCategories(List<RestaurantCategories> restaurantCategories) {
+        this.restaurantCategories = restaurantCategories;
+    }
 
     @ManyToMany
     @JoinTable(

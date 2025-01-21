@@ -1,19 +1,16 @@
 package com.richfood.service;
 
 import com.richfood.dto.BusinessHoursDto;
-import com.richfood.dto.RestaurantsDto;
-import com.richfood.model.BusinessHours;
-import com.richfood.model.BusinessHoursId;
-import com.richfood.model.Restaurants;
+import com.richfood.dto.RestaurantCategoriesDto;
+import com.richfood.dto.RestaurantDto;
+import com.richfood.model.*;
 import com.richfood.repository.RestaurantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -54,35 +51,48 @@ public class RestaurantsService {
     }
 
     //Save Restaurants for JSON
-    public void saveRestaurants(@RequestBody RestaurantsDto restaurantsDto){
-        Restaurants restaurants = new Restaurants();
-        restaurants.setName(restaurantsDto.getName());
-        restaurants.setDescription(restaurantsDto.getDescription());
-        restaurants.setCountry(restaurantsDto.getCountry());
-        restaurants.setDistrict(restaurantsDto.getDistrict());
-        restaurants.setAddress(restaurantsDto.getAddress());
-        restaurants.setLatitude(restaurantsDto.getLatitude());
-        restaurants.setLongitude(restaurantsDto.getLongitude());
-        restaurants.setScore(restaurantsDto.getScore());
-        restaurants.setAverage(restaurantsDto.getAverage());
-        restaurants.setImage(restaurantsDto.getImage());
-        restaurants.setPhone(restaurantsDto.getPhone());
-        restaurants.setStoreId(restaurantsDto.getStoreId());
+    public void saveRestaurantsAndBusinessHours(@RequestBody List<RestaurantDto> restaurantDtoList) {
+        for (RestaurantDto restaurantDto : restaurantDtoList) {
 
-        restaurantsRepository.save(restaurants);
-        List<BusinessHours> businessHoursList=new ArrayList<>();
-        for (BusinessHoursDto businessHoursDto : restaurantsDto.getBusinessHours()) {
-            String startTime = businessHoursDto.getStartTime();
-            String endTime = businessHoursDto.getEndTime();
-            //TODO 改格式
-            BusinessHoursId businessHoursId=new BusinessHoursId(businessHoursDto.getRestaurantId(),businessHoursDto.getDayOfWeek(), startTime);
+            Restaurants restaurants = new Restaurants();
+            restaurants.setName(restaurantDto.getName());
+            restaurants.setDescription(restaurantDto.getDescription());
+            restaurants.setCountry(restaurantDto.getCountry());
+            restaurants.setDistrict(restaurantDto.getDistrict());
+            restaurants.setAddress(restaurantDto.getAddress());
+            restaurants.setLatitude(restaurantDto.getLatitude());
+            restaurants.setLongitude(restaurantDto.getLongitude());
+            restaurants.setScore(restaurantDto.getScore());
+            restaurants.setAverage(restaurantDto.getAverage());
+            restaurants.setImage(restaurantDto.getImage());
+            restaurants.setPhone(restaurantDto.getPhone());
+            restaurants.setStoreId(restaurantDto.getStoreId());
 
-            BusinessHours businessHours = new BusinessHours(businessHoursId, endTime);
-            businessHoursList.add(businessHours);
+            restaurantsRepository.save(restaurants);
+            List<BusinessHours> businessHoursList = new ArrayList<>();
+            for (BusinessHoursDto businessHoursDto : restaurantDto.getBusinessHours()) {
+                String startTime = businessHoursDto.getStartTime();
+                String endTime = businessHoursDto.getEndTime();
+                //TODO 改格式
+                BusinessHoursId businessHoursId = new BusinessHoursId(businessHoursDto.getRestaurantId(), businessHoursDto.getDayOfWeek(), startTime);
+
+                BusinessHours businessHours = new BusinessHours(businessHoursId, endTime);
+                businessHoursList.add(businessHours);
+            }
+            restaurants.setBusinessHours(businessHoursList);
+
+            List<RestaurantCategories> restaurantCategoriesList=new ArrayList<>();
+            for (RestaurantCategoriesDto restaurantCategoriesDto: restaurantDto.getRestaurantCategoriesDtos()){
+                Integer rid=restaurantCategoriesDto.getRestaurantId();
+                Integer cid=restaurantCategoriesDto.getCategoryId();
+
+                RestaurantCategoriesId restaurantCategoriesId=new RestaurantCategoriesId(rid,cid);
+
+                RestaurantCategories restaurantCategories=new RestaurantCategories(restaurantCategoriesId);
+                restaurantCategoriesList.add(restaurantCategories);
+            }
+
+            restaurantsRepository.save(restaurants);
         }
-        restaurants.setBusinessHours(businessHoursList);
-
-        restaurantsRepository.save(restaurants);
     }
-
 }

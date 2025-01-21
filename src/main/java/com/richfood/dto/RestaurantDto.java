@@ -1,8 +1,11 @@
 package com.richfood.dto;
 
+import com.richfood.model.Categories;
+import com.richfood.model.RestaurantCategories;
+
 import java.util.List;
 
-public class RestaurantsDto {
+public class RestaurantDto {
     private String name;
     private String description;
     private String address;
@@ -16,6 +19,7 @@ public class RestaurantsDto {
     private String phone;
     private Integer storeId;
     private List<BusinessHoursDto> businessHours;
+    private List<RestaurantCategoriesDto> restaurantCategoriesDtos;
 
     public String getName() {
         return name;
@@ -120,4 +124,13 @@ public class RestaurantsDto {
     public void setBusinessHours(List<BusinessHoursDto> businessHours) {
         this.businessHours = businessHours;
     }
+
+    public List<RestaurantCategoriesDto> getRestaurantCategoriesDtos() {
+        return restaurantCategoriesDtos;
+    }
+
+    public void setRestaurantCategoriesDtos(List<RestaurantCategoriesDto> restaurantCategoriesDtos) {
+        this.restaurantCategoriesDtos = restaurantCategoriesDtos;
+    }
 }
+

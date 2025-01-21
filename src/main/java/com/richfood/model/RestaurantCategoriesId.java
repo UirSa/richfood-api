@@ -10,6 +10,13 @@ public class RestaurantCategoriesId {
     @Column(name = "category_id")
     private Integer categoryId;
 
+    public RestaurantCategoriesId(){}
+
+    public RestaurantCategoriesId(Integer restaurantId, Integer categoryId) {
+        this.restaurantId = restaurantId;
+        this.categoryId = categoryId;
+    }
+
     public Integer getRestaurantId() {
         return restaurantId;
     }

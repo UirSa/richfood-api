@@ -9,6 +9,12 @@ public class RestaurantCategories {
     @EmbeddedId
     private RestaurantCategoriesId restaurantCategoriesId;
 
+    public RestaurantCategories(){}
+
+    public RestaurantCategories(RestaurantCategoriesId restaurantCategoriesId) {
+        this.restaurantCategoriesId = restaurantCategoriesId;
+    }
+
     public RestaurantCategoriesId getRestaurantCategoriesId() {
         return restaurantCategoriesId;
     }

@@ -1,7 +1,7 @@
 package com.richfood.controller;
 
-import com.richfood.dto.RestaurantsDto;
-import com.richfood.model.BusinessHours;
+
+import com.richfood.dto.RestaurantDto;
 import com.richfood.model.Restaurants;
 import com.richfood.service.RestaurantsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,8 +45,8 @@ public class RestaurantsController {
 
     //Save Restaurants for JSON
     @PostMapping("")
-    public void test2(@RequestBody RestaurantsDto restaurantsDto){
-        restaurantsService.saveRestaurants(restaurantsDto);
+    public void saveRestaurantsAndBusinessHours(@RequestBody List<RestaurantDto> restaurantDto){
+        restaurantsService.saveRestaurantsAndBusinessHours(restaurantDto);
     }
 
 //    {
