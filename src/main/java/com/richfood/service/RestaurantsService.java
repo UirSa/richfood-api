@@ -22,6 +22,7 @@ public class RestaurantsService {
     @Autowired
     private RestaurantsRepository restaurantsRepository;
 
+    //Restaurants list
     public  Page<Restaurants> searchRestaurants(String country, String category, Pageable pageable){
         if(country !=null && category !=null){
            return restaurantsRepository.findRestaurantsByCountryAndCategoryName(country, category, pageable);
@@ -34,7 +35,13 @@ public class RestaurantsService {
         }
     }
 
+    //Restaurants by id
+    public Optional<Restaurants> getRestaurantsById(Integer restaurantId){
+       return restaurantsRepository.findById(restaurantId);
+    }
 
+
+    //saveRestaurants
     public void saveRestaurants(@RequestBody RestaurantsDto restaurantsDto){
         Restaurants restaurants = new Restaurants();
         restaurants.setName(restaurantsDto.getName());
