@@ -18,4 +18,6 @@ public interface RestaurantsRepository extends JpaRepository<Restaurants, Intege
     Page<Restaurants> findRestaurantsByCategoryName(@Param("categoryName") String category, Pageable pageable);
     @Query("SELECT r FROM Restaurants r JOIN r.categories c WHERE (:country IS NULL OR r.country = :country) AND (:categoryName IS NULL OR c.name = :categoryName)")
     Page<Restaurants> findRestaurantsByCountryAndCategoryName(String country, @Param("categoryName") String category, Pageable pageable);
+    @Query("SELECT r FROM Restaurants r WHERE r.latitude BETWEEN :latMax AND :latMin AND r.longitude BETWEEN :longMax AND :longMin")
+    Page<Restaurants> findRestaurantsByLatitudeAndLongitudeBetween(@Param("latMin") double latMin, @Param("latMax") double latMax, @Param("longMin") double longMin, @Param("longMax") double longMax, Pageable pageable);
 }

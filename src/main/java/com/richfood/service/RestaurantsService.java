@@ -8,6 +8,7 @@ import com.richfood.model.Restaurants;
 import com.richfood.repository.RestaurantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,9 @@ public class RestaurantsService {
     @Autowired
     private RestaurantsRepository restaurantsRepository;
 
-    //Restaurants list
-    public  Page<Restaurants> searchRestaurants(String country, String category, Pageable pageable){
+
+    //Restaurants list by country and category for checkbox and selected
+    public  Page<Restaurants> searchRestaurantsByCountryAndCategory(String country, String category, Pageable pageable){
         if(country !=null && category !=null){
            return restaurantsRepository.findRestaurantsByCountryAndCategoryName(country, category, pageable);
         }else if(country !=null){
@@ -40,8 +42,18 @@ public class RestaurantsService {
        return restaurantsRepository.findById(restaurantId);
     }
 
+    //Restaurants by lat and long for recommend
+    public Page<Restaurants> getRestaurantByLatAndLong(Double latitude, Double longitude, Pageable pageable){
+        Double distance=0.009*5;
+        Double latMax =latitude+distance;
+        Double latMin =latitude-distance;
+        Double longMax=longitude+distance;
+        Double longMin=longitude-distance;
+        return restaurantsRepository.findRestaurantsByLatitudeAndLongitudeBetween(latMax,latMin,longMax,longMin,pageable);
 
-    //saveRestaurants
+    }
+
+    //Save Restaurants for JSON
     public void saveRestaurants(@RequestBody RestaurantsDto restaurantsDto){
         Restaurants restaurants = new Restaurants();
         restaurants.setName(restaurantsDto.getName());
@@ -49,12 +61,15 @@ public class RestaurantsService {
         restaurants.setCountry(restaurantsDto.getCountry());
         restaurants.setDistrict(restaurantsDto.getDistrict());
         restaurants.setAddress(restaurantsDto.getAddress());
+        restaurants.setLatitude(restaurantsDto.getLatitude());
+        restaurants.setLongitude(restaurantsDto.getLongitude());
         restaurants.setScore(restaurantsDto.getScore());
         restaurants.setAverage(restaurantsDto.getAverage());
         restaurants.setImage(restaurantsDto.getImage());
         restaurants.setPhone(restaurantsDto.getPhone());
         restaurants.setStoreId(restaurantsDto.getStoreId());
 
+        restaurantsRepository.save(restaurants);
         List<BusinessHours> businessHoursList=new ArrayList<>();
         for (BusinessHoursDto businessHoursDto : restaurantsDto.getBusinessHours()) {
             String startTime = businessHoursDto.getStartTime();

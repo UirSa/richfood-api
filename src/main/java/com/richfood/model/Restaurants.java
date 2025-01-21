@@ -23,6 +23,9 @@ public class Restaurants {
     private String image;
     private String phone;
     private Integer storeId;
+    private double longitude;
+    private double latitude;
+
 
     public Integer getRestaurantId() {
         return restaurantId;
@@ -110,6 +113,22 @@ public class Restaurants {
 
     public void setStoreId(Integer storeId) {
         this.storeId = storeId;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     //-------------------------------------------------------
