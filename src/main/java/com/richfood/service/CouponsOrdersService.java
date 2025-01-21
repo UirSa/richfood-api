@@ -34,6 +34,13 @@ public class CouponsOrdersService {
 		return couponsOrders;
 	}
 	
+	public List<CouponsOrders> selectAllStoreCouponsOrder(Integer storeId) {
+		List<CouponsOrders> couponsOrders=couponsOrdersRepository.findByStoreId(storeId);
+		return couponsOrders;
+	}
+	
+	
+	
 	public CouponsOrders usedCoupon(Integer orderId) {
 		Optional<CouponsOrders> orders=couponsOrdersRepository.findById(orderId);
 		CouponsOrders couponsOrders=orders.get();

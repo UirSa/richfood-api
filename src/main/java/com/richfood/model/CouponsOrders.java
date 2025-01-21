@@ -85,7 +85,7 @@ public class CouponsOrders {
 	//-----------------------------------------------
     @ManyToOne
     @JoinColumn(name = "storeId", insertable = false, updatable = false)
-    @JsonIgnore
+    //@JsonIgnore
     private Store store;
 
     public Store getStore() {
@@ -99,7 +99,7 @@ public class CouponsOrders {
     //------------------------------------------------------
     @ManyToOne
     @JoinColumn(name = "couponId", insertable = false, updatable = false)
-    @JsonIgnore
+    //@JsonIgnore
     private Coupons coupons;
 
     public Coupons getCoupons() {
