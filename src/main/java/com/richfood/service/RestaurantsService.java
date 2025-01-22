@@ -36,12 +36,17 @@ public class RestaurantsService {
 
     //Restaurants by id
     public Optional<Restaurants> getRestaurantsById(Integer restaurantId){
+        Optional<Restaurants> restaurant =restaurantsRepository.findById(restaurantId);
+        List<BusinessHours> businessHours=restaurant.get().getBusinessHours();
+        for (BusinessHours businessHour : businessHours) {
+            businessHour.getBusinessHoursId().getDayOfWeek();
+        }
        return restaurantsRepository.findById(restaurantId);
     }
 
     //Restaurants by lat and long for recommend
     public Page<Restaurants> getRestaurantByLatAndLong(Double latitude, Double longitude, Pageable pageable){
-        Double distance=0.009*5;
+        Double distance=0.009*1;
         Double latMax =latitude+distance;
         Double latMin =latitude-distance;
         Double longMax=longitude+distance;
@@ -80,9 +85,9 @@ public class RestaurantsService {
                 businessHoursList.add(businessHours);
             }
             restaurants.setBusinessHours(businessHoursList);
-
+            restaurantsRepository.save(restaurants);
             List<RestaurantCategories> restaurantCategoriesList=new ArrayList<>();
-            for (RestaurantCategoriesDto restaurantCategoriesDto: restaurantDto.getRestaurantCategoriesDtos()){
+            for (RestaurantCategoriesDto restaurantCategoriesDto: restaurantDto.getCategories()){
                 Integer rid=restaurantCategoriesDto.getRestaurantId();
                 Integer cid=restaurantCategoriesDto.getCategoryId();
 
@@ -91,7 +96,7 @@ public class RestaurantsService {
                 RestaurantCategories restaurantCategories=new RestaurantCategories(restaurantCategoriesId);
                 restaurantCategoriesList.add(restaurantCategories);
             }
-
+            restaurants.setRestaurantCategories(restaurantCategoriesList);
             restaurantsRepository.save(restaurants);
         }
     }

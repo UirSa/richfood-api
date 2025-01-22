@@ -19,7 +19,7 @@ public class RestaurantDto {
     private String phone;
     private Integer storeId;
     private List<BusinessHoursDto> businessHours;
-    private List<RestaurantCategoriesDto> restaurantCategoriesDtos;
+    private List<RestaurantCategoriesDto> Categories;
 
     public String getName() {
         return name;
@@ -125,12 +125,12 @@ public class RestaurantDto {
         this.businessHours = businessHours;
     }
 
-    public List<RestaurantCategoriesDto> getRestaurantCategoriesDtos() {
-        return restaurantCategoriesDtos;
+    public List<RestaurantCategoriesDto> getCategories() {
+        return Categories;
     }
 
-    public void setRestaurantCategoriesDtos(List<RestaurantCategoriesDto> restaurantCategoriesDtos) {
-        this.restaurantCategoriesDtos = restaurantCategoriesDtos;
+    public void setCategories(List<RestaurantCategoriesDto> categories) {
+        Categories = categories;
     }
 }
 
