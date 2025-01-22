@@ -30,6 +30,13 @@ public class ReservationStoreService {
 	
 		return storeReservations;
 	}
+	
+	public List<Reservations>seleteSeatAsc(Integer storeId){
+		List<Reservations> storeReservations=reservationStoreRepository.findByStoreIdReservation(storeId);
+	
+		return storeReservations;
+	}
+	
 	//修改狀態
 	  public Reservations updateSeat(Integer reservationId,Reservations updatedReservation) {
 	    	Optional<Reservations> optionalorder=reservationStoreRepository.findById(reservationId);

@@ -53,12 +53,21 @@ public class ReservationStoreController {
 	}
 
 	//瀏覽頁面
-	@GetMapping("/selectAllReservationAsc")
-	public ResponseEntity<List<Reservations>>selectAllReservation(HttpServletRequest request){
+	@GetMapping("/selectAllReservationNotCancelAsc")
+	public ResponseEntity<List<Reservations>>selectAllReservationNotCancel(HttpServletRequest request){
 		Integer storeid= (Integer)request.getSession().getAttribute("storeId");
 		List<Reservations> reservations=reservationStoreService.seleteSeatNotCancelAsc(storeid);
 		
 		return ResponseEntity.ok(reservations);
 	}
+	@GetMapping("/selectAllReservationAsc")
+	public ResponseEntity<List<Reservations>>selectAllReservation(HttpServletRequest request){
+		Integer storeid= (Integer)request.getSession().getAttribute("storeId");
+		List<Reservations> reservations=reservationStoreService.seleteSeatAsc(storeid);
+		
+		return ResponseEntity.ok(reservations);
+	}
+	
+	
 	
 }

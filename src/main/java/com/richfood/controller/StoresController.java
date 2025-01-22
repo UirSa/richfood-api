@@ -73,6 +73,13 @@ public class StoresController {
 		Store store=storesService.getStoreDatail(storeId);
 		return ResponseEntity.ok(store);
 	}
+	@GetMapping("/selectStore")
+	public ResponseEntity<Store> selectStore(HttpServletRequest request) {
+		Integer storeId=(Integer)request.getSession().getAttribute("storeId");
+		Store store=storesService.getStoreDatail(storeId);
+		return ResponseEntity.ok(store);
+	}
+	
 	@PostMapping("/updateStore")
 	public ResponseEntity<Store> updateStore(HttpServletRequest request,@RequestBody Store store) {
 		Integer storeId=(Integer)request.getSession().getAttribute("storeId");
