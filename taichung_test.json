@@ -1,0 +1,1059 @@
+[
+    {
+        "id": 1,
+        "name": "知肉極緻韓燒肉 台中公益店",
+        "description": "“台中知肉極緻韓燒肉，提供全程代烤服務，客製化滿足您的需求，更擁有全台首創真露販賣機，享受獨特用餐體驗。”",
+        "country": "臺中市",
+        "district": "西區",
+        "address": "公益路282之2號",
+        "latitude": 24.151073,
+        "longitude": 120.6536858,
+        "score": "4.8",
+        "average": "2000",
+        "image": "https://lh3.googleusercontent.com/lXuUmf9j5NDkNOwbyOZ344wB6kVvQwz0-CpEOYXg8zVFifQOV5Vy49YDejZb76Ceqw2XioLz3aJavqFzUgNQBj4aGAyZgRHYE9HH0HYj5vE=s200",
+        "phone": "0423207007",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期三",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期四",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期五",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期六",
+                "startTime": "12:00",
+                "endTime": "15:00"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期六",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期日",
+                "startTime": "12:00",
+                "endTime": "15:00"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期日",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期一",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            },
+            {
+                "restaurantId": 1,
+                "dayOfWeek": "星期二",
+                "startTime": "17:30",
+                "endTime": "23:30"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 1,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 1,
+                "categoryid": 36
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "Nikuniku 肉肉燒肉 五權西路店",
+        "description": "“寵物友善日式燒肉餐廳，提供多種套餐選擇，還有單點服務，毛孩可享免費肉肉。”",
+        "country": "臺中市",
+        "district": "南屯區",
+        "address": "五權西路二段223號",
+        "latitude": 24.1398659,
+        "longitude": 120.6486243,
+        "score": "4.5",
+        "average": "1000",
+        "image": "https://lh3.googleusercontent.com/KGQK5hjEr_QPICm3ZZ2nJcVzSL3bXXhEgcEcK_HE6GyuebHdO-AT9tZCtYl6UgtnrwQjAJM0QG5-VE-enYo7uyJn5sDdcV4g_KQnsNKh-gm6=s200",
+        "phone": "0424721166",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期三",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期三",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期四",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期四",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期五",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期五",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期六",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期日",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期一",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期一",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期二",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 2,
+                "dayOfWeek": "星期二",
+                "startTime": "17:00",
+                "endTime": "22:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 2,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 2,
+                "categoryid": 7
+            },
+            {
+                "restaurantId": 2,
+                "categoryid": 8
+            },
+            {
+                "restaurantId": 2,
+                "categoryid": 28
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "屋馬燒肉 國安店",
+        "description": "“環境舒適，精緻好肉，雞湯無限暢飲，適合歡樂聚餐。”",
+        "country": "臺中市",
+        "district": "西屯區",
+        "address": "國安一路168號B1之2",
+        "latitude": 24.1921753,
+        "longitude": 120.6117706,
+        "score": "4.8",
+        "average": "1000",
+        "image": "https://lh3.googleusercontent.com/XfCqcPzrx9Ozn4CsHXg2h9W0KB0tzn3dIgeYjwDoRCQZHZq-Qf5dic85zBnt-mS2pCZZWz77ZfPZSm2wZx9qZ2R9UoDAWCY=s200",
+        "phone": "0424652222",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 3,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 3,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 3,
+                "categoryid": 8
+            },
+            {
+                "restaurantId": 3,
+                "categoryid": 7
+            },
+            {
+                "restaurantId": 3,
+                "categoryid": 33
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "屋馬燒肉文心秀泰店",
+        "description": "無描述資訊",
+        "country": "臺中市",
+        "district": "南屯區",
+        "address": "文心南路289號5樓",
+        "latitude": 24.130047,
+        "longitude": 120.6459526,
+        "score": "4.9",
+        "average": "1200",
+        "image": "https://lh3.googleusercontent.com/o61uT9m9gmS-thbbSIiMRl6HAxvfifFXhH2FAtazBZkSqvPGqElendJi-Ln9VIPLbEabNEZmcKeQx8Mo1_MJnhy1GvD-ok8oeBdTmbDZF2s=s200",
+        "phone": "0424750777",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 4,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 4,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 4,
+                "categoryid": 33
+            },
+            {
+                "restaurantId": 4,
+                "categoryid": 35
+            },
+            {
+                "restaurantId": 4,
+                "categoryid": 36
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "屋馬燒肉 中港店",
+        "description": "“屋馬燒肉以高品質肉品、無限享用雞湯聞名，服務周到，深受顧客喜愛，台中必吃燒肉之一。”",
+        "country": "臺中市",
+        "district": "西屯區",
+        "address": "臺灣大道三段300號",
+        "latitude": 24.1658007,
+        "longitude": 120.6446009,
+        "score": "4.8",
+        "average": "1500",
+        "image": "https://lh3.googleusercontent.com/8qYJ-tHCXVs2kIr3UkZPIOXK1MIARhbtRqMoiB9AWfKBHvwAWVQcgE44zfkrZVzhUVQSPQn7f69NCfSjhzaSIyx_vjbPxw=s200",
+        "phone": "0423121000",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期三",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期四",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期五",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期六",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期日",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期一",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期二",
+                "startTime": "00:00",
+                "endTime": "01:00"
+            },
+            {
+                "restaurantId": 5,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 5,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 5,
+                "categoryid": 7
+            },
+            {
+                "restaurantId": 5,
+                "categoryid": 8
+            },
+            {
+                "restaurantId": 5,
+                "categoryid": 33
+            }
+        ]
+    },
+    {
+        "id": 6,
+        "name": "老井極上燒肉 崇德店",
+        "description": "“炭火炙燒，肉品新鮮美味，附餐豐富，還有握壽司、烤雞肉串、飲料無限暢飲。”",
+        "country": "臺中市",
+        "district": "北屯區",
+        "address": "崇德路二段256號",
+        "latitude": 24.1747747,
+        "longitude": 120.6860856,
+        "score": "4.8",
+        "average": "1900",
+        "image": "https://lh3.googleusercontent.com/UIC6wnaeNyCJB9-maM_umXObYF69KtAVvy3fh1kVW0wki9zPMZ9l3uSv0PV5GYFrRKRP6RjTJaWJQ7hBNxm3o46YrsBHJj71OAIzjpFTqTHf=s200",
+        "phone": "0422478590",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 6,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 6,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 6,
+                "categoryid": 12
+            },
+            {
+                "restaurantId": 6,
+                "categoryid": 33
+            },
+            {
+                "restaurantId": 6,
+                "categoryid": 35
+            }
+        ]
+    },
+    {
+        "id": 7,
+        "name": "燒肉SMILE 台中沙鹿店",
+        "description": "無描述資訊",
+        "country": "台中市",
+        "district": "沙鹿區",
+        "address": "北英路97號",
+        "latitude": 24.2270639,
+        "longitude": 120.5732944,
+        "score": "4.9",
+        "average": "1200",
+        "image": "https://lh3.googleusercontent.com/JhWp34fbyGclHfzot8UK3g3G7vNnzbBMFFE-MaF9sxqVNCs2KEZNtgHVDtEwDvK56RDEvsDNITTr7jTLO7E1-3UGhAMvTB5MVWt3GG_mZzlQ=s200",
+        "phone": "0426335055",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期三",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期四",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期五",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期六",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期日",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期一",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期二",
+                "startTime": "00:00",
+                "endTime": "01:30"
+            },
+            {
+                "restaurantId": 7,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 7,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 7,
+                "categoryid": 7
+            },
+            {
+                "restaurantId": 7,
+                "categoryid": 8
+            },
+            {
+                "restaurantId": 7,
+                "categoryid": 33
+            }
+        ]
+    },
+    {
+        "id": 8,
+        "name": "屋馬燒肉 崇德店",
+        "description": "“台中超人氣燒肉名店，空間寬敞，肉品海鮮品質優，適合約會慶生聚餐。”",
+        "country": "臺中市",
+        "district": "北屯區",
+        "address": "崇德路二段369號",
+        "latitude": 24.1797052,
+        "longitude": 120.6857777,
+        "score": "4.7",
+        "average": "1100",
+        "image": "https://lh3.googleusercontent.com/r_5yC6l5N69bY51voP2npPUVOEl2PIqYidxGCggJoWsC_o5GgcJPRogefELSKROy3dmiKQ3rrMCirFqnW2SyUCjk2pod32M=s200",
+        "phone": "0422410000",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 8,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 8,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 8,
+                "categoryid": 8
+            },
+            {
+                "restaurantId": 8,
+                "categoryid": 33
+            },
+            {
+                "restaurantId": 8,
+                "categoryid": 35
+            }
+        ]
+    },
+    {
+        "id": 9,
+        "name": "焼肉スマイル（燒肉Smile） 台中高工店",
+        "description": "無描述資訊",
+        "country": "臺中市",
+        "district": "南區",
+        "address": "高工路388之9號",
+        "latitude": 24.1141816,
+        "longitude": 120.6675757,
+        "score": "4.9",
+        "average": "600",
+        "image": "https://lh3.googleusercontent.com/gMSLkr2OgFrenciBbfUFpum12J5FggENeagP6mI3wbDKIrihlSGVx4PY-CTjO0g43aMBH9n3RPBctfpSBxeY9su0kxyGjvExickRZGGwideryw=s200",
+        "phone": "0422609797",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期三",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期四",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期五",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期六",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期日",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期一",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期二",
+                "startTime": "00:00",
+                "endTime": "03:00"
+            },
+            {
+                "restaurantId": 9,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "00:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 9,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 9,
+                "categoryid": 33
+            },
+            {
+                "restaurantId": 9,
+                "categoryid": 35
+            },
+            {
+                "restaurantId": 9,
+                "categoryid": 36
+            }
+        ]
+    },
+    {
+        "id": 10,
+        "name": "森森燒肉 台中站前秀泰店",
+        "description": "無描述資訊",
+        "country": "臺中市",
+        "district": "東區",
+        "address": "南京路66號S2館1樓",
+        "latitude": 24.1402335,
+        "longitude": 120.6918434,
+        "score": "5.0",
+        "average": "1309",
+        "image": "https://lh3.googleusercontent.com/8JmF22HuJAezR5dgfShwkutMMoQ2foBCGTRFjmELJpKtCyvAlei098DD_AZK_gcJ5DDJQZIbXDsHfKnogXytXRNOAZIgVgFyZSwnEvOY8Zgj=s200",
+        "phone": "0422153088",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期三",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期四",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期五",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期六",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期日",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期一",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            },
+            {
+                "restaurantId": 10,
+                "dayOfWeek": "星期二",
+                "startTime": "11:00",
+                "endTime": "22:00"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 10,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 10,
+                "categoryid": 35
+            },
+            {
+                "restaurantId": 10,
+                "categoryid": 36
+            }
+        ]
+    },
+    {
+        "id": 11,
+        "name": "嵐山熟成牛かつ專売 台中西區健行店",
+        "description": "“台中人氣炸牛排專賣店，主打浮誇系布丁，還有季節限定草莓甜點及夏季限定飲品，滿足味蕾與視覺享受。”",
+        "country": "臺中市",
+        "district": "西區",
+        "address": "健行路1058號",
+        "latitude": 24.1561464,
+        "longitude": 120.6626072,
+        "score": "4.8",
+        "average": "814",
+        "image": "https://lh3.googleusercontent.com/faN5tFwuMDVBSNFC5dQ1oXtJLiq6btpImMS1gZAsaJwfd1wizgh02H_MuMppHmt6SUV1x_YDI7A2J6O5zor61R7SP_b7WUBhXc-Z9MINPYIg=s200",
+        "phone": "0423230222",
+        "store_id": null,
+        "businessHours": [
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期三",
+                "startTime": "11:30",
+                "endTime": "14:00"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期三",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期四",
+                "startTime": "11:30",
+                "endTime": "14:00"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期四",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期五",
+                "startTime": "11:30",
+                "endTime": "14:00"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期五",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期六",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期六",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期日",
+                "startTime": "11:30",
+                "endTime": "14:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期日",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期一",
+                "startTime": "11:30",
+                "endTime": "14:00"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期一",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期二",
+                "startTime": "11:30",
+                "endTime": "14:00"
+            },
+            {
+                "restaurantId": 11,
+                "dayOfWeek": "星期二",
+                "startTime": "17:00",
+                "endTime": "20:30"
+            }
+        ],
+        "categories": [
+            {
+                "restaurantId": 11,
+                "categoryid": 12
+            },
+            {
+                "restaurantId": 11,
+                "categoryid": 25
+            },
+            {
+                "restaurantId": 11,
+                "categoryid": 10
+            },
+            {
+                "restaurantId": 11,
+                "categoryid": 8
+            }
+        ]
+    }
+]
