@@ -1,10 +1,12 @@
 package com.richfood.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.richfood.model.Reviews;
+import com.richfood.repository.UsersRepository;
 import com.richfood.service.ReviewsService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +27,9 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ReviewsController {
 	
 	@Autowired ReviewsService reviewsService;
+	
+	@Autowired
+    private UsersRepository usersRepository;
 	
 	/*
      * [GET] 取得「該餐廳」的所有評論
@@ -117,6 +123,50 @@ public class ReviewsController {
             throw new RuntimeException("您尚未登入，無法刪除評論");
         }
         reviewsService.deleteReviewByUserAndRestaurant(currentUserId, restaurantId);
+    }
+    
+    
+    @GetMapping("/flagged")
+    public ResponseEntity<List<Map<String, Object>>> getFlaggedReviews() {
+        // 獲取所有被標記 (flagged) 的 Reviews
+        List<Reviews> flaggedReviews = reviewsService.getFlaggedReviews();
+
+        // 創建一個列表，用來存放添加了餐廳名稱的 Reviews 信息
+        List<Map<String, Object>> responseList = new ArrayList<>();
+        
+        for (Reviews review : flaggedReviews) {
+            // 根據每個 reviewId 獲取餐廳名稱
+            String restaurantName = reviewsService.getRestaurantNameByReviewId(review.getReviewId());
+            
+            // 根據 userId 獲取用戶名稱
+            String userName = usersRepository.findUserNameByUserId(review.getUserId());
+
+            // 將 Reviews 轉換成 Map，並添加餐廳名稱
+            Map<String, Object> reviewMap = new HashMap<>();
+            reviewMap.put("reviewId", review.getReviewId());
+            reviewMap.put("restaurantId", review.getRestaurantId());
+            reviewMap.put("restaurantName", restaurantName);
+            reviewMap.put("userId", review.getUserId());
+            reviewMap.put("userName", userName);
+            reviewMap.put("rating", review.getRating());
+            reviewMap.put("content", review.getContent());
+            reviewMap.put("createdAt", review.getCreatedAt());
+            reviewMap.put("storeId", review.getStoreId());
+            reviewMap.put("flagged", review.getFlagged());
+            reviewMap.put("approved", review.getApproved());
+            reviewMap.put("restaurantName", restaurantName); // 新增餐廳名稱
+
+            // 添加到結果列表
+            responseList.add(reviewMap);
+        }
+
+        return ResponseEntity.ok(responseList);
+    }
+    
+    @DeleteMapping("/{reviewId}")
+    public ResponseEntity<Void> deleteReview(@PathVariable Integer reviewId) {
+        reviewsService.deleteReview(reviewId);
+        return ResponseEntity.noContent().build();
     }
 
 }

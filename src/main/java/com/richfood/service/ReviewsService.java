@@ -19,6 +19,7 @@ public class ReviewsService {
 
 	@Autowired ReviewsRepository reviewsRepository;
 	
+	
 	@Autowired
 	    private RestaurantsRepository restaurantsRepository; // 餐廳的 Repository
 	 
@@ -124,6 +125,38 @@ public class ReviewsService {
     	Reviews existingReview = reviewsRepository.findByUserIdAndRestaurantId(userId, restaurantId)
                 .orElseThrow(() -> new RuntimeException("找不到該評論，或您尚未對此餐廳發表評論"));
         reviewsRepository.delete(existingReview);
+    }
+    
+    
+    public List<Reviews> getFlaggedReviews() {
+        List<Reviews> flaggedReviews = reviewsRepository.findByIsFlaggedTrueAndIsApprovedTrue();
+        return flaggedReviews;
+    }
+
+    public Reviews getReviewById(Integer reviewId) {
+        return reviewsRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+    }
+
+    public void deleteReview(Integer reviewId) {
+        reviewsRepository.deleteById(reviewId); // 刪除評論
+    }
+
+    
+    public String getRestaurantNameByReviewId(Integer reviewId) {
+        // 通過評論 ID 獲取餐廳 ID
+    	Integer restaurantId = reviewsRepository.findRestaurantIdByReviewId(reviewId);
+        if (restaurantId == null) {
+            throw new IllegalArgumentException("No restaurant ID found for review ID: " + reviewId);
+        }
+
+        // 通過餐廳 ID 獲取餐廳名稱
+        String restaurantName = restaurantsRepository.findNameByRestaurantId(restaurantId).toString();
+        if (restaurantName == null) {
+            throw new IllegalArgumentException("No restaurant name found for restaurant ID: " + restaurantId);
+        }
+
+        return restaurantName;
     }
 
 	
