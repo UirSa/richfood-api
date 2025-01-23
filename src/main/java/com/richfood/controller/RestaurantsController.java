@@ -35,8 +35,8 @@ public class RestaurantsController {
     }
     //Restaurants by lat and long for recommend
     @GetMapping("")
-    public Page<Restaurants> getRestaurantByLatAndLong(@RequestParam(required = true) Double latitude,
-                                                       @RequestParam(required = true) Double longitude,
+    public Page<Restaurants> getRestaurantByLatAndLong(@RequestParam(name = "lat",required = true) Double latitude,
+                                                       @RequestParam(name = "long",required = true) Double longitude,
                                                        @RequestParam(defaultValue = "0") int page,
                                                        @RequestParam(defaultValue = "10") int size){
         Pageable pageable = PageRequest.of(page,size);
