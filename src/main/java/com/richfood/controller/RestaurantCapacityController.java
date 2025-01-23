@@ -16,6 +16,7 @@ import com.richfood.service.RestaurantCapacityService;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -34,13 +35,51 @@ public class RestaurantCapacityController {
 		restaurantCapacityService.addCapacity(restaurantCapacity);
 		return ResponseEntity.ok(restaurantCapacity);
 	}
+	@PostMapping("/addStoreCapacity")
+	public ResponseEntity<RestaurantCapacity> addCapacity(@RequestBody RestaurantCapacity restaurantCapacity){
+
+		restaurantCapacityService.addCapacity(restaurantCapacity);
+		return ResponseEntity.ok(restaurantCapacity);
+	}
 	@GetMapping("/getMaxCapacity")
 	public ResponseEntity<List<RestaurantCapacity>> getCapacity(@RequestParam Integer storeId){
-//		Integer storeId = (Integer) request.getSession().getAttribute("storeId");
-		
-		
+
 		return ResponseEntity.ok(restaurantCapacityService.getCapacity(storeId));
 	}
+	@GetMapping("/getCapacityList")
+	public ResponseEntity<List<RestaurantCapacity>> getCapacityList(HttpServletRequest request,
+	        @RequestParam(value = "storeId", required = false) Integer storeId){
+	    if (storeId == null) {
+	        storeId = (Integer) request.getSession().getAttribute("storeId");
+	    }
+		return ResponseEntity.ok(restaurantCapacityService.getCapacity(storeId));
+	}
+	@GetMapping("/getStoreIdCapacityList")
+	public ResponseEntity<List<RestaurantCapacity>> getStoreIdCapacityList(Integer storeId){
+		return ResponseEntity.ok(restaurantCapacityService.getCapacity(storeId));
+	}
+	@PostMapping("/searchSameTime")
+    public boolean searchSameTime(@RequestBody RestaurantCapacity request) {
+    	boolean record =restaurantCapacityService.searchSameTime(
+    			request.getStoreId(),
+    	        request.getDate(),
+    	        request.getTime());
+    	return record;
+    }
+	
+	@PutMapping("/searchAfterUpdate")
+	public RestaurantCapacity searchAfterUpdate(@RequestBody RestaurantCapacity request) {
+	    return restaurantCapacityService.searchAfterUpdate(
+	        request.getStoreId(),
+	        request.getDate(),
+	        request.getTime(),
+	        request.getMaxCapacity()
+	    );
+	}
+	
+
+	
+	
 	
 	
 	

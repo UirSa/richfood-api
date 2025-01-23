@@ -32,7 +32,5 @@ public interface RestaurantCapacityRepository extends JpaRepository<RestaurantCa
 	
 	RestaurantCapacity findLastByStoreIdAndDateAndTime(Integer storeid,String date,String time);
 	
-	
-
 
 }

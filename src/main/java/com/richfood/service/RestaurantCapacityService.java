@@ -48,4 +48,20 @@ public class RestaurantCapacityService {
     	
     	
     }
+    
+    public boolean searchSameTime(Integer storeId,String date,String time) {
+    	Object record =restaurantCapacityRepository.findLastByStoreIdAndDateAndTime(storeId,date,time);
+    	if(record !=null) {
+    		return true;
+    	}
+    	return false;
+    }
+    
+    
+    public RestaurantCapacity searchAfterUpdate(Integer storeId,String date,String time,Integer maxCapacity) {
+    	RestaurantCapacity restaurantCapacity=restaurantCapacityRepository.findLastByStoreIdAndDateAndTime(storeId,date,time);
+    	restaurantCapacity.setMaxCapacity(maxCapacity);
+    	return restaurantCapacityRepository.save(restaurantCapacity);
+    	
+    }
 }
