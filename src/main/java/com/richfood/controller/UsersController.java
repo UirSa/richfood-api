@@ -127,24 +127,36 @@ public class UsersController {
     }
 	 
 	@GetMapping("/getUserDetails")
-	public ResponseEntity<Users> getUserDetails(HttpSession session) {
+	public ResponseEntity<Map<String, Object>> getUserDetails(HttpSession session) {
 	    Integer userId = (Integer) session.getAttribute("userId");
-	    if (userId == null) {
-	        return ResponseEntity.status(401).body(null); // 使用者未登入
+	    String userType = (String) session.getAttribute("userType");
+
+	    System.out.println("Session 中的 userId: " + userId);
+	    System.out.println("Session 中的 userType: " + userType);
+
+	    if (userId == null || userType == null) {
+	        return ResponseEntity.status(401).body(Map.of("message", "未登入"));
 	    }
 
 	    Users user = userService.getUserDetails(userId);
 	    if (user != null) {
-	        user.setPassword(null); // 移除密碼
-	        // 如果 gender 為 null 或空字串，設置預設值
-	        if (user.getGender() == null || user.getGender().isEmpty()) {
-	            user.setGender("other"); // 預設值為 "other"
-	        }
-	        return ResponseEntity.ok(user);
-	    } else {
-	        return ResponseEntity.status(404).body(null); // 資料不存在
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("userId", user.getUserId());
+	        response.put("name", user.getName());
+	        response.put("userAccount", user.getUserAccount());
+	        response.put("tel", user.getTel());
+	        response.put("email", user.getEmail());
+	        response.put("birthday", user.getBirthday());
+	        response.put("gender", user.getGender() == null ? "other" : user.getGender());
+	        response.put("icon", user.getIcon());
+	        response.put("userType", userType);
+
+	        System.out.println("用戶詳細資料返回: " + response);
+	        return ResponseEntity.ok(response);
 	    }
+	    return ResponseEntity.status(404).body(Map.of("message", "資料不存在"));
 	}
+
 
 	 
 	 @PutMapping(value = "/updateUser", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
