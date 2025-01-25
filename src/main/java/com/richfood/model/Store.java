@@ -14,6 +14,7 @@ public class Store {
     private Integer restaurantId;
     private String storeAccount;
     private String password;
+    private byte[] icon;
 
     public Integer getStoreId() {
         return storeId;
@@ -47,7 +48,15 @@ public class Store {
         this.password = password;
     }
 
-    //------------------------------------
+    public byte[] getIcon() {
+		return icon;
+	}
+
+	public void setIcon(byte[] icon) {
+		this.icon = icon;
+	}
+
+	//------------------------------------
     @OneToOne
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
 //    @JsonIgnore

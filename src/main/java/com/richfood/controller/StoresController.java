@@ -2,6 +2,9 @@ package com.richfood.controller;
 
 
 
+import java.io.IOException;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.richfood.model.Store;
 import com.richfood.service.StoresService;
@@ -35,7 +39,7 @@ public class StoresController {
 	}
 	
 	@PostMapping("/storeLogin")
-	public ResponseEntity<Store> storeLogin(@RequestBody Store store, HttpServletRequest request) {
+	public ResponseEntity<?> storeLogin(@RequestBody Store store, HttpServletRequest request) {
 		boolean isStoreExist =storesService.storeLogin(store.getStoreAccount(), store.getPassword());
 		if(isStoreExist) {
 	        Store storeData = storesService.getStoreDatail(store.getStoreAccount());
@@ -48,9 +52,16 @@ public class StoresController {
 	        return ResponseEntity.ok(storeData);
 
 		}else {
-	       
-	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+	       // 驗證失敗
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(Map.of(
+                        "error", "Bad Request",
+                        "message", "帳號或密碼錯誤",
+                        "status", HttpStatus.BAD_REQUEST.value()
+                    ));
+//	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
 	    }
+		
 		
 		
 	}
