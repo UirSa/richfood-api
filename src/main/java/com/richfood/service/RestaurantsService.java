@@ -100,4 +100,28 @@ public class RestaurantsService {
             restaurantsRepository.save(restaurants);
         }
     }
+    
+    public Restaurants saveResraurantData(Integer restaurantId,String name,String country,String district,String address,String phone) {
+    	Optional<Restaurants> optRestaurants=restaurantsRepository.findById(restaurantId);
+    	Restaurants restaurantInfo=optRestaurants.get();
+    	
+    	if(name!=null) {
+    		restaurantInfo.setName(name);
+    	}
+    	if(country!=null) {
+    		restaurantInfo.setCountry(country);
+    	}
+    	if(district!=null) {
+    		restaurantInfo.setDistrict(district);
+    	}
+    	if(address!=null) {
+    		restaurantInfo.setAddress(address);
+    	}
+    	if(phone!=null) {
+    		restaurantInfo.setPhone(phone);
+    	}
+
+    	return restaurantsRepository.save(restaurantInfo);
+
+    }
 }
