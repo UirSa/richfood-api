@@ -88,4 +88,10 @@ public class StoresService {
 		 }
 		
 	}
+    public Store updateUserIcon(Integer storeId, String base64Icon) {
+    	Store store = storeRepository.findById(storeId).orElseThrow(() -> new RuntimeException("User not found"));
+    	store.setIcon(base64Icon);  // 更新icon
+        return storeRepository.save(store);
+    }
+	
 }

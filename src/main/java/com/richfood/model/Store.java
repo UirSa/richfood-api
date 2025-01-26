@@ -14,7 +14,8 @@ public class Store {
     private Integer restaurantId;
     private String storeAccount;
     private String password;
-    private byte[] icon;
+//    @Lob  // 使用 @Lob 來儲存較大的文字資料
+    private String icon;  // 這裡儲存 BASE64 編碼的
 
     public Integer getStoreId() {
         return storeId;
@@ -48,13 +49,15 @@ public class Store {
         this.password = password;
     }
 
-    public byte[] getIcon() {
+	public String getIcon() {
 		return icon;
 	}
 
-	public void setIcon(byte[] icon) {
+	public void setIcon(String icon) {
 		this.icon = icon;
 	}
+
+
 
 	//------------------------------------
     @OneToOne
