@@ -231,4 +231,73 @@ public class UsersController {
 	         return ResponseEntity.status(500).body("Error deleting user: " + e.getMessage());
 	     }
 	 }
+	 
+	  // 忘记密码：生成重置链接
+	 @PostMapping("/forgotPassword")
+	 public ResponseEntity<Map<String, String>> forgotPassword(@RequestBody Map<String, String> requestBody) {
+	     String email = requestBody.get("email");
+
+	     try {
+	         // 1. 檢查請求數據
+	         if (email == null || email.isEmpty()) {
+	             return ResponseEntity.badRequest().body(Map.of("message", "請提供有效的電子郵件地址！"));
+	         }
+
+	         // 2. 檢查電子郵件是否存在
+	         Optional<Users> userOptional = userRepository.findByEmail(email);
+	         if (userOptional.isEmpty()) {
+	             return ResponseEntity.badRequest().body(Map.of("message", "該電子郵件未註冊"));
+	         }
+
+	         Users user = userOptional.get();
+
+	         // 3. 生成重置令牌
+	         String resetToken = userService.generateResetToken(email);
+
+	         // 4. 構建重置密碼鏈接
+	         String resetLink = "http://localhost:5173/Reset-Password?token=" + resetToken;
+
+	         // 5. 發送重置密碼郵件
+	         userService.sendResetPasswordEmail(email, resetLink);
+
+	         // 返回成功響應
+	         return ResponseEntity.ok(Map.of("message", "重設密碼的連結已發送至您的電子郵件！"));
+	     } catch (IllegalArgumentException e) {
+	         // 處理業務邏輯異常
+	         return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
+	     } catch (Exception e) {
+	         // 記錄伺服器異常
+	         e.printStackTrace(); // 可以用 Logger 替代
+	         return ResponseEntity.status(500).body(Map.of("message", "伺服器錯誤，請稍後再試！"));
+	     }
+	 }
+
+
+	    // 验证 Token 并重置密码
+	 @PostMapping("/resetPassword")
+	 public ResponseEntity<Map<String, String>> resetPassword(@RequestBody Map<String, String> requestBody) {
+	     String resetToken = requestBody.get("token");
+	     String newPassword = requestBody.get("newPassword");
+
+	     try {
+	         // 驗證 token
+	         if (!userService.validateResetToken(resetToken)) {
+	             return ResponseEntity.badRequest().body(Map.of("message", "無效或過期的重置令牌"));
+	         }
+
+	         // 根據 token 獲取 email
+	         String email = userService.getEmailByResetToken(resetToken);
+
+	         // 更新密碼
+	         userService.updatePasswordByEmail(email, newPassword);
+
+	         // 移除 token
+	         userService.removeResetToken(resetToken);
+
+	         return ResponseEntity.ok(Map.of("message", "密碼已成功重置"));
+	     } catch (Exception e) {
+	         return ResponseEntity.status(500).body(Map.of("message", "伺服器錯誤：" + e.getMessage()));
+	     }
+	 }
+
 }

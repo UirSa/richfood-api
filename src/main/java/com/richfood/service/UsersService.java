@@ -12,12 +12,14 @@ import jakarta.transaction.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +30,12 @@ public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
+    
+    @Autowired
+    private JavaMailSender mailSender; // Spring 提供的郵件發送工具
+    
+    // 存储 token 和过期时间
+    private final ConcurrentHashMap<String, TokenInfo> resetTokens = new ConcurrentHashMap<>();
     
     private static final String IMAGE_DIRECTORY = System.getProperty("user.dir") + "/src/main/resources/static/UserImages/";
     //C:\Users\USER\eclipse-workspace\richfood\src\main\resources\static\UserImages
@@ -258,6 +266,92 @@ public class UsersService {
     	 Users user = findUserById(userId); // 使用共用方法檢查用戶是否存在
     	    usersRepository.delete(user);
     	    System.out.println("User with id " + userId + " deleted successfully.");
+    }
+    
+
+    // 生成临时 resetToken
+    public String generateResetToken(String email) {
+        // 生成唯一的 Token
+        String resetToken = UUID.randomUUID().toString();
+        // 设置过期时间（例如 30 分钟后）
+        LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(30);
+
+        // 存储到内存中
+        resetTokens.put(resetToken, new TokenInfo(email, expiryTime));
+
+        return resetToken;
+    }
+    
+    // 验证 resetToken 是否有效
+    public boolean validateResetToken(String resetToken) {
+        TokenInfo tokenInfo = resetTokens.get(resetToken);
+        if (tokenInfo == null || tokenInfo.getExpiryTime().isBefore(LocalDateTime.now())) {
+            // Token 不存在或已过期
+            resetTokens.remove(resetToken); // 清理无效 token
+            return false;
+        }
+        return true;
+    }
+
+    // 根据 token 获取对应的邮箱
+    public String getEmailByResetToken(String resetToken) {
+        TokenInfo tokenInfo = resetTokens.get(resetToken);
+        return tokenInfo != null ? tokenInfo.getEmail() : null;
+    }
+
+    // 移除 token
+    public void removeResetToken(String resetToken) {
+        resetTokens.remove(resetToken);
+    }
+
+    // 内部类用于存储 token 信息
+    private static class TokenInfo {
+        private final String email;
+        private final LocalDateTime expiryTime;
+
+        public TokenInfo(String email, LocalDateTime expiryTime) {
+            this.email = email;
+            this.expiryTime = expiryTime;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public LocalDateTime getExpiryTime() {
+            return expiryTime;
+        }
+    }
+    
+    public void updatePasswordByEmail(String email, String newPassword) {
+        // 查找用户
+        Users user = usersRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("找不到該電子郵件的用戶"));
+
+        // 使用 BCrypt 加密新密码
+        String encodedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+
+        // 更新密码
+        user.setPassword(encodedPassword);
+
+        // 保存用户
+        usersRepository.save(user);
+    }
+    
+    public void sendResetPasswordEmail(String email, String resetLink) {
+        try {
+            // 创建邮件内容
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(email); // 接收者邮箱
+            message.setSubject("重置您的密码"); // 邮件标题
+            message.setText("点击以下链接以重置您的密码：\n" + resetLink); // 邮件正文
+
+            // 发送邮件
+            mailSender.send(message);
+            System.out.println("重置密码邮件已发送到：" + email);
+        } catch (Exception e) {
+            throw new RuntimeException("发送邮件失败", e);
+        }
     }
        
 }
