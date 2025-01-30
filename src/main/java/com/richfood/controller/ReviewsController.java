@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,10 +36,24 @@ public class ReviewsController {
      * [GET] 取得「該餐廳」的所有評論
      *  GET /Reviews/restaurant/5
      */
-    @GetMapping("/restaurant/{restaurantId}")
-    public List<Reviews> getReviewsByRestaurantId(@PathVariable Integer restaurantId) {
-        return reviewsService.getReviewsByRestaurantId(restaurantId);
-    }
+	@GetMapping("/restaurant/{restaurantId}")
+	public List<Map<String, Object>> getReviewsByRestaurantId(@PathVariable Integer restaurantId) {
+	    // 從 Service 獲取評論
+	    List<Reviews> reviews = reviewsService.getReviewsByRestaurantId(restaurantId);
+
+	    // 生成返回結果，添加用戶名稱
+	    return reviews.stream().map(review -> {
+	        Map<String, Object> result = new HashMap<>();
+	        result.put("reviewId", review.getReviewId());
+	        result.put("userId", review.getUserId());
+	        result.put("userName", usersRepository.findUserNameByUserId(review.getUserId())); // 根據用戶ID獲取用戶名稱
+	        result.put("restaurantId", review.getRestaurantId());
+	        result.put("rating", review.getRating());
+	        result.put("content", review.getContent());
+	        result.put("createdAt", review.getCreatedAt());
+	        return result;
+	    }).collect(Collectors.toList());
+	}
 
     /*
      * [GET] 取得「某使用者」的所有評論
@@ -167,6 +182,23 @@ public class ReviewsController {
     public ResponseEntity<Void> deleteReview(@PathVariable Integer reviewId) {
         reviewsService.deleteReview(reviewId);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/latest")
+    public List<Map<String, Object>> getLatestReviews() {
+        List<Reviews> reviews = reviewsService.getLatestReviews(10); // 獲取最新 10 條評論
+
+        return reviews.stream().map(review -> {
+            Map<String, Object> result = new HashMap<>();
+            result.put("reviewId", review.getReviewId());
+            result.put("userId", review.getUserId());
+            result.put("restaurantId", review.getRestaurantId());
+            result.put("restaurantName", reviewsService.getRestaurantNameByReviewId(review.getReviewId()));
+            result.put("rating", review.getRating());
+            result.put("content", review.getContent());
+            result.put("createdAt", review.getCreatedAt());
+            return result;
+        }).collect(Collectors.toList());
     }
 
 }

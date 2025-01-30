@@ -159,5 +159,8 @@ public class ReviewsService {
         return restaurantName;
     }
 
-	
+    public List<Reviews> getLatestReviews(int limit) {
+        // 獲取最新的評論，按創建時間排序
+        return reviewsRepository.findTopByOrderByCreatedAtDesc(limit);
+    }
 }

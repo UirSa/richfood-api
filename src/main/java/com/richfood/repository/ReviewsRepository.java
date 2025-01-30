@@ -33,6 +33,7 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	
 	List<Reviews> findByIsFlaggedTrueAndIsApprovedTrue();
 	
-	
+	@Query(value = "SELECT r FROM Reviews r ORDER BY r.createdAt DESC")
+    List<Reviews> findTopByOrderByCreatedAtDesc(@Param("limit") int limit);
 	
 }
