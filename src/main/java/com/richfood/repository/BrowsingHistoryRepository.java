@@ -22,5 +22,12 @@ public interface BrowsingHistoryRepository extends JpaRepository<BrowsingHistory
         Integer restaurantId,
         LocalDateTime viewedAt
     );
+    
+ // 查詢用戶在某餐廳的最新瀏覽紀錄
+ 	BrowsingHistory findTopByUserIdAndRestaurantIdOrderByViewedAtDesc(Integer userId, Integer restaurantId);
 
+ 	// 查詢用戶的所有瀏覽紀錄，按時間降序排列
+ 	List<BrowsingHistory> findByUserIdOrderByViewedAtDesc(Integer userId);
+
+ 
 }

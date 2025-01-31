@@ -14,50 +14,47 @@ import jakarta.transaction.Transactional;
 @Service
 public class BrowsingHistoryService {
 	
-	@Autowired BrowsingHistoryRepository browsingHistoryRepository;
+	@Autowired
+	private BrowsingHistoryRepository browsingHistoryRepository;
+
 	@Transactional
-	 public void addBrowsingHistory(Integer userId, Integer restaurantId) {
-		 
-		 if (userId == null) {
-	            // 若 userId 為空，代表未登入/或 session 無效，則直接 return
-	            return;
-	        }
-		 
-		 LocalDateTime oneHourAgo = LocalDateTime.now().minusHours(1);
-	        
-	        		boolean hasSameRecordRecently = !browsingHistoryRepository
-	                .findByUserIdAndRestaurantIdAndViewedAtGreaterThan(userId, restaurantId, oneHourAgo)
-	                .isEmpty();
-	        		
-	        if (hasSameRecordRecently) {
-	            // 若 1 小時內有相同紀錄，直接忽略，不新增
-	            return;
-	        }
-	        
-	        BrowsingHistory history = new BrowsingHistory();
-	        history.setUserId(userId);
-	        history.setRestaurantId(restaurantId);
-	        history.setViewedAt(LocalDateTime.now());
+	public void addBrowsingHistory(Integer userId, Integer restaurantId) {
+		if (userId == null || restaurantId == null) {
+			// 若 userId 或 restaurantId 為空，直接 return
+			return;
+		}
 
-	        browsingHistoryRepository.save(history);
+		// 查找是否已有該用戶對該餐廳的瀏覽紀錄
+		BrowsingHistory existingHistory = browsingHistoryRepository
+			.findTopByUserIdAndRestaurantIdOrderByViewedAtDesc(userId, restaurantId);
 
-	        Long count = browsingHistoryRepository.countByUserId(userId);
-	        if (count > 6) {
+		if (existingHistory != null) {
+			// 如果已有紀錄，則更新瀏覽時間
+			existingHistory.setViewedAt(LocalDateTime.now());
+			browsingHistoryRepository.save(existingHistory);
+		} else {
+			// 如果沒有紀錄，則新增一條紀錄
+			BrowsingHistory newHistory = new BrowsingHistory();
+			newHistory.setUserId(userId);
+			newHistory.setRestaurantId(restaurantId);
+			newHistory.setViewedAt(LocalDateTime.now());
+			browsingHistoryRepository.save(newHistory);
+		}
 
-	        // 3) 再 count
-	            List<BrowsingHistory> allRecords = browsingHistoryRepository.findByUserIdOrderByViewedAtAsc(userId);
-	            if (!allRecords.isEmpty()) {
-	                BrowsingHistory oldestRecord = allRecords.get(0);
-	                browsingHistoryRepository.delete(oldestRecord); 
-	        	}
-	        }
-	    }
-	 
-	 public List<BrowsingHistory> getBrowsingHistoryByUserId(Integer userId) {
-	        // 假設我們需要用 userId 來查詢
-	        
-	        return browsingHistoryRepository.findByUserIdOrderByViewedAtAsc(userId);
-	    }
-	
-	
+		// 限制用戶的瀏覽紀錄數量最多為 6
+		Long count = browsingHistoryRepository.countByUserId(userId);
+		if (count > 6) {
+			// 如果超過 6 條紀錄，刪除最舊的紀錄
+			List<BrowsingHistory> allRecords = browsingHistoryRepository.findByUserIdOrderByViewedAtAsc(userId);
+			if (!allRecords.isEmpty()) {
+				BrowsingHistory oldestRecord = allRecords.get(0);
+				browsingHistoryRepository.delete(oldestRecord);
+			}
+		}
+	}
+
+	public List<BrowsingHistory> getBrowsingHistoryByUserId(Integer userId) {
+		// 按瀏覽時間倒序排列，查詢用戶的瀏覽紀錄
+		return browsingHistoryRepository.findByUserIdOrderByViewedAtDesc(userId);
+	}
 }
