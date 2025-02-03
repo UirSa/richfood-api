@@ -163,7 +163,7 @@ public class Restaurants {
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")  
     )
-    @JsonIgnore
+//    @JsonIgnore
     private List<Categories> categories;
 
     public List<Categories> getCategories() {
@@ -199,4 +199,16 @@ public class Restaurants {
 //    public void setRestaurantCapacity(List<RestaurantCapacity> restaurantCapacity) {
 //        this.restaurantCapacity = restaurantCapacity;
 //    }
+    //--------------------------------------------------------
+    @OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<History> histories;
+
+    public List<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(List<History> histories) {
+        this.histories = histories;
+    }
 }
