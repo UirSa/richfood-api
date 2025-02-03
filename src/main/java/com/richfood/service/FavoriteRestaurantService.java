@@ -111,5 +111,10 @@ public class FavoriteRestaurantService {
 		    System.out.println("最終返回的數據: " + result); // 檢查最終結果
 		    return result;
 		}
+	 
+	 
+	 public List<FavoriteRestaurants> selectFavorite(Integer restaurantId) {
+		 return favoriteRestaurantRepository.findByRestaurantId(restaurantId);
+	 }
 	
 }

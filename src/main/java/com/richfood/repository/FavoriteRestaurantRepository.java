@@ -17,6 +17,8 @@ public interface FavoriteRestaurantRepository extends JpaRepository<FavoriteRest
 	 
 	 List<FavoriteRestaurants> findByUserIdOrderByFavoriteIdDesc(Integer userId);  
 	 
+	 List<FavoriteRestaurants> findByRestaurantId(Integer restaurantId);
+	 
 
 	 
 	 
