@@ -78,7 +78,7 @@ public class RestaurantsController {
 //    }
     @PutMapping("/saveResraurantData")
     public ResponseEntity<Restaurants>  saveResraurantData(@RequestBody Restaurants restaurants) {
-    	Restaurants reestaurant=
+    	Restaurants restaurant=
     	restaurantsService.saveResraurantData(
     			restaurants.getRestaurantId(), 
     			restaurants.getName(), 
@@ -86,7 +86,7 @@ public class RestaurantsController {
     			restaurants.getDistrict(),
     			restaurants.getAddress(),
     			restaurants.getPhone());
-    	return ResponseEntity.ok(reestaurant);
+    	return ResponseEntity.ok(restaurant);
     }
     
     
