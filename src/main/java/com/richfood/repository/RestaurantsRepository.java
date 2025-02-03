@@ -24,8 +24,11 @@ public interface RestaurantsRepository extends JpaRepository<Restaurants, Intege
     Page<Restaurants> findRestaurantsByLatitudeAndLongitudeBetween(@Param("latMin") double latMin, @Param("latMax") double latMax, @Param("longMin") double longMin, @Param("longMax") double longMax, Pageable pageable);
     @Query("SELECT r.name FROM Restaurants r WHERE r.restaurantId = :restaurantId")
     String findNameByRestaurantId(@Param("restaurantId") Integer restaurantId);
-    @Query(value = "SELECT * FROM Restaurants WHERE description LIKE %:keyword% ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Restaurants WHERE description LIKE CONCAT('%', :keyword, '%')", nativeQuery = true)
     Page<Restaurants> findRestaurantsByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    @Query("SELECT r.image FROM Restaurants r WHERE r.restaurantId = :restaurantId")
+    String findImageByRestaurantId(@Param("restaurantId") Integer restaurantId);
+
 }
 
 //建立搜尋索引

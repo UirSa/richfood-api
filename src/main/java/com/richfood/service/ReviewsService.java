@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import com.richfood.model.Restaurants;
 import com.richfood.model.Reviews;
@@ -159,8 +163,30 @@ public class ReviewsService {
         return restaurantName;
     }
 
-    public List<Reviews> getLatestReviews(int limit) {
-        // 獲取最新的評論，按創建時間排序
-        return reviewsRepository.findTopByOrderByCreatedAtDesc(limit);
+    public List<Map<String, Object>> getLatestReviews(int limit) {
+        Pageable pageable = PageRequest.of(0, limit, Sort.by(Sort.Direction.DESC, "createdAt"));
+        Page<Reviews> reviewsPage = reviewsRepository.findAll(pageable);
+        List<Reviews> reviews = reviewsPage.getContent();
+
+        return reviews.stream().map(review -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("reviewId", review.getReviewId());
+            map.put("userId", review.getUserId());
+            map.put("restaurantId", review.getRestaurantId());
+
+            // 正確獲取餐廳名稱
+            String restaurantName = restaurantsRepository.findNameByRestaurantId(review.getRestaurantId());
+            map.put("restaurantName", restaurantName != null ? restaurantName : "未知餐廳");
+
+            map.put("rating", review.getRating());
+            map.put("content", review.getContent());
+            map.put("createdAt", review.getCreatedAt());
+
+            // 直接透過 `ReviewsRepository` 查詢餐廳圖片
+            String imageUrl = restaurantsRepository.findImageByRestaurantId(review.getRestaurantId());
+            map.put("imageUrl", imageUrl != null ? imageUrl : "/default-placeholder.png");
+
+            return map;
+        }).collect(Collectors.toList());
     }
 }

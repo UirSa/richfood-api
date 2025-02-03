@@ -185,20 +185,7 @@ public class ReviewsController {
     }
     
     @GetMapping("/latest")
-    public List<Map<String, Object>> getLatestReviews() {
-        List<Reviews> reviews = reviewsService.getLatestReviews(10); // 獲取最新 10 條評論
-
-        return reviews.stream().map(review -> {
-            Map<String, Object> result = new HashMap<>();
-            result.put("reviewId", review.getReviewId());
-            result.put("userId", review.getUserId());
-            result.put("restaurantId", review.getRestaurantId());
-            result.put("restaurantName", reviewsService.getRestaurantNameByReviewId(review.getReviewId()));
-            result.put("rating", review.getRating());
-            result.put("content", review.getContent());
-            result.put("createdAt", review.getCreatedAt());
-            return result;
-        }).collect(Collectors.toList());
+    public ResponseEntity<List<Map<String, Object>>> getLatestReviews() {
+        return ResponseEntity.ok(reviewsService.getLatestReviews(10)); // 取得最新10條評論
     }
-
 }

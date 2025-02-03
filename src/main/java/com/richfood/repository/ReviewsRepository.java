@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.data.domain.Pageable;
 
 @Repository
 public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
@@ -33,7 +34,14 @@ public interface ReviewsRepository extends JpaRepository<Reviews, Integer> {
 	
 	List<Reviews> findByIsFlaggedTrueAndIsApprovedTrue();
 	
-	@Query(value = "SELECT r FROM Reviews r ORDER BY r.createdAt DESC")
-    List<Reviews> findTopByOrderByCreatedAtDesc(@Param("limit") int limit);
+	  // 查詢最新的評論
+	@Query("SELECT r.image FROM Restaurants r WHERE r.restaurantId = :restaurantId")
+	String findImageByRestaurantId(@Param("restaurantId") Integer restaurantId);
 	
+	@Query("SELECT r FROM Reviews r ORDER BY r.createdAt DESC")
+	List<Reviews> findLatestReviews(Pageable pageable);
+	
+
+
+
 }
