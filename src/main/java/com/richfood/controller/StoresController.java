@@ -51,6 +51,7 @@ public class StoresController {
 	        session.setAttribute("storeId", storeData.getStoreId());
 	        session.setAttribute("restaurantId", storeData.getRestaurantId());
 	        session.setAttribute("storeName", storeData.getStoreAccount());
+	        session.setAttribute("userType", "store");
 	        return ResponseEntity.ok(storeData);
 
 		}else {
