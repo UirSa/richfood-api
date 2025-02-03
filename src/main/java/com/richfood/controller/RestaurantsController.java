@@ -20,15 +20,21 @@ public class RestaurantsController {
     @Autowired
     private RestaurantsService restaurantsService;
 
-    //Restaurants list by country and category for checkbox and selected
-    @GetMapping(value = {"/list","/{country}/list/{category}", "/{country}/list","/list/{category}",})
-    public Page<Restaurants> searchRestaurantsByCountryAndCategory(@PathVariable(required = false) String country,
-                                               @PathVariable(required = false) String category,
-                                               @RequestParam(defaultValue = "0") int page,
-                                               @RequestParam(defaultValue = "10") int size){
-        Pageable pageable = PageRequest.of(page,size);
-        return restaurantsService.searchRestaurantsByCountryAndCategory(country, category ,pageable);
+    //All restaurants
+    @GetMapping("/list")
+    public List<Restaurants> getAllRestaurants(){
+    return restaurantsService.getAllRestaurants();
     }
+
+    //Restaurants list by country and category for checkbox and selected
+//    @GetMapping(value = {"/list","/{country}/list/{category}", "/{country}/list","/list/{category}",})
+//    public Page<Restaurants> searchRestaurantsByCountryAndCategory(@PathVariable(required = false) String country,
+//                                               @PathVariable(required = false) String category,
+//                                               @RequestParam(defaultValue = "0") int page,
+//                                               @RequestParam(defaultValue = "10") int size){
+//        Pageable pageable = PageRequest.of(page,size);
+//        return restaurantsService.searchRestaurantsByCountryAndCategory(country, category ,pageable);
+//    }
     //Restaurants by id
     @GetMapping("/{restaurantId}")
     public Optional<Restaurants> getRestaurantsById(@PathVariable Integer restaurantId){

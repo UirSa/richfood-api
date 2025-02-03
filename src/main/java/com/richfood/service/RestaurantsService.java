@@ -21,6 +21,10 @@ public class RestaurantsService {
     private RestaurantsRepository restaurantsRepository;
 
 
+    //All restaurants
+    public List<Restaurants> getAllRestaurants(){
+        return restaurantsRepository.findAll();
+    }
     //Restaurants list by country and category for checkbox and selected
     public  Page<Restaurants> searchRestaurantsByCountryAndCategory(String country, String category, Pageable pageable){
         if(country !=null && category !=null){
