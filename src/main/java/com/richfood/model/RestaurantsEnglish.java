@@ -1,9 +1,9 @@
 package com.richfood.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class RestaurantsEnglish {
@@ -121,8 +121,33 @@ public class RestaurantsEnglish {
         this.latitude = latitude;
     }
 
+    //-----------------------------------------------------------
+    @OneToMany(mappedBy = "restaurantsEnglish", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<BusinessHoursEnglish> businessHoursEnglishes;
 
+    public List<BusinessHoursEnglish> getBusinessHoursEnglishes() {
+        return businessHoursEnglishes;
+    }
 
+    public void setBusinessHoursEnglishes(List<BusinessHoursEnglish> businessHoursEnglishes) {
+        this.businessHoursEnglishes = businessHoursEnglishes;
+    }
 
+    //-----------------------------------------------
+    @ManyToMany
+    @JoinTable(
+            name = "restaurant_categories_english",
+            joinColumns = @JoinColumn(name = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private List<CategoriesEnglish> categoriesEnglishes;
 
+    public List<CategoriesEnglish> getCategoriesEnglishes() {
+        return categoriesEnglishes;
+    }
+
+    public void setCategoriesEnglishes(List<CategoriesEnglish> categoriesEnglishes) {
+        this.categoriesEnglishes = categoriesEnglishes;
+    }
 }

@@ -1,10 +1,7 @@
 package com.richfood.model;
 
 import com.richfood.util.StringToOffsetTimeConverter;
-import jakarta.persistence.Convert;
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "business_hours_english")
@@ -36,5 +33,18 @@ public class BusinessHoursEnglish {
 
     public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    //------------------------------------------------------
+    @ManyToOne
+    @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
+    private RestaurantsEnglish restaurantsEnglish;
+
+    public RestaurantsEnglish getRestaurantsEnglish() {
+        return restaurantsEnglish;
+    }
+
+    public void setRestaurantsEnglish(RestaurantsEnglish restaurantsEnglish) {
+        this.restaurantsEnglish = restaurantsEnglish;
     }
 }

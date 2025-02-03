@@ -163,7 +163,7 @@ public class Restaurants {
             joinColumns = @JoinColumn(name = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")  
     )
-//    @JsonIgnore
+//  @JsonIgnore
     private List<Categories> categories;
 
     public List<Categories> getCategories() {
