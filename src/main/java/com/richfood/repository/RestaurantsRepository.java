@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface RestaurantsRepository extends JpaRepository<Restaurants, Integer> {
@@ -22,6 +23,8 @@ public interface RestaurantsRepository extends JpaRepository<Restaurants, Intege
     Page<Restaurants> findRestaurantsByCountryAndCategoryName(String country, @Param("categoryName") String category, Pageable pageable);
     @Query("SELECT r FROM Restaurants r WHERE r.latitude BETWEEN :latMax AND :latMin AND r.longitude BETWEEN :longMax AND :longMin")
     Page<Restaurants> findRestaurantsByLatitudeAndLongitudeBetween(@Param("latMin") double latMin, @Param("latMax") double latMax, @Param("longMin") double longMin, @Param("longMax") double longMax, Pageable pageable);
+    @Query("SELECT r FROM Restaurants r WHERE r.latitude BETWEEN :latMax AND :latMin AND r.longitude BETWEEN :longMax AND :longMin")
+    List<Restaurants> findRestaurantsByLatitudeAndLongitudeBetween(@Param("latMin") double latMin, @Param("latMax") double latMax, @Param("longMin") double longMin, @Param("longMax") double longMax);
     @Query("SELECT r.name FROM Restaurants r WHERE r.restaurantId = :restaurantId")
     String findNameByRestaurantId(@Param("restaurantId") Integer restaurantId);
     @Query(value = "SELECT * FROM Restaurants WHERE description LIKE CONCAT('%', :keyword, '%')", nativeQuery = true)

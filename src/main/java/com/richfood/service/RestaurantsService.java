@@ -82,7 +82,6 @@ public class RestaurantsService {
             for (BusinessHoursDto businessHoursDto : restaurantDto.getBusinessHours()) {
                 String startTime = businessHoursDto.getStartTime();
                 String endTime = businessHoursDto.getEndTime();
-                //TODO 改格式
                 BusinessHoursId businessHoursId = new BusinessHoursId(businessHoursDto.getRestaurantId(), businessHoursDto.getDayOfWeek(), startTime);
 
                 BusinessHours businessHours = new BusinessHours(businessHoursId, endTime);
@@ -104,7 +103,21 @@ public class RestaurantsService {
             restaurantsRepository.save(restaurants);
         }
     }
-    
+
+    //Save englishRestaurants for JSON
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Restaurants saveResraurantData(Integer restaurantId,String name,String country,String district,String address,String phone) {
     	Optional<Restaurants> optRestaurants=restaurantsRepository.findById(restaurantId);
     	Restaurants restaurantInfo=optRestaurants.get();

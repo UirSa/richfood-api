@@ -35,11 +35,13 @@ public class RestaurantsController {
 //        Pageable pageable = PageRequest.of(page,size);
 //        return restaurantsService.searchRestaurantsByCountryAndCategory(country, category ,pageable);
 //    }
+
     //Restaurants by id
     @GetMapping("/{restaurantId}")
     public Optional<Restaurants> getRestaurantsById(@PathVariable Integer restaurantId){
         return restaurantsService.getRestaurantsById(restaurantId);
     }
+
     //Restaurants by lat and long for recommend
     @GetMapping("")
     public Page<Restaurants> getRestaurantByLatAndLong(@RequestParam(name = "lat",required = true) Double latitude,
