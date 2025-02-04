@@ -68,7 +68,7 @@ public class StoresController {
 		
 		
 	}
-	@GetMapping("/storeLogOut")
+	@PostMapping("/storeLogOut")
 	public ResponseEntity<String> storeLogout(HttpServletRequest request) {
 		
 		 HttpSession session = request.getSession(false); 
