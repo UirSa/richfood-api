@@ -4,6 +4,7 @@ import com.richfood.dto.BusinessHoursDto;
 import com.richfood.dto.RestaurantCategoriesDto;
 import com.richfood.dto.RestaurantDto;
 import com.richfood.model.*;
+import com.richfood.repository.RestaurantCategoriesRepository;
 import com.richfood.repository.RestaurantsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class RestaurantsService {
     @Autowired
     private RestaurantsRepository restaurantsRepository;
+    @Autowired
+    private RestaurantCategoriesRepository restaurantCategoriesRepository;
 
 
     //All restaurants
@@ -93,7 +96,9 @@ public class RestaurantsService {
             for (RestaurantCategoriesDto restaurantCategoriesDto: restaurantDto.getCategories()){
                 Integer rid=restaurantCategoriesDto.getRestaurantId();
                 Integer cid=restaurantCategoriesDto.getCategoryId();
-
+                if (cid == null) {
+                    throw new IllegalArgumentException("Category ID cannot be null for restaurant with ID: " + rid);
+                }
                 RestaurantCategoriesId restaurantCategoriesId=new RestaurantCategoriesId(rid,cid);
 
                 RestaurantCategories restaurantCategories=new RestaurantCategories(restaurantCategoriesId);
@@ -101,6 +106,14 @@ public class RestaurantsService {
             }
             restaurants.setRestaurantCategories(restaurantCategoriesList);
             restaurantsRepository.save(restaurants);
+            // 將所有 categories 一次性保存
+//            if (!restaurantCategoriesList.isEmpty()) {
+//                restaurantCategoriesRepository.saveAll(restaurantCategoriesList); // 假設你有 restaurantCategoriesRepository
+//            }
+            // 最後將所有的資料保存到 restaurants
+//            restaurants.setRestaurantCategories(restaurantCategoriesList);
+//            restaurantsRepository.save(restaurants);
+
         }
     }
 
