@@ -44,7 +44,7 @@ public class CouponsOrdersService {
 	public CouponsOrders usedCoupon(Integer orderId) {
 		Optional<CouponsOrders> orders=couponsOrdersRepository.findById(orderId);
 		CouponsOrders couponsOrders=orders.get();
-		couponsOrders.setStatus(false);
+		couponsOrders.setQuantity(couponsOrders.getQuantity()-1);
 		couponsOrdersRepository.save(couponsOrders);
 		return couponsOrders;
 	}
