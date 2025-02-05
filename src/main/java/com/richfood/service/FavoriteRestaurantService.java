@@ -46,16 +46,15 @@ public class FavoriteRestaurantService {
 	        }
 	    }
 	 
-	 @Transactional
-	    public void removeFavorite(Integer userId, Integer restaurantId) {
-	        // 查找現有的收藏記錄
-	        Optional<FavoriteRestaurants> existingFavorite = favoriteRestaurantRepository.findByUserIdAndRestaurantId(userId, restaurantId);
-	        
-	        if (existingFavorite.isPresent()) {
-	            // 如果已經收藏，則刪除該收藏
-	            favoriteRestaurantRepository.delete(existingFavorite.get());
-	        }
-	    }
+	 public boolean removeFavorite(Integer userId, Integer restaurantId) {
+		    Optional<FavoriteRestaurants> favorite = favoriteRestaurantRepository.findByUserIdAndRestaurantId(userId, restaurantId);
+		    if (favorite.isPresent()) {
+		        favoriteRestaurantRepository.delete(favorite.get());
+		        return true;
+		    }
+		    return false;
+		}
+
 	 
 	 
 	 // 查詢已收藏的餐廳
@@ -116,5 +115,10 @@ public class FavoriteRestaurantService {
 	 public List<FavoriteRestaurants> selectFavorite(Integer restaurantId) {
 		 return favoriteRestaurantRepository.findByRestaurantId(restaurantId);
 	 }
+	 
+	 public boolean isFavorite(Integer userId, Integer restaurantId) {
+		    return favoriteRestaurantRepository.existsByUserIdAndRestaurantId(userId, restaurantId);
+		}
+
 	
 }

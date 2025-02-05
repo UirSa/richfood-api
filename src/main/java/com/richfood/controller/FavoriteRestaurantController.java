@@ -39,15 +39,22 @@ public class FavoriteRestaurantController {
     }
 
     // 移除收藏
-    @DeleteMapping
-    public ResponseEntity<String> removeFavorite(@RequestBody FavoriteRestaurants favoriteRestaurant, HttpSession session) {
+    @DeleteMapping("/{restaurantId}")
+    public ResponseEntity<String> removeFavorite(@PathVariable Integer restaurantId, HttpSession session) {
         Integer userId = (Integer) session.getAttribute("userId"); // 從 session 獲取 userId
         if (userId == null) {
             return ResponseEntity.status(401).body("未登入");
         }
-        favoriteRestaurantService.removeFavorite(userId, favoriteRestaurant.getRestaurantId());
+        
+        boolean removed = favoriteRestaurantService.removeFavorite(userId, restaurantId);
+        
+        if (!removed) {
+            return ResponseEntity.status(404).body("收藏不存在");
+        }
+        
         return ResponseEntity.ok("餐廳已從收藏中移除");
     }
+
 
     // 查詢已收藏的餐廳
     @GetMapping
@@ -82,6 +89,14 @@ public class FavoriteRestaurantController {
     	return ResponseEntity.ok(favoriteRestaurantCount);
     }
     
-    
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<Boolean> isRestaurantFavorited(@PathVariable Integer restaurantId, HttpSession session) {
+        Integer userId = (Integer) session.getAttribute("userId");
+        if (userId == null) {
+            return ResponseEntity.status(401).body(false);
+        }
+        boolean isFavorited = favoriteRestaurantService.isFavorite(userId, restaurantId);
+        return ResponseEntity.ok(isFavorited);
+    }
 
 }

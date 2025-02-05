@@ -19,11 +19,7 @@ public interface FavoriteRestaurantRepository extends JpaRepository<FavoriteRest
 	 
 	 List<FavoriteRestaurants> findByRestaurantId(Integer restaurantId);
 	 
-
+	 boolean existsByUserIdAndRestaurantId(Integer userId, Integer restaurantId);
 	 
-	 
-
-
-
 
 } 
