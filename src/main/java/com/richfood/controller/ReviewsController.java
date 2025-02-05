@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,7 +161,6 @@ public class ReviewsController {
             Map<String, Object> reviewMap = new HashMap<>();
             reviewMap.put("reviewId", review.getReviewId());
             reviewMap.put("restaurantId", review.getRestaurantId());
-            reviewMap.put("restaurantName", restaurantName);
             reviewMap.put("userId", review.getUserId());
             reviewMap.put("userName", userName);
             reviewMap.put("rating", review.getRating());
@@ -188,4 +188,20 @@ public class ReviewsController {
     public ResponseEntity<List<Map<String, Object>>> getLatestReviews() {
         return ResponseEntity.ok(reviewsService.getLatestReviews(10)); // 取得最新10條評論
     }
+    
+    @GetMapping("/restaurant/{restaurantId}/user/{userId}")
+    public ResponseEntity<Reviews> getReviewByUserAndRestaurant(
+            @PathVariable Integer restaurantId,
+            @PathVariable Integer userId
+    ) {
+        Reviews review = reviewsService.getReviewByUserAndRestaurant(restaurantId, userId);
+        if (review == null) {
+            return ResponseEntity.notFound().build(); // 找不到該評論，回傳 404
+        }
+        return ResponseEntity.ok(review);
+    }
+
+
+
+    
 }

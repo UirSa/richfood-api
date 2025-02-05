@@ -189,4 +189,11 @@ public class ReviewsService {
             return map;
         }).collect(Collectors.toList());
     }
+    
+    public Reviews getReviewByUserAndRestaurant(Integer restaurantId, Integer userId) {
+        return reviewsRepository.findByUserIdAndRestaurantId(userId, restaurantId)
+                .orElse(null); // 如果找不到，回傳 null
+    }
+
+    
 }
