@@ -33,7 +33,7 @@ public class ReviewsController {
 	@Autowired
     private UsersRepository usersRepository;
 	
-	/*
+	/* 
      * [GET] 取得「該餐廳」的所有評論
      *  GET /Reviews/restaurant/5
      */
