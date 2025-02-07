@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RestaurantsEnglishRepository extends JpaRepository<RestaurantsEnglish, Integer> {
     Page<RestaurantsEnglish> findRestaurantsEnglishByCountry(String country, Pageable pageable);
@@ -16,5 +18,6 @@ public interface RestaurantsEnglishRepository extends JpaRepository<RestaurantsE
     Page<RestaurantsEnglish> findRestaurantsEnglishByCategoryName(@Param("categoryName") String category, Pageable pageable);
     @Query("SELECT r FROM RestaurantsEnglish r JOIN r.categoriesEnglishes c WHERE (:country IS NULL OR r.country = :country) AND (:categoryName IS NULL OR c.name = :categoryName)")
     Page<RestaurantsEnglish> findRestaurantsEnglishByCountryAndCategoryName(String country, @Param("categoryName") String category, Pageable pageable);
-
+    @Query("SELECT r FROM RestaurantsEnglish r WHERE r.latitude BETWEEN :latMax AND :latMin AND r.longitude BETWEEN :longMax AND :longMin")
+    List<RestaurantsEnglish> findRestaurantsEnglishByLatitudeAndLongitudeBetween(@Param("latMin") double latMin, @Param("latMax") double latMax, @Param("longMin") double longMin, @Param("longMax") double longMax);
 }

@@ -1,5 +1,6 @@
 package com.richfood.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.richfood.util.StringToOffsetTimeConverter;
 import jakarta.persistence.*;
 
@@ -37,6 +38,7 @@ public class BusinessHoursEnglish {
 
     //------------------------------------------------------
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "restaurantId", insertable = false, updatable = false)
     private RestaurantsEnglish restaurantsEnglish;
 

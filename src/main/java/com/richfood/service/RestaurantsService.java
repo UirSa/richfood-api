@@ -43,11 +43,11 @@ public class RestaurantsService {
 
     //Restaurants by id
     public Optional<Restaurants> getRestaurantsById(Integer restaurantId){
-        Optional<Restaurants> restaurant =restaurantsRepository.findById(restaurantId);
-        List<BusinessHours> businessHours=restaurant.get().getBusinessHours();
-        for (BusinessHours businessHour : businessHours) {
-            businessHour.getBusinessHoursId().getDayOfWeek();
-        }
+//        Optional<Restaurants> restaurant =restaurantsRepository.findById(restaurantId);
+//        List<BusinessHours> businessHours=restaurant.get().getBusinessHours();
+//        for (BusinessHours businessHour : businessHours) {
+//            businessHour.getBusinessHoursId().getDayOfWeek();
+//        }
        return restaurantsRepository.findById(restaurantId);
     }
 
