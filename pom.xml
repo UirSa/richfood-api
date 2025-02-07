@@ -98,6 +98,34 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+            <groupId>io.fabric8</groupId>
+            <artifactId>docker-maven-plugin</artifactId>
+            <version>0.45.0</version>
+            <!-- 可以根據需要選擇適合的版本 -->
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>build</goal>
+                        <goal>push</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+            <images>
+            <image>
+            <name>uirsa/richfoodapi:latest</name>
+            <!-- 設置你在 Docker Hub 上的倉庫名稱和標籤 -->
+            <build>
+                <dockerFileDir>${project.basedir}</dockerFileDir>
+                <!-- 指向 Dockerfile 所在的目錄 -->
+                <contextDir>${project.basedir}</contextDir>
+                <!-- 項目根目錄 -->
+            </build>
+            </image>
+            </images>
+            </configuration>
+            </plugin>
         </plugins>
     </build>
 
