@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         // 配置 CORS 設置
         registry.addMapping("/**")  // 設置允許跨域的路徑，這裡是全域所有路徑
-                .allowedOrigins("http://localhost:5173/")  // 允許的來源（React 前端地址）
+                .allowedOrigins("http://localhost:5173/", "https://k-0606.github.io/")  // 允許的來源（React 前端地址）
                 .allowedMethods("GET", "POST", "PUT", "DELETE")  // 允許的方法
                 .allowedHeaders("*")  // 允許的標頭
                 .allowCredentials(true)  // 是否允許發送 Cookie
